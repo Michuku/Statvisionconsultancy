@@ -1758,25 +1758,29 @@
     </div>
     <div class="mbdy">
       <div class="sm-inner">
-        <div id="serviceModalHero" class="sm-hero"></div>
-        <div id="serviceModalDesc" class="sm-desc"></div>
-        <div class="sm-grid">
-          <div class="sm-features">
-            <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
-            <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
+        <div class="sm-cols">
+          <div class="sm-col-left">
+            <div id="serviceModalDesc" class="sm-desc"></div>
+            <div class="sm-features">
+              <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
+              <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
+            </div>
+            <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
+              <h4>📝 Analysis Notes</h4>
+              <div id="serviceModalNotes"></div>
+            </div>
           </div>
-          <div class="sm-chart-wrap">
-            <h4 id="serviceModalChartLabel" style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">📈 Sample Output</h4>
-            <canvas id="serviceModalChart" height="200"></canvas>
+          <div class="sm-col-right">
+            <div id="serviceModalHero" class="sm-hero"></div>
+            <div class="sm-chart-wrap">
+              <h4 id="serviceModalChartLabel" style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">📈 Sample Output</h4>
+              <canvas id="serviceModalChart" height="200"></canvas>
+            </div>
+            <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
+              <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
+              <div class="sm-gallery-grid" id="serviceModalGallery"></div>
+            </div>
           </div>
-        </div>
-        <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
-          <h4>📝 Analysis Notes</h4>
-          <div id="serviceModalNotes"></div>
-        </div>
-        <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
-          <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
-          <div class="sm-gallery-grid" id="serviceModalGallery"></div>
         </div>
       </div>
     </div>

@@ -415,24 +415,52 @@ const SERVICES_DATA = {
 }
 let serviceChartInstance=null
 function svcHeroSVG(color,icon){
-  return `<svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice">
-    <defs><linearGradient id="svcGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${color}" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="${color}" stop-opacity="0.55"/>
-    </linearGradient></defs>
-    <rect width="400" height="150" fill="url(#svcGrad)"/>
-    <circle cx="360" cy="20" r="70" fill="#fff" opacity=".08"/>
-    <circle cx="40" cy="140" r="50" fill="#fff" opacity=".08"/>
-    <rect x="30" y="95" width="18" height="30" fill="#fff" opacity=".35" rx="2"/>
-    <rect x="55" y="80" width="18" height="45" fill="#fff" opacity=".45" rx="2"/>
-    <rect x="80" y="60" width="18" height="65" fill="#fff" opacity=".6" rx="2"/>
-    <rect x="105" y="40" width="18" height="85" fill="#fff" opacity=".8" rx="2"/>
-    <text x="200" y="85" font-size="54" text-anchor="middle" dominant-baseline="middle">${icon}</text>
+  return `<svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="svcGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${color}" stop-opacity="0.98"/>
+        <stop offset="100%" stop-color="${color}" stop-opacity="0.6"/>
+      </linearGradient>
+      <pattern id="svcDots" width="22" height="22" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.4" fill="#fff" opacity=".3"/>
+      </pattern>
+    </defs>
+    <rect width="400" height="220" fill="url(#svcGrad)"/>
+    <rect width="400" height="220" fill="url(#svcDots)"/>
+    <circle cx="365" cy="25" r="85" fill="#fff" opacity=".07"/>
+    <circle cx="20" cy="205" r="65" fill="#fff" opacity=".07"/>
+    <g transform="translate(30,110)">
+      <rect x="0" y="50" width="18" height="34" fill="#FDE68A" rx="3"/>
+      <rect x="26" y="30" width="18" height="54" fill="#FCA5A5" rx="3"/>
+      <rect x="52" y="10" width="18" height="74" fill="#BFDBFE" rx="3"/>
+      <rect x="78" y="-10" width="18" height="94" fill="#fff" rx="3"/>
+    </g>
+    <g transform="translate(215,55)">
+      <polyline points="0,92 24,64 48,72 72,32 96,46 120,12" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5,5" opacity=".85"/>
+      <circle cx="0" cy="92" r="4" fill="#FDE68A"/>
+      <circle cx="24" cy="64" r="4" fill="#FCA5A5"/>
+      <circle cx="48" cy="72" r="4" fill="#BFDBFE"/>
+      <circle cx="72" cy="32" r="4" fill="#FDE68A"/>
+      <circle cx="96" cy="46" r="4" fill="#FCA5A5"/>
+      <circle cx="120" cy="12" r="4" fill="#BFDBFE"/>
+    </g>
+    <text x="72" y="36" font-size="19" opacity=".9">📈</text>
+    <text x="330" y="196" font-size="19" opacity=".9">🧮</text>
+    <text x="345" y="60" font-size="17" opacity=".85">Σ</text>
+    <circle cx="200" cy="112" r="46" fill="#fff"/>
+    <text x="200" y="113" font-size="46" text-anchor="middle" dominant-baseline="central">${icon}</text>
   </svg>`
 }
 function svcHeroBlock(color,icon,iconURL){
   if(iconURL){
-    return `<div class="sm-hero-custom" style="background:linear-gradient(120deg,${color},${color}cc)">
+    return `<div class="sm-hero-custom" style="background:linear-gradient(135deg,${color},${color}cc)">
+      <div class="sm-hero-dots"></div>
+      <div class="sm-hero-blob" style="width:170px;height:170px;top:-45px;right:-35px;background:rgba(255,255,255,.1)"></div>
+      <div class="sm-hero-blob" style="width:120px;height:120px;bottom:-30px;left:-20px;background:rgba(255,255,255,.1)"></div>
+      <span class="sm-hero-float f1">📊</span>
+      <span class="sm-hero-float f2">📈</span>
+      <span class="sm-hero-float f3">🧮</span>
+      <span class="sm-hero-float f4">Σ</span>
       <div class="sm-hero-badge"><img src="${iconURL}" alt=""></div>
     </div>`
   }
