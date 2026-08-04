@@ -459,7 +459,7 @@ function svcHeroBlock(color,icon,iconURL){
       <div class="sm-hero-blob" style="width:120px;height:120px;bottom:-30px;left:-20px;background:rgba(255,255,255,.1)"></div>
       <span class="sm-hero-float f1">📊</span>
       <span class="sm-hero-float f2">📈</span>
-      <span class="sm-hero-float f3">🧮</span>
+      <span class="sm-hero-float sm-hero-float-img"><img src="${iconURL}" alt=""></span>
       <span class="sm-hero-float f4">Σ</span>
       <div class="sm-hero-badge"><img src="${iconURL}" alt=""></div>
     </div>`
@@ -505,24 +505,10 @@ async function openServiceModal(id){
   document.getElementById('serviceModalDesc').innerHTML=mdLite(s.desc)
   document.getElementById('serviceModalHero').innerHTML=svcHeroSVG(s.color,s.icon)
   document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
-  document.getElementById('serviceModalChartLabel').textContent=s.chartLabel
   document.getElementById('serviceModalNotesWrap').style.display='none'
   document.getElementById('serviceModalGalleryWrap').style.display='none'
   document.getElementById('serviceModal').style.display='flex'
   document.body.style.overflow='hidden'
-  if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
-  const ctx=document.getElementById('serviceModalChart')
-  if(ctx && window.Chart){
-    serviceChartInstance = new Chart(ctx,{
-      type:s.chartType,
-      data:s.chartData,
-      options:{
-        responsive:true,
-        plugins:{legend:{display:s.chartData.datasets.length>1 || s.chartType==='doughnut' || s.chartType==='pie',position:'bottom',labels:{boxWidth:12,font:{size:10}}}},
-        scales:(s.chartType==='doughnut'||s.chartType==='pie'||s.chartType==='radar')?{}:{y:{beginAtZero:true}}
-      }
-    })
-  }
   // 2) layer in any admin-uploaded overrides (icon, text, gallery, notes)
   try{
     const doc = await fbDB.collection('services').doc(id).get()
