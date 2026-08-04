@@ -430,20 +430,51 @@ function svcHeroSVG(color,icon){
     <text x="200" y="85" font-size="54" text-anchor="middle" dominant-baseline="middle">${icon}</text>
   </svg>`
 }
+function svcHeroBlock(color,icon,iconURL){
+  if(iconURL){
+    return `<div class="sm-hero-custom" style="background:linear-gradient(120deg,${color},${color}cc)">
+      <div class="sm-hero-badge"><img src="${iconURL}" alt=""></div>
+    </div>`
+  }
+  return svcHeroSVG(color,icon)
+}
 function svcIconHTML(icon,iconURL){
   return iconURL ? `<img src="${iconURL}" alt="">` : (icon||'📊')
+}
+// ---- lightweight markdown renderer for admin-entered descriptions/notes ----
+function mdInline(s){
+  return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*(?!\*)(.+?)\*(?!\*)/g,'$1<em>$2</em>')
+}
+function mdLite(raw){
+  if(!raw) return ''
+  const lines = escapeHtml(raw).split(/\r?\n/)
+  let html='', inList=false
+  const closeList=()=>{ if(inList){ html+='</ul>'; inList=false } }
+  for(let line of lines){
+    line = line.trim()
+    if(!line){ closeList(); continue }
+    let m
+    if((m=line.match(/^###\s+(.*)/))){ closeList(); html+=`<h5>${mdInline(m[1])}</h5>`; continue }
+    if((m=line.match(/^##\s+(.*)/))){ closeList(); html+=`<h4>${mdInline(m[1])}</h4>`; continue }
+    if((m=line.match(/^#\s+(.*)/))){ closeList(); html+=`<h3>${mdInline(m[1])}</h3>`; continue }
+    if((m=line.match(/^[-*]\s+(.*)/))){ if(!inList){ html+='<ul>'; inList=true } html+=`<li>${mdInline(m[1])}</li>`; continue }
+    closeList()
+    html+=`<p>${mdInline(line)}</p>`
+  }
+  closeList()
+  return html
 }
 async function openServiceModal(id){
   const s = SERVICES_DATA[id]
   if(!s) return
   // 1) paint instantly with the built-in defaults
   const iconEl=document.getElementById('serviceModalIcon')
+  const headband=document.getElementById('serviceModalHeadband')
   iconEl.innerHTML=svcIconHTML(s.icon,null)
-  iconEl.style.background=s.color+'22'
-  iconEl.style.color=s.color
+  headband.style.background=`linear-gradient(120deg,${s.color},${s.color}cc)`
   document.getElementById('serviceModalTitle').textContent=s.title
   document.getElementById('serviceModalTag').textContent=s.tag
-  document.getElementById('serviceModalDesc').textContent=s.desc
+  document.getElementById('serviceModalDesc').innerHTML=mdLite(s.desc)
   document.getElementById('serviceModalHero').innerHTML=svcHeroSVG(s.color,s.icon)
   document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
   document.getElementById('serviceModalChartLabel').textContent=s.chartLabel
@@ -468,13 +499,16 @@ async function openServiceModal(id){
   try{
     const doc = await fbDB.collection('services').doc(id).get()
     const data = doc.exists ? doc.data() : {}
-    if(data.iconURL){ iconEl.innerHTML=svcIconHTML(null,data.iconURL) }
+    if(data.iconURL){
+      iconEl.innerHTML=svcIconHTML(null,data.iconURL)
+      document.getElementById('serviceModalHero').innerHTML=svcHeroBlock(s.color,s.icon,data.iconURL)
+    }
     if(data.title) document.getElementById('serviceModalTitle').textContent=data.title
     if(data.tag) document.getElementById('serviceModalTag').textContent=data.tag
-    if(data.desc) document.getElementById('serviceModalDesc').textContent=data.desc
+    if(data.desc) document.getElementById('serviceModalDesc').innerHTML=mdLite(data.desc)
     if(data.features && data.features.length) document.getElementById('serviceModalFeatures').innerHTML=data.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
     if(data.analysisNotes){
-      document.getElementById('serviceModalNotes').textContent=data.analysisNotes
+      document.getElementById('serviceModalNotes').innerHTML=mdLite(data.analysisNotes)
       document.getElementById('serviceModalNotesWrap').style.display='block'
     }
     const gsnap = await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
@@ -493,7 +527,7 @@ function closeServiceModal(){
   document.body.style.overflow=''
   if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
 }
-// ---- PUBLIC — reflect admin icon/title/desc overrides on the Services grid cards ----
+// ---- PUBLIC — reflect admin icon/title/tools overrides on the Services grid cards ----
 async function loadServiceCardOverrides(){
   for(const id of Object.keys(SERVICES_DATA)){
     try{
@@ -502,7 +536,7 @@ async function loadServiceCardOverrides(){
       const data=doc.data()
       if(data.iconURL){ const el=document.getElementById('svcCardIcon-'+id); if(el) el.innerHTML=svcIconHTML(null,data.iconURL) }
       if(data.title){ const el=document.getElementById('svcCardTitle-'+id); if(el) el.textContent=data.title }
-      if(data.desc){ const el=document.getElementById('svcCardDesc-'+id); if(el) el.textContent=data.desc }
+      if(data.tag){ const el=document.getElementById('svcCardTools-'+id); if(el) el.textContent=data.tag }
     }catch(e){ /* card just keeps its default */ }
   }
 }
@@ -612,7 +646,7 @@ async function saveServiceAdmin(id){
     await fbDB.collection('services').doc(id).set(payload,{merge:true})
     const s=SERVICES_DATA[id]
     const cardTitle=document.getElementById('svcCardTitle-'+id); if(cardTitle) cardTitle.textContent=payload.title||s.title
-    const cardDesc=document.getElementById('svcCardDesc-'+id); if(cardDesc) cardDesc.textContent=payload.desc||s.desc
+    const cardTools=document.getElementById('svcCardTools-'+id); if(cardTools) cardTools.textContent=payload.tag||s.tag
     if(statusEl){ statusEl.style.color='#107C10'; statusEl.textContent='✓ Saved — now live on the website.' }
   }catch(e){
     if(statusEl){ statusEl.style.color='#D13438'; statusEl.textContent='⚠ Could not save: '+e.message }

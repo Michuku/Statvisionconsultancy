@@ -334,49 +334,49 @@
       <article class="service-card" onclick="openServiceModal('statistical')">
         <span class="s-ico blue" id="svcCardIcon-statistical">&#128202;</span>
         <h3 id="svcCardTitle-statistical">Statistical Analysis</h3>
-        <p id="svcCardDesc-statistical">Advanced statistical modeling using SPSS, STATA, R, Python.</p>
+        <p class="s-tools" id="svcCardTools-statistical">SPSS &middot; STATA &middot; R &middot; Python</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('statistical');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('powerbi')">
         <span class="s-ico amber" id="svcCardIcon-powerbi">&#128200;</span>
         <h3 id="svcCardTitle-powerbi">Power BI Dashboards</h3>
-        <p id="svcCardDesc-powerbi">Interactive dashboards that turn data into actionable insights.</p>
+        <p class="s-tools" id="svcCardTools-powerbi">Interactive Business Dashboards</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('powerbi');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('monitoring')">
         <span class="s-ico green" id="svcCardIcon-monitoring">&#127919;</span>
         <h3 id="svcCardTitle-monitoring">Monitoring &amp; Evaluation</h3>
-        <p id="svcCardDesc-monitoring">Designing M&amp;E frameworks, data collection, analysis, and impact assessment.</p>
+        <p class="s-tools" id="svcCardTools-monitoring">M&amp;E Frameworks &amp; Impact Assessment</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('monitoring');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('research')">
         <span class="s-ico violet" id="svcCardIcon-research">&#128269;</span>
         <h3 id="svcCardTitle-research">Research Consultancy</h3>
-        <p id="svcCardDesc-research">Data-driven research solutions for institutions, NGOs, and businesses.</p>
+        <p class="s-tools" id="svcCardTools-research">Data-Driven Research Solutions</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('research');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('cleaning')">
         <span class="s-ico teal" id="svcCardIcon-cleaning">&#129529;</span>
         <h3 id="svcCardTitle-cleaning">Data Cleaning</h3>
-        <p id="svcCardDesc-cleaning">Data preparation, validation, and cleaning for accurate analysis.</p>
+        <p class="s-tools" id="svcCardTools-cleaning">Preparation, Validation &amp; Quality Control</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('cleaning');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('survey')">
         <span class="s-ico orange" id="svcCardIcon-survey">&#128221;</span>
         <h3 id="svcCardTitle-survey">Survey Design</h3>
-        <p id="svcCardDesc-survey">Designing structured surveys and instruments for reliable data collection.</p>
+        <p class="s-tools" id="svcCardTools-survey">Structured Data Collection Instruments</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('survey');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('bi')">
         <span class="s-ico indigo" id="svcCardIcon-bi">&#128161;</span>
         <h3 id="svcCardTitle-bi">Business Intelligence</h3>
-        <p id="svcCardDesc-bi">Transforming raw data into meaningful insights for better decision making.</p>
+        <p class="s-tools" id="svcCardTools-bi">Turning Data into Decisions</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('bi');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('training')">
         <span class="s-ico green2" id="svcCardIcon-training">&#127891;</span>
         <h3 id="svcCardTitle-training">Training &amp; Capacity</h3>
-        <p id="svcCardDesc-training">Training on data analysis tools and research methodologies.</p>
+        <p class="s-tools" id="svcCardTools-training">Data Skills &amp; Research Methodology Training</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('training');return false">Learn More <span>&rarr;</span></a>
       </article>
       <button class="service-next" id="serviceNext" aria-label="More services">&rarr;</button>
@@ -1724,12 +1724,34 @@
 <!-- SERVICE DETAIL MODAL (full page) -->
 <div class="mov fullpage" id="serviceModal" onclick="if(event.target===this)closeServiceModal()">
   <div class="modal modal-fullpage" id="serviceModalCard">
-    <div class="mhd" id="serviceModalHead">
-      <div class="sm-inner" style="display:flex;align-items:center;gap:1rem;width:100%">
-        <span class="sm-ico" id="serviceModalIcon">📊</span>
-        <div>
-          <h2 id="serviceModalTitle" style="margin-bottom:.15rem">—</h2>
-          <p id="serviceModalTag" style="font-size:.82rem;color:var(--sl)">—</p>
+    <div class="mhd sm-mhd" id="serviceModalHead">
+      <div class="sm-topbar">
+        <span class="cube-wrap" aria-hidden="true">
+          <span class="cube3d">
+            <span class="cube-face cube-front"></span>
+            <span class="cube-face cube-back"></span>
+            <span class="cube-face cube-right"></span>
+            <span class="cube-face cube-left"></span>
+            <span class="cube-face cube-top"></span>
+            <span class="cube-face cube-bottom"></span>
+          </span>
+        </span>
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <rect x="2" y="12" width="5" height="10" rx="1" fill="#1e3a8a"/>
+            <rect x="9.5" y="7" width="5" height="15" rx="1" fill="#2563eb"/>
+            <rect x="17" y="2" width="5" height="20" rx="1" fill="#60a5fa"/>
+          </svg>
+        </span>
+        <span class="logo-text" style="font-size:15px">StatVision<small>Research &amp; Consultancy</small></span>
+      </div>
+      <div class="sm-headband" id="serviceModalHeadband">
+        <div class="sm-inner" style="display:flex;align-items:center;gap:1rem;width:100%">
+          <span class="sm-ico" id="serviceModalIcon">📊</span>
+          <div>
+            <h2 id="serviceModalTitle" style="margin-bottom:.15rem">—</h2>
+            <p id="serviceModalTag" style="font-size:.82rem">—</p>
+          </div>
         </div>
       </div>
       <button class="mcls" onclick="closeServiceModal()">✕</button>
@@ -1737,7 +1759,7 @@
     <div class="mbdy">
       <div class="sm-inner">
         <div id="serviceModalHero" class="sm-hero"></div>
-        <p id="serviceModalDesc" style="color:var(--sl);font-size:.92rem;line-height:1.7;margin:1.1rem 0"></p>
+        <div id="serviceModalDesc" class="sm-desc"></div>
         <div class="sm-grid">
           <div class="sm-features">
             <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>

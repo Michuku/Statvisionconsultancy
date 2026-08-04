@@ -404,13 +404,44 @@ footer{background:#060F2E;color:#fff;padding:3.5rem 2rem 1.75rem}
 }
 .sm-ico img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 
+/* SERVICE MODAL HEADER — branded topbar + colored accent band */
+.sm-mhd{padding:0;display:flex;flex-direction:column;position:sticky;top:0;z-index:2;border-bottom:none;background:transparent}
+.sm-topbar{display:flex;align-items:center;gap:8px;padding:.65rem 2.4rem;border-bottom:1px solid var(--br);background:#fff}
+.sm-topbar .logo-text{font-size:15px}
+.sm-headband{padding:1.4rem 2.4rem;background:linear-gradient(120deg,#3b82f6,#2563eb);transition:background .25s}
+.sm-headband h2{color:#fff;font-family:var(--fd);font-size:1.3rem;font-weight:700}
+.sm-headband p{color:rgba(255,255,255,.88);margin:0}
+.sm-headband .sm-ico{background:rgba(255,255,255,.22);color:#fff}
+@media (max-width:640px){
+  .sm-topbar{padding:.6rem 1.2rem}
+  .sm-headband{padding:1.1rem 1.2rem}
+}
+
+/* SERVICE MODAL DESCRIPTION — rendered from admin markdown-lite text */
+.sm-desc{color:var(--sl);font-size:.92rem;line-height:1.75;margin:1.3rem 0}
+.sm-desc p{margin-bottom:.9rem}
+.sm-desc h3,.sm-desc h4,.sm-desc h5{font-family:var(--fd);color:var(--ch);margin:1.1rem 0 .5rem;font-weight:700}
+.sm-desc h3{font-size:1.05rem}
+.sm-desc h4{font-size:.96rem}
+.sm-desc h5{font-size:.88rem}
+.sm-desc ul{padding-left:1.2rem;margin-bottom:.9rem}
+.sm-desc li{margin-bottom:.3rem}
+.sm-desc strong{color:var(--ch)}
+
+/* SERVICE MODAL HERO — with a custom uploaded icon */
+.sm-hero-custom{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.sm-hero-badge{width:96px;height:96px;border-radius:50%;background:#fff;padding:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.sm-hero-badge img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+
 /* SERVICE GALLERY (admin-uploaded images / analysis output) */
 .sm-gallery{margin-top:1.8rem}
 .sm-gallery h4{font-family:var(--fd);font-size:.85rem;margin-bottom:.7rem}
 .sm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
 .sm-gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid var(--br);cursor:zoom-in}
-.sm-notes{margin-top:1.8rem;background:var(--bl);border-radius:12px;padding:1.2rem 1.4rem;font-size:.88rem;line-height:1.75;color:var(--ch);white-space:pre-line}
+.sm-notes{margin-top:1.8rem;background:var(--bl);border-radius:12px;padding:1.2rem 1.4rem;font-size:.88rem;line-height:1.75;color:var(--ch)}
 .sm-notes h4{font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem}
+#serviceModalNotes p{margin-bottom:.7rem}
+#serviceModalNotes strong{color:var(--ch)}
 
 /* ADMIN — SERVICE ICON/GALLERY UPLOAD */
 .svc-icon-upload{position:relative;display:inline-block;cursor:pointer;flex-shrink:0}
@@ -872,6 +903,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .service-card > *{position:relative;z-index:1;}
 .service-card h3{font-size:15.5px;font-weight:700;margin-bottom:8px;}
 .service-card p{font-size:13.5px;color:var(--muted);line-height:1.5;margin-bottom:14px;min-height:60px;}
+.s-tools{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.01em;margin-bottom:16px;min-height:auto;}
 .service-card a{font-size:13px;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:4px;}
 .service-card a span{transition:transform .3s ease;}
 .service-card:hover a span{transform:translateX(4px);}
