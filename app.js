@@ -347,6 +347,124 @@ async function uploadStaffAvatar(input,role){
 }
 
 // ══════════════════════════════════════════════════════════════════
+// SERVICES PAGE — "Learn More" detail modal with sample charts
+// ══════════════════════════════════════════════════════════════════
+const SERVICES_DATA = {
+  statistical:{
+    title:'Statistical Analysis', tag:'SPSS · STATA · R · Python', icon:'📊', color:'#3b82f6',
+    desc:'We turn raw numbers into defensible conclusions. Our analysts run descriptive and inferential statistics, regression modelling, hypothesis testing, and predictive analytics using industry-standard tools — so your decisions are backed by rigorous, reproducible evidence.',
+    features:['Descriptive & inferential statistics','Regression & predictive modelling','Hypothesis testing & significance analysis','Custom SPSS, STATA, R & Python scripts','Clear, decision-ready result summaries'],
+    chartType:'bar', chartLabel:'📈 Sample Output — Model Accuracy by Method',
+    chartData:{labels:['Linear Reg.','Logistic Reg.','Random Forest','XGBoost'],datasets:[{label:'Accuracy %',data:[78,84,91,93],backgroundColor:'#3b82f6'}]}
+  },
+  powerbi:{
+    title:'Power BI Dashboards', tag:'Interactive Business Dashboards', icon:'📈', color:'#f59e0b',
+    desc:'We design live, interactive Power BI dashboards that turn scattered spreadsheets into a single source of truth — so your team can track KPIs, spot trends, and make decisions in real time instead of waiting on monthly reports.',
+    features:['Custom KPI & executive dashboards','Live data connections & auto-refresh','Drill-down reports by team, region or product','Mobile-friendly dashboard design','Staff training on dashboard use'],
+    chartType:'line', chartLabel:'📈 Sample Output — Monthly KPI Trend',
+    chartData:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{label:'Revenue Index',data:[62,68,71,80,86,94],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.15)',fill:true,tension:.35}]}
+  },
+  monitoring:{
+    title:'Monitoring & Evaluation', tag:'M&E Frameworks & Impact Assessment', icon:'🎯', color:'#22c55e',
+    desc:'We design end-to-end M&E frameworks for NGOs, government programmes and businesses — from theory of change and indicator selection to field data collection and impact assessment — so you can prove and improve what your programme actually achieves.',
+    features:['Theory of change & log-frame design','Indicator & baseline development','Field data collection & KoBo/ODK setup','Impact & outcome evaluation','Donor-ready M&E reports'],
+    chartType:'doughnut', chartLabel:'📈 Sample Output — Project Outcomes Achieved',
+    chartData:{labels:['Fully Achieved','Partially Achieved','Not Achieved'],datasets:[{data:[64,27,9],backgroundColor:['#22c55e','#fbbf24','#ef4444']}]}
+  },
+  research:{
+    title:'Research Consultancy', tag:'Data-Driven Research Solutions', icon:'🔍', color:'#8b5cf6',
+    desc:'From concept notes to final publication, we support institutions, NGOs and businesses through the full research lifecycle — study design, ethical clearance support, data collection, analysis, and writing up findings for policy or publication.',
+    features:['Research design & proposal development','Mixed-methods (qualitative + quantitative)','Ethical review & IRB support','Peer-review-ready analysis & writing','Policy brief & publication support'],
+    chartType:'radar', chartLabel:'📈 Sample Output — Research Focus Areas Covered',
+    chartData:{labels:['Health','Education','Economics','Agriculture','Governance','Environment'],datasets:[{label:'Projects Delivered',data:[8,6,9,5,7,4],backgroundColor:'rgba(139,92,246,.2)',borderColor:'#8b5cf6',pointBackgroundColor:'#8b5cf6'}]}
+  },
+  cleaning:{
+    title:'Data Cleaning', tag:'Preparation, Validation & Quality Control', icon:'🧹', color:'#14b8a6',
+    desc:'Messy data leads to wrong conclusions. We detect and fix missing values, duplicates, inconsistent coding and outliers, and validate your dataset against its own logic — so every analysis built on it stands on solid ground.',
+    features:['Missing value & outlier treatment','De-duplication & consistency checks','Variable coding & standardisation','Data validation against source logic','Clean, analysis-ready dataset delivery'],
+    chartType:'bar', chartLabel:'📈 Sample Output — Data Quality Before vs After',
+    chartData:{labels:['Missing Values','Duplicates','Coding Errors','Outliers'],datasets:[
+      {label:'Before Cleaning (%)',data:[18,9,12,7],backgroundColor:'#fca5a5'},
+      {label:'After Cleaning (%)',data:[1,0,0.5,1],backgroundColor:'#14b8a6'}
+    ]}
+  },
+  survey:{
+    title:'Survey Design', tag:'Structured Data Collection Instruments', icon:'📝', color:'#f97316',
+    desc:'A survey is only as good as its design. We build structured, bias-tested questionnaires and digital data collection tools tailored to your research questions — piloted and refined before they ever reach your respondents.',
+    features:['Questionnaire design & question wording','Digital tools: KoBo, ODK, Google Forms','Sampling strategy & respondent targeting','Pilot testing & instrument refinement','Multi-language survey adaptation'],
+    chartType:'pie', chartLabel:'📈 Sample Output — Survey Response Channels',
+    chartData:{labels:['Online','In-Person','Phone','SMS'],datasets:[{data:[42,31,18,9],backgroundColor:['#f97316','#fb923c','#fdba74','#ffedd5']}]}
+  },
+  bi:{
+    title:'Business Intelligence', tag:'Turning Data into Decisions', icon:'💡', color:'#6366f1',
+    desc:'We help organisations build the data infrastructure and reporting culture to compete on insight — consolidating data sources, building BI pipelines, and delivering the kind of intelligence that shows up directly in the bottom line.',
+    features:['Data warehousing & pipeline setup','Cross-department reporting systems','Trend & competitor benchmarking','Automated reporting workflows','Executive-level insight briefings'],
+    chartType:'line', chartLabel:'📈 Sample Output — Revenue Growth After BI Adoption',
+    chartData:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Revenue (KES M)',data:[4.2,4.8,5.9,7.1],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.15)',fill:true,tension:.3}]}
+  },
+  training:{
+    title:'Training & Capacity Building', tag:'Data Skills & Research Methodology Training', icon:'🎓', color:'#10b981',
+    desc:'We build lasting in-house capacity, not just one-off reports. Our hands-on workshops train your team on statistical tools, survey methods and dashboard use — so your organisation keeps generating insight long after our engagement ends.',
+    features:['SPSS, STATA, R & Excel training','Survey & M&E methodology workshops','Power BI / dashboard skills training','Customised in-house curricula','Certificates of completion'],
+    chartType:'bar', chartLabel:'📈 Sample Output — Participant Skill Score (Pre vs Post)',
+    chartData:{labels:['Statistics','Data Cleaning','Dashboards','Survey Design'],datasets:[
+      {label:'Before Training',data:[38,42,29,35],backgroundColor:'#a7f3d0'},
+      {label:'After Training',data:[81,88,76,84],backgroundColor:'#10b981'}
+    ]}
+  }
+}
+let serviceChartInstance=null
+function svcHeroSVG(color,icon){
+  return `<svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="svcGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.55"/>
+    </linearGradient></defs>
+    <rect width="400" height="150" fill="url(#svcGrad)"/>
+    <circle cx="360" cy="20" r="70" fill="#fff" opacity=".08"/>
+    <circle cx="40" cy="140" r="50" fill="#fff" opacity=".08"/>
+    <rect x="30" y="95" width="18" height="30" fill="#fff" opacity=".35" rx="2"/>
+    <rect x="55" y="80" width="18" height="45" fill="#fff" opacity=".45" rx="2"/>
+    <rect x="80" y="60" width="18" height="65" fill="#fff" opacity=".6" rx="2"/>
+    <rect x="105" y="40" width="18" height="85" fill="#fff" opacity=".8" rx="2"/>
+    <text x="200" y="85" font-size="54" text-anchor="middle" dominant-baseline="middle">${icon}</text>
+  </svg>`
+}
+function openServiceModal(id){
+  const s = SERVICES_DATA[id]
+  if(!s) return
+  document.getElementById('serviceModalIcon').textContent=s.icon
+  document.getElementById('serviceModalIcon').style.background=s.color+'22'
+  document.getElementById('serviceModalIcon').style.color=s.color
+  document.getElementById('serviceModalTitle').textContent=s.title
+  document.getElementById('serviceModalTag').textContent=s.tag
+  document.getElementById('serviceModalDesc').textContent=s.desc
+  document.getElementById('serviceModalHero').innerHTML=svcHeroSVG(s.color,s.icon)
+  document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${f}</li>`).join('')
+  document.getElementById('serviceModalChartLabel').textContent=s.chartLabel
+  document.getElementById('serviceModal').style.display='flex'
+  document.body.style.overflow='hidden'
+  if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
+  const ctx=document.getElementById('serviceModalChart')
+  if(ctx && window.Chart){
+    serviceChartInstance = new Chart(ctx,{
+      type:s.chartType,
+      data:s.chartData,
+      options:{
+        responsive:true,
+        plugins:{legend:{display:s.chartData.datasets.length>1 || s.chartType==='doughnut' || s.chartType==='pie',position:'bottom',labels:{boxWidth:12,font:{size:10}}}},
+        scales:(s.chartType==='doughnut'||s.chartType==='pie'||s.chartType==='radar')?{}:{y:{beginAtZero:true}}
+      }
+    })
+  }
+}
+function closeServiceModal(){
+  document.getElementById('serviceModal').style.display='none'
+  document.body.style.overflow=''
+  if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
+}
+
+// ══════════════════════════════════════════════════════════════════
 // ABOUT PAGE — team member profiles (photo, academic history, bio)
 // ══════════════════════════════════════════════════════════════════
 const teamMembers = {

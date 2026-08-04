@@ -331,53 +331,53 @@
   <div class="section-inner">
     <h2>Our Core Services</h2>
     <div class="service-grid reveal reveal-stagger">
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('statistical')">
         <span class="s-ico blue">&#128202;</span>
         <h3>Statistical Analysis</h3>
         <p>Advanced statistical modeling using SPSS, STATA, R, Python.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('statistical');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('powerbi')">
         <span class="s-ico amber">&#128200;</span>
         <h3>Power BI Dashboards</h3>
         <p>Interactive dashboards that turn data into actionable insights.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('powerbi');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('monitoring')">
         <span class="s-ico green">&#127919;</span>
         <h3>Monitoring &amp; Evaluation</h3>
         <p>Designing M&amp;E frameworks, data collection, analysis, and impact assessment.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('monitoring');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('research')">
         <span class="s-ico violet">&#128269;</span>
         <h3>Research Consultancy</h3>
         <p>Data-driven research solutions for institutions, NGOs, and businesses.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('research');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('cleaning')">
         <span class="s-ico teal">&#129529;</span>
         <h3>Data Cleaning</h3>
         <p>Data preparation, validation, and cleaning for accurate analysis.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('cleaning');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('survey')">
         <span class="s-ico orange">&#128221;</span>
         <h3>Survey Design</h3>
         <p>Designing structured surveys and instruments for reliable data collection.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('survey');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('bi')">
         <span class="s-ico indigo">&#128161;</span>
         <h3>Business Intelligence</h3>
         <p>Transforming raw data into meaningful insights for better decision making.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('bi');return false">Learn More <span>&rarr;</span></a>
       </article>
-      <article class="service-card">
+      <article class="service-card" onclick="openServiceModal('training')">
         <span class="s-ico green2">&#127891;</span>
         <h3>Training &amp; Capacity</h3>
         <p>Training on data analysis tools and research methodologies.</p>
-        <a href="#">Learn More &rarr;</a>
+        <a href="#" onclick="event.stopPropagation();openServiceModal('training');return false">Learn More <span>&rarr;</span></a>
       </article>
       <button class="service-next" id="serviceNext" aria-label="More services">&rarr;</button>
     </div>
@@ -1710,6 +1710,40 @@
   </div>
 </div>
 </div><!-- end admin -->
+<!-- SERVICE DETAIL MODAL -->
+<div class="mov" id="serviceModal" onclick="if(event.target===this)closeServiceModal()">
+  <div class="modal" id="serviceModalCard" style="max-width:760px">
+    <div class="mhd" id="serviceModalHead">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <span class="sm-ico" id="serviceModalIcon">📊</span>
+        <div>
+          <h2 id="serviceModalTitle" style="margin-bottom:.15rem">—</h2>
+          <p id="serviceModalTag" style="font-size:.82rem;color:var(--sl)">—</p>
+        </div>
+      </div>
+      <button class="mcls" onclick="closeServiceModal()">✕</button>
+    </div>
+    <div class="mbdy">
+      <div id="serviceModalHero" class="sm-hero"></div>
+      <p id="serviceModalDesc" style="color:var(--sl);font-size:.92rem;line-height:1.7;margin:1.1rem 0"></p>
+      <div class="sm-grid">
+        <div class="sm-features">
+          <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
+          <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
+        </div>
+        <div class="sm-chart-wrap">
+          <h4 id="serviceModalChartLabel" style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">📈 Sample Output</h4>
+          <canvas id="serviceModalChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="mft">
+      <button class="bsec" onclick="closeServiceModal()">Close</button>
+      <button class="bp" onclick="closeServiceModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request This Service →</button>
+    </div>
+  </div>
+</div>
+
 <!-- TEAM MEMBER MODAL (view only — edited from the Admin Portal) -->
 <div class="mov" id="teamModal" onclick="if(event.target===this)closeTeamModal()">
   <div class="modal" style="max-width:640px">
@@ -1789,5 +1823,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
 </body>
 </html>
