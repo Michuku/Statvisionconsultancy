@@ -430,18 +430,25 @@ function svcHeroSVG(color,icon){
     <text x="200" y="85" font-size="54" text-anchor="middle" dominant-baseline="middle">${icon}</text>
   </svg>`
 }
-function openServiceModal(id){
+function svcIconHTML(icon,iconURL){
+  return iconURL ? `<img src="${iconURL}" alt="">` : (icon||'📊')
+}
+async function openServiceModal(id){
   const s = SERVICES_DATA[id]
   if(!s) return
-  document.getElementById('serviceModalIcon').textContent=s.icon
-  document.getElementById('serviceModalIcon').style.background=s.color+'22'
-  document.getElementById('serviceModalIcon').style.color=s.color
+  // 1) paint instantly with the built-in defaults
+  const iconEl=document.getElementById('serviceModalIcon')
+  iconEl.innerHTML=svcIconHTML(s.icon,null)
+  iconEl.style.background=s.color+'22'
+  iconEl.style.color=s.color
   document.getElementById('serviceModalTitle').textContent=s.title
   document.getElementById('serviceModalTag').textContent=s.tag
   document.getElementById('serviceModalDesc').textContent=s.desc
   document.getElementById('serviceModalHero').innerHTML=svcHeroSVG(s.color,s.icon)
-  document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${f}</li>`).join('')
+  document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
   document.getElementById('serviceModalChartLabel').textContent=s.chartLabel
+  document.getElementById('serviceModalNotesWrap').style.display='none'
+  document.getElementById('serviceModalGalleryWrap').style.display='none'
   document.getElementById('serviceModal').style.display='flex'
   document.body.style.overflow='hidden'
   if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
@@ -457,11 +464,205 @@ function openServiceModal(id){
       }
     })
   }
+  // 2) layer in any admin-uploaded overrides (icon, text, gallery, notes)
+  try{
+    const doc = await fbDB.collection('services').doc(id).get()
+    const data = doc.exists ? doc.data() : {}
+    if(data.iconURL){ iconEl.innerHTML=svcIconHTML(null,data.iconURL) }
+    if(data.title) document.getElementById('serviceModalTitle').textContent=data.title
+    if(data.tag) document.getElementById('serviceModalTag').textContent=data.tag
+    if(data.desc) document.getElementById('serviceModalDesc').textContent=data.desc
+    if(data.features && data.features.length) document.getElementById('serviceModalFeatures').innerHTML=data.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+    if(data.analysisNotes){
+      document.getElementById('serviceModalNotes').textContent=data.analysisNotes
+      document.getElementById('serviceModalNotesWrap').style.display='block'
+    }
+    const gsnap = await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
+    if(!gsnap.empty){
+      document.getElementById('serviceModalGallery').innerHTML = gsnap.docs.map(d=>{
+        const g=d.data()
+        const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
+        return `<img src="${g.url}" alt="${safeName}" onclick="window.open('${g.url}','_blank')"/>`
+      }).join('')
+      document.getElementById('serviceModalGalleryWrap').style.display='block'
+    }
+  }catch(e){ /* no overrides saved yet — defaults already shown */ }
 }
 function closeServiceModal(){
   document.getElementById('serviceModal').style.display='none'
   document.body.style.overflow=''
   if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
+}
+// ---- PUBLIC — reflect admin icon/title/desc overrides on the Services grid cards ----
+async function loadServiceCardOverrides(){
+  for(const id of Object.keys(SERVICES_DATA)){
+    try{
+      const doc = await fbDB.collection('services').doc(id).get()
+      if(!doc.exists) continue
+      const data=doc.data()
+      if(data.iconURL){ const el=document.getElementById('svcCardIcon-'+id); if(el) el.innerHTML=svcIconHTML(null,data.iconURL) }
+      if(data.title){ const el=document.getElementById('svcCardTitle-'+id); if(el) el.textContent=data.title }
+      if(data.desc){ const el=document.getElementById('svcCardDesc-'+id); if(el) el.textContent=data.desc }
+    }catch(e){ /* card just keeps its default */ }
+  }
+}
+document.addEventListener('DOMContentLoaded',loadServiceCardOverrides)
+
+// ---- ADMIN (edit) — Admin Portal > Manage Services ----
+function renderAdminServicesPanel(){
+  const grid=document.getElementById('adServicesGrid')
+  if(!grid) return
+  grid.innerHTML = Object.keys(SERVICES_DATA).map(id=>{
+    const s=SERVICES_DATA[id]
+    return `<div class="odtl">
+      <div style="display:flex;align-items:center;gap:1.1rem;margin-bottom:1rem">
+        <label class="svc-icon-upload" title="Upload a custom icon image">
+          <div class="svc-icon-preview" id="adSvcIcon-${id}" style="background:${s.color}22;color:${s.color}">${s.icon}</div>
+          <span class="avatar-cam">📷</span>
+          <input type="file" accept="image/*" onchange="uploadServiceIconAdmin(this,'${id}')" hidden/>
+        </label>
+        <div>
+          <div style="font-weight:700;font-size:.95rem;color:var(--ch)">${s.title}</div>
+          <div style="font-size:.8rem;color:var(--sl)">${s.tag}</div>
+          <button type="button" onclick="resetServiceIconAdmin('${id}')" style="margin-top:.3rem;background:none;border:none;color:var(--b2);font-size:.75rem;cursor:pointer;padding:0">Reset icon to default</button>
+        </div>
+      </div>
+      <div class="fg"><label>Title</label><input id="adSvcTitle-${id}" placeholder="${s.title}"/></div>
+      <div class="fg"><label>Tagline</label><input id="adSvcTag-${id}" placeholder="${s.tag}"/></div>
+      <div class="fg"><label>Description</label><textarea id="adSvcDesc-${id}" placeholder="${s.desc}" style="min-height:80px"></textarea></div>
+      <div class="fg"><label>What's Included (one feature per line)</label><textarea id="adSvcFeatures-${id}" placeholder="${s.features.join('\n')}" style="min-height:90px"></textarea></div>
+      <div class="fg"><label>📝 Analysis Notes / Write-up (shown under the sample chart)</label><textarea id="adSvcNotes-${id}" placeholder="Optional write-up describing a real project's analysis, methodology or results..." style="min-height:80px"></textarea></div>
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem">
+        <button class="db1 dba" onclick="saveServiceAdmin('${id}')">Save ${s.title}</button>
+        <span id="adSvcStatus-${id}" style="font-size:.78rem;color:var(--sl)"></span>
+      </div>
+      <div class="fg" style="margin-bottom:.4rem">
+        <label>🖼️ Sample Graphs, Screenshots &amp; Deliverables</label>
+        <input type="file" id="adSvcGalleryInput-${id}" accept="image/*" multiple/>
+      </div>
+      <button class="bsec" onclick="uploadServiceGalleryAdmin('${id}')">⬆ Upload Images</button>
+      <span id="adSvcGalleryStatus-${id}" style="font-size:.78rem;color:var(--sl);margin-left:.6rem"></span>
+      <div class="svc-gallery-admin" id="adSvcGallery-${id}"></div>
+    </div>`
+  }).join('')
+  Object.keys(SERVICES_DATA).forEach(async id=>{
+    try{
+      const doc = await fbDB.collection('services').doc(id).get()
+      const data = doc.exists ? doc.data() : {}
+      if(data.iconURL) document.getElementById('adSvcIcon-'+id).innerHTML=svcIconHTML(null,data.iconURL)
+      document.getElementById('adSvcTitle-'+id).value = data.title||''
+      document.getElementById('adSvcTag-'+id).value = data.tag||''
+      document.getElementById('adSvcDesc-'+id).value = data.desc||''
+      document.getElementById('adSvcFeatures-'+id).value = (data.features||[]).join('\n')
+      document.getElementById('adSvcNotes-'+id).value = data.analysisNotes||''
+    }catch(e){ /* leave fields blank if nothing saved yet */ }
+    loadServiceGalleryAdmin(id)
+  })
+}
+async function uploadServiceIconAdmin(input,id){
+  const file = input.files && input.files[0]
+  if(!file) return
+  if(!file.type.startsWith('image/')){ alert('Please choose an image file.'); input.value=''; return }
+  const statusEl = document.getElementById('adSvcStatus-'+id)
+  const reader = new FileReader()
+  reader.onload = e => { document.getElementById('adSvcIcon-'+id).innerHTML = `<img src="${e.target.result}" alt="">` }
+  reader.readAsDataURL(file)
+  if(statusEl){ statusEl.style.color='var(--sl)'; statusEl.textContent='Uploading icon...' }
+  try{
+    const path = `service-icons/${id}_${Date.now()}_${file.name}`
+    const ref = fbStorage.ref(path)
+    await ref.put(file)
+    const url = await ref.getDownloadURL()
+    await fbDB.collection('services').doc(id).set({iconURL:url},{merge:true})
+    document.getElementById('adSvcIcon-'+id).innerHTML = svcIconHTML(null,url)
+    const cardIcon=document.getElementById('svcCardIcon-'+id); if(cardIcon) cardIcon.innerHTML=svcIconHTML(null,url)
+    if(statusEl){ statusEl.style.color='#107C10'; statusEl.textContent='✓ Icon updated across the site.' }
+  }catch(e){
+    if(statusEl){ statusEl.style.color='#D13438'; statusEl.textContent='⚠ Upload failed: '+e.message }
+  }
+  input.value=''
+}
+async function resetServiceIconAdmin(id){
+  if(!confirm('Reset this icon back to the default?')) return
+  const s=SERVICES_DATA[id]
+  const statusEl = document.getElementById('adSvcStatus-'+id)
+  try{
+    await fbDB.collection('services').doc(id).set({iconURL:firebase.firestore.FieldValue.delete()},{merge:true})
+    document.getElementById('adSvcIcon-'+id).innerHTML = s.icon
+    const cardIcon=document.getElementById('svcCardIcon-'+id); if(cardIcon) cardIcon.innerHTML = s.icon
+    if(statusEl){ statusEl.style.color='#107C10'; statusEl.textContent='✓ Icon reset to default.' }
+  }catch(e){
+    if(statusEl){ statusEl.style.color='#D13438'; statusEl.textContent='⚠ Could not reset: '+e.message }
+  }
+}
+async function saveServiceAdmin(id){
+  const statusEl = document.getElementById('adSvcStatus-'+id)
+  const featuresText = document.getElementById('adSvcFeatures-'+id).value.trim()
+  const payload = {
+    title: document.getElementById('adSvcTitle-'+id).value.trim(),
+    tag: document.getElementById('adSvcTag-'+id).value.trim(),
+    desc: document.getElementById('adSvcDesc-'+id).value.trim(),
+    features: featuresText ? featuresText.split('\n').map(f=>f.trim()).filter(Boolean) : [],
+    analysisNotes: document.getElementById('adSvcNotes-'+id).value.trim()
+  }
+  // don't overwrite with blanks — only save fields the admin actually filled in
+  Object.keys(payload).forEach(k=>{ if(!payload[k] || (Array.isArray(payload[k]) && !payload[k].length)) delete payload[k] })
+  if(statusEl){ statusEl.style.color='var(--sl)'; statusEl.textContent='Saving...' }
+  try{
+    await fbDB.collection('services').doc(id).set(payload,{merge:true})
+    const s=SERVICES_DATA[id]
+    const cardTitle=document.getElementById('svcCardTitle-'+id); if(cardTitle) cardTitle.textContent=payload.title||s.title
+    const cardDesc=document.getElementById('svcCardDesc-'+id); if(cardDesc) cardDesc.textContent=payload.desc||s.desc
+    if(statusEl){ statusEl.style.color='#107C10'; statusEl.textContent='✓ Saved — now live on the website.' }
+  }catch(e){
+    if(statusEl){ statusEl.style.color='#D13438'; statusEl.textContent='⚠ Could not save: '+e.message }
+  }
+}
+async function uploadServiceGalleryAdmin(id){
+  const input=document.getElementById('adSvcGalleryInput-'+id)
+  const statusEl=document.getElementById('adSvcGalleryStatus-'+id)
+  if(!input || !input.files || !input.files.length){
+    if(statusEl){statusEl.style.color='#D13438';statusEl.textContent='⚠ Choose at least one image first.'}
+    return
+  }
+  if(statusEl){statusEl.style.color='var(--sl)';statusEl.textContent='Uploading...'}
+  try{
+    for(const f of [...input.files]){
+      const path=`service-gallery/${id}/${Date.now()}_${f.name}`
+      const ref=fbStorage.ref(path)
+      await ref.put(f)
+      const url=await ref.getDownloadURL()
+      await fbDB.collection('services').doc(id).collection('gallery').add({url,path,name:f.name,uploadedAt:Date.now()})
+    }
+    if(statusEl){statusEl.style.color='#107C10';statusEl.textContent='✓ Uploaded! Now visible on the service page.'}
+    input.value=''
+    loadServiceGalleryAdmin(id)
+  }catch(e){
+    if(statusEl){statusEl.style.color='#D13438';statusEl.textContent='⚠ Upload failed: '+e.message}
+  }
+}
+async function loadServiceGalleryAdmin(id){
+  const grid=document.getElementById('adSvcGallery-'+id)
+  if(!grid) return
+  try{
+    const snap=await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
+    grid.innerHTML=snap.empty ? '' : snap.docs.map(d=>{
+      const data=d.data()
+      return `<div><img src="${data.url}"/><button onclick="deleteServiceGalleryImage('${id}','${d.id}','${(data.path||'').replace(/'/g,"\\'")}')" title="Remove">✕</button></div>`
+    }).join('')
+  }catch(e){
+    grid.innerHTML='<div style="color:#D13438;font-size:.78rem">Could not load images: '+e.message+'</div>'
+  }
+}
+async function deleteServiceGalleryImage(id,galleryId,path){
+  if(!confirm('Remove this image from the service page?')) return
+  try{
+    if(path) await fbStorage.ref(path).delete()
+    await fbDB.collection('services').doc(id).collection('gallery').doc(galleryId).delete()
+    loadServiceGalleryAdmin(id)
+  }catch(e){
+    alert('Could not delete: '+e.message)
+  }
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -1853,7 +2054,7 @@ function adTab(n,btn){
   document.querySelectorAll('#page-admin .snav').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')
   document.querySelectorAll('#page-admin [id^=adtab-]').forEach(d=>d.style.display='none')
   const el=document.getElementById('adtab-'+n);if(el)el.style.display='block'
-  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',team:'Team Profiles',profile:'My Profile'}
+  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',services:'Manage Services',team:'Team Profiles',profile:'My Profile'}
   document.getElementById('adTabTitle').textContent=t[n]||n
   renderSQL()
   if(n==='finance') renderFinance()
@@ -1861,6 +2062,7 @@ function adTab(n,btn){
   if(n==='clients') renderAdminClients()
   if(n==='notifs') renderAdminNotifications([])
   if(n==='content') loadSiteImages()
+  if(n==='services') renderAdminServicesPanel()
   if(n==='team') renderAdminTeamPanel()
 }
 function filt(btn,f){btn.closest('.filt').querySelectorAll('.fb2').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}

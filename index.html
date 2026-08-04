@@ -332,51 +332,51 @@
     <h2>Our Core Services</h2>
     <div class="service-grid reveal reveal-stagger">
       <article class="service-card" onclick="openServiceModal('statistical')">
-        <span class="s-ico blue">&#128202;</span>
-        <h3>Statistical Analysis</h3>
-        <p>Advanced statistical modeling using SPSS, STATA, R, Python.</p>
+        <span class="s-ico blue" id="svcCardIcon-statistical">&#128202;</span>
+        <h3 id="svcCardTitle-statistical">Statistical Analysis</h3>
+        <p id="svcCardDesc-statistical">Advanced statistical modeling using SPSS, STATA, R, Python.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('statistical');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('powerbi')">
-        <span class="s-ico amber">&#128200;</span>
-        <h3>Power BI Dashboards</h3>
-        <p>Interactive dashboards that turn data into actionable insights.</p>
+        <span class="s-ico amber" id="svcCardIcon-powerbi">&#128200;</span>
+        <h3 id="svcCardTitle-powerbi">Power BI Dashboards</h3>
+        <p id="svcCardDesc-powerbi">Interactive dashboards that turn data into actionable insights.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('powerbi');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('monitoring')">
-        <span class="s-ico green">&#127919;</span>
-        <h3>Monitoring &amp; Evaluation</h3>
-        <p>Designing M&amp;E frameworks, data collection, analysis, and impact assessment.</p>
+        <span class="s-ico green" id="svcCardIcon-monitoring">&#127919;</span>
+        <h3 id="svcCardTitle-monitoring">Monitoring &amp; Evaluation</h3>
+        <p id="svcCardDesc-monitoring">Designing M&amp;E frameworks, data collection, analysis, and impact assessment.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('monitoring');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('research')">
-        <span class="s-ico violet">&#128269;</span>
-        <h3>Research Consultancy</h3>
-        <p>Data-driven research solutions for institutions, NGOs, and businesses.</p>
+        <span class="s-ico violet" id="svcCardIcon-research">&#128269;</span>
+        <h3 id="svcCardTitle-research">Research Consultancy</h3>
+        <p id="svcCardDesc-research">Data-driven research solutions for institutions, NGOs, and businesses.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('research');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('cleaning')">
-        <span class="s-ico teal">&#129529;</span>
-        <h3>Data Cleaning</h3>
-        <p>Data preparation, validation, and cleaning for accurate analysis.</p>
+        <span class="s-ico teal" id="svcCardIcon-cleaning">&#129529;</span>
+        <h3 id="svcCardTitle-cleaning">Data Cleaning</h3>
+        <p id="svcCardDesc-cleaning">Data preparation, validation, and cleaning for accurate analysis.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('cleaning');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('survey')">
-        <span class="s-ico orange">&#128221;</span>
-        <h3>Survey Design</h3>
-        <p>Designing structured surveys and instruments for reliable data collection.</p>
+        <span class="s-ico orange" id="svcCardIcon-survey">&#128221;</span>
+        <h3 id="svcCardTitle-survey">Survey Design</h3>
+        <p id="svcCardDesc-survey">Designing structured surveys and instruments for reliable data collection.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('survey');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('bi')">
-        <span class="s-ico indigo">&#128161;</span>
-        <h3>Business Intelligence</h3>
-        <p>Transforming raw data into meaningful insights for better decision making.</p>
+        <span class="s-ico indigo" id="svcCardIcon-bi">&#128161;</span>
+        <h3 id="svcCardTitle-bi">Business Intelligence</h3>
+        <p id="svcCardDesc-bi">Transforming raw data into meaningful insights for better decision making.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('bi');return false">Learn More <span>&rarr;</span></a>
       </article>
       <article class="service-card" onclick="openServiceModal('training')">
-        <span class="s-ico green2">&#127891;</span>
-        <h3>Training &amp; Capacity</h3>
-        <p>Training on data analysis tools and research methodologies.</p>
+        <span class="s-ico green2" id="svcCardIcon-training">&#127891;</span>
+        <h3 id="svcCardTitle-training">Training &amp; Capacity</h3>
+        <p id="svcCardDesc-training">Training on data analysis tools and research methodologies.</p>
         <a href="#" onclick="event.stopPropagation();openServiceModal('training');return false">Learn More <span>&rarr;</span></a>
       </article>
       <button class="service-next" id="serviceNext" aria-label="More services">&rarr;</button>
@@ -1392,6 +1392,7 @@
     <button class="snav" onclick="adTab('reports',this)"><span class="sni">📈</span>Reports</button>
     <button class="snav" onclick="adTab('notifs',this)"><span class="sni">🔔</span>Notifications<span class="ndot"></span></button>
     <button class="snav" onclick="adTab('content',this)"><span class="sni">🌐</span>Website Content</button>
+    <button class="snav" onclick="adTab('services',this)"><span class="sni">🛠️</span>Manage Services</button>
     <button class="snav" onclick="adTab('team',this)"><span class="sni">🧑‍💼</span>Team Profiles</button>
     <button class="snav" onclick="adTab('profile',this)"><span class="sni">👤</span>My Profile</button>
     <div class="ssep"></div>
@@ -1675,6 +1676,16 @@
           </div>
         </div>
       </div>
+      <!-- MANAGE SERVICES -->
+      <div id="adtab-services" style="display:none">
+        <div class="odtl">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">🛠️ Manage Services</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1.2rem">Edit each service's icon, title, description, feature list, and upload real sample graphs, screenshots or analysis write-ups. Changes appear instantly on the public Services section and its full-page detail view — no code changes needed.</p>
+          <div id="adServicesGrid" style="display:grid;grid-template-columns:1fr;gap:1.2rem">
+            <!-- populated by renderAdminServicesPanel() -->
+          </div>
+        </div>
+      </div>
       <!-- TEAM PROFILES -->
       <div id="adtab-team" style="display:none">
         <div class="odtl">
@@ -1710,11 +1721,11 @@
   </div>
 </div>
 </div><!-- end admin -->
-<!-- SERVICE DETAIL MODAL -->
-<div class="mov" id="serviceModal" onclick="if(event.target===this)closeServiceModal()">
-  <div class="modal" id="serviceModalCard" style="max-width:760px">
+<!-- SERVICE DETAIL MODAL (full page) -->
+<div class="mov fullpage" id="serviceModal" onclick="if(event.target===this)closeServiceModal()">
+  <div class="modal modal-fullpage" id="serviceModalCard">
     <div class="mhd" id="serviceModalHead">
-      <div style="display:flex;align-items:center;gap:1rem">
+      <div class="sm-inner" style="display:flex;align-items:center;gap:1rem;width:100%">
         <span class="sm-ico" id="serviceModalIcon">📊</span>
         <div>
           <h2 id="serviceModalTitle" style="margin-bottom:.15rem">—</h2>
@@ -1724,22 +1735,34 @@
       <button class="mcls" onclick="closeServiceModal()">✕</button>
     </div>
     <div class="mbdy">
-      <div id="serviceModalHero" class="sm-hero"></div>
-      <p id="serviceModalDesc" style="color:var(--sl);font-size:.92rem;line-height:1.7;margin:1.1rem 0"></p>
-      <div class="sm-grid">
-        <div class="sm-features">
-          <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
-          <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
+      <div class="sm-inner">
+        <div id="serviceModalHero" class="sm-hero"></div>
+        <p id="serviceModalDesc" style="color:var(--sl);font-size:.92rem;line-height:1.7;margin:1.1rem 0"></p>
+        <div class="sm-grid">
+          <div class="sm-features">
+            <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
+            <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
+          </div>
+          <div class="sm-chart-wrap">
+            <h4 id="serviceModalChartLabel" style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">📈 Sample Output</h4>
+            <canvas id="serviceModalChart" height="200"></canvas>
+          </div>
         </div>
-        <div class="sm-chart-wrap">
-          <h4 id="serviceModalChartLabel" style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">📈 Sample Output</h4>
-          <canvas id="serviceModalChart" height="200"></canvas>
+        <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
+          <h4>📝 Analysis Notes</h4>
+          <div id="serviceModalNotes"></div>
+        </div>
+        <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
+          <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
+          <div class="sm-gallery-grid" id="serviceModalGallery"></div>
         </div>
       </div>
     </div>
     <div class="mft">
-      <button class="bsec" onclick="closeServiceModal()">Close</button>
-      <button class="bp" onclick="closeServiceModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request This Service →</button>
+      <div class="sm-inner" style="display:flex;gap:1rem;justify-content:flex-end;width:100%">
+        <button class="bsec" onclick="closeServiceModal()">Close</button>
+        <button class="bp" onclick="closeServiceModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request This Service →</button>
+      </div>
     </div>
   </div>
 </div>

@@ -389,6 +389,38 @@ footer{background:#060F2E;color:#fff;padding:3.5rem 2rem 1.75rem}
 .sm-features li::before{content:'✓';position:absolute;left:0;color:var(--ok);font-weight:700;}
 .sm-chart-wrap{background:var(--bl);border-radius:12px;padding:1rem;}
 @media (max-width:640px){.sm-grid{grid-template-columns:1fr;}}
+
+/* FULL-PAGE SERVICE MODAL */
+.mov.fullpage{padding:0;background:rgba(6,15,46,.97)}
+.modal-fullpage{max-width:none;width:100%;height:100vh;max-height:100vh;border-radius:0;display:flex;flex-direction:column;overflow:hidden}
+.modal-fullpage .mhd{border-radius:0;padding:1.5rem 2.4rem}
+.modal-fullpage .mbdy{flex:1;overflow-y:auto;padding:2rem 2.4rem 3rem}
+.modal-fullpage .mft{border-radius:0}
+.sm-inner{max-width:1080px;margin:0 auto}
+@media (max-width:640px){
+  .modal-fullpage .mhd{padding:1.2rem 1.2rem}
+  .modal-fullpage .mbdy{padding:1.3rem 1.2rem 2.2rem}
+  .modal-fullpage .mft{padding:1rem 1.2rem}
+}
+.sm-ico img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+
+/* SERVICE GALLERY (admin-uploaded images / analysis output) */
+.sm-gallery{margin-top:1.8rem}
+.sm-gallery h4{font-family:var(--fd);font-size:.85rem;margin-bottom:.7rem}
+.sm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.sm-gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid var(--br);cursor:zoom-in}
+.sm-notes{margin-top:1.8rem;background:var(--bl);border-radius:12px;padding:1.2rem 1.4rem;font-size:.88rem;line-height:1.75;color:var(--ch);white-space:pre-line}
+.sm-notes h4{font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem}
+
+/* ADMIN — SERVICE ICON/GALLERY UPLOAD */
+.svc-icon-upload{position:relative;display:inline-block;cursor:pointer;flex-shrink:0}
+.svc-icon-upload .svc-icon-preview{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden}
+.svc-icon-upload .svc-icon-preview img{width:100%;height:100%;object-fit:cover}
+.svc-icon-upload .avatar-cam{position:absolute;bottom:-4px;right:-4px;background:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.25);opacity:1}
+.svc-gallery-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.7rem;margin-top:.9rem}
+.svc-gallery-admin > div{position:relative;border-radius:8px;overflow:hidden;background:#F4F6FA}
+.svc-gallery-admin img{width:100%;height:95px;object-fit:cover;display:block}
+.svc-gallery-admin button{position:absolute;top:.25rem;right:.25rem;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:6px;width:22px;height:22px;cursor:pointer;font-size:.75rem}
 .bsec{background:var(--bg);color:var(--sl);padding:.68rem 1.55rem;border-radius:8px;font-family:var(--fd);font-weight:600;font-size:.86rem;border:1.5px solid var(--br);cursor:pointer}
 .bsec:hover{border-color:var(--b2);color:var(--b2)}
 .sdts{display:flex;gap:.5rem;margin-bottom:1.65rem}
