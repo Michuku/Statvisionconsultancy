@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>StatVision Research and Consultancy — Data Analysis & Research Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<!-- Firebase must load BEFORE app.js, since app.js uses fbAuth/fbDB right away -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js" defer></script>
+<script src="firebase-config.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="navbar" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home');window.scrollTo(0,0);return false">
+      <span class="cube-wrap" aria-hidden="true">
+        <span class="cube3d">
+          <span class="cube-face cube-front"></span>
+          <span class="cube-face cube-back"></span>
+          <span class="cube-face cube-right"></span>
+          <span class="cube-face cube-left"></span>
+          <span class="cube-face cube-top"></span>
+          <span class="cube-face cube-bottom"></span>
+        </span>
+      </span>
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none">
+          <rect x="2" y="12" width="5" height="10" rx="1" fill="#1e3a8a"/>
+          <rect x="9.5" y="7" width="5" height="15" rx="1" fill="#2563eb"/>
+          <rect x="17" y="2" width="5" height="20" rx="1" fill="#60a5fa"/>
+        </svg>
+      </span>
+      <span class="logo-text">
+        StatVision
+        <small>Research &amp; Consultancy</small>
+      </span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#" class="nav-client" onclick="goClient();return false">Client Login</a>
+      <a href="#" class="active">Home</a>
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About Us</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Toggle theme" id="themeToggle">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Menu" onclick="toggleMM()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="mm" id="mmenu">
+  <a href="#" onclick="goClient();toggleMM();return false">Client Login</a>
+  <a href="#" onclick="toggleMM();return false">Home</a>
+  <a href="#services" onclick="toggleMM()">Services</a>
+  <a href="#industries" onclick="toggleMM()">Industries</a>
+  <a href="#portfolio" onclick="toggleMM()">Portfolio</a>
+  <a href="#about" onclick="toggleMM()">About Us</a>
+  <a href="#insights" onclick="toggleMM()">Insights</a>
+  <a href="#contact" onclick="toggleMM()">Contact</a>
+</div>
+
+<div id="page-home" class="page active">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Welcome to StatVision</span>
+      <h1>Turning Complex Data Into Powerful <span class="highlight">Business Intelligence.</span></h1>
+      <p class="hero-sub">StatVision Research &amp; Consultancy empowers organizations with data-driven insights through research, analytics, monitoring &amp; evaluation, and intelligent reporting.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary" onclick="openModal();return false">Request Consultation <span aria-hidden="true">&rarr;</span></a>
+        <a href="#services" class="btn btn-outline">Explore Services <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="globe-wrap" aria-hidden="true">
+<svg viewBox="200 280 480 420" xmlns="http://www.w3.org/2000/svg" class="world-svg" aria-hidden="true">
+  <g class="land">
+    <path d="M528.466,468.135l0.753,3.008l8.522,0.752l0.596-6.172l1.644-0.897l0.448-2.257l-2.688,0.753l-2.99,4.521L528.466,468.135L528.466,468.135z"/>
+    <path d="M545.85,435.383l1.374,10.771l3.423,0.752l0.32,1.937l-2.455,2.049l4.573,3.691l8.885-3.198l0.709-3.786l5.593-3.491l2.145-8.091l1.599-1.722l-1.659-2.887l5.412-3.347l-0.691-0.968l-2.498,0.155l-0.226,2.299l-3.354-0.033l-0.062-3.068l-1.079-1.288l-1.815,1.649l0.052,1.515l-2.739,1.036l-5.059-0.319l-6.568,6.881L545.85,435.383L545.85,435.383z"/>
+    <path d="M450.679,420.438v3.984l1.142,2.152l0.82-0.096l1.409-2.566l-0.821-1.15l-0.319-2.844l-1.089-1.012L450.679,420.438L450.679,420.438z"/>
+    <path d="M507.47,420.549l4.149,5.411l-1.218,1.427l-2.939-0.51l-3.646-3.268l0.196-2.146L507.47,420.549L507.47,420.549z"/>
+    <path d="M279.05,600.613l1.677,1.571l-6.371,9.467l-2.239,2.479l0.777,10.813l4.918,5.974l-4.132,7.209l-3.129,1.35h-3.579l1.003,5.627l-5.593,1.92l1.34,4.729l-3.354,10.701l4.141,3.38l-2.239,5.515l-3.804,5.975l2.014,4.165l-4.918,0.786l-4.028-4.951l-0.674-15.432l-6.258-26.209l1.893-9.163l-4.028-11.713l2.68-15.204l2.463-2.931l-0.605-2.222l3.164-2.888l7.054,0.483l3.942,4.21l4.555,0.078l4.668,2.853l-1.375,3.217l0.329,3.25l6.612-0.312L279.05,600.613L279.05,600.613z"/>
+    <path d="M264.745,687.564l0.225,4.951l3.803-0.337l3.242-2.144l-5.48-1.124L264.745,687.564L264.745,687.564z"/>
+    <path d="M430.46,403.459l-0.562,1.167l0.483,0.83l2.015-0.415h1.711l1.857,1.572l3.95-0.717l2.904-1.729l0.743-1.167l-0.112-1.504l-2.611-1.954l-3.501,0.035l-0.294,1.988l-3.683,1.797L430.46,403.459L430.46,403.459z"/>
+    <path d="M672.961,609.067l-0.303,21.938l-3.371,2.472l-0.303,2.161l4.598,3.086l11.35-2.161h5.826l2.145-3.095l12.879-2.472l9.198,2.784l-0.614,3.708l1.228,3.708l7.055-1.236l0.303,1.851l-4.599,3.396l1.53,1.236l3.37-1.236l-0.917,10.2l6.44,4.944l3.683-1.236l1.841,1.852l10.735-1.548l10.123-16.381l3.682-0.925l7.357-13.596l1.841-11.739l-4.599-5.869l1.842-1.236l-3.684-11.436l-3.984-2.783l0.614-15.448l-3.684-2.782l-0.916-8.652h-1.842l-6.138,20.392l-3.37,0.312l-7.668-7.728l4.297-11.437l-7.971-1.547l-8.896,2.472l-2.454,7.104l-3.984,0.925l-0.304-4.944l-16.252,9.889l0.304,3.708l-2.454,3.397h-6.139l-13.19,5.56L672.961,609.067L672.961,609.067z"/>
+    <path d="M728.775,668.089l-1.531,6.181l0.304,4.322l4.599-0.312l5.213-8.03L728.775,668.089L728.775,668.089z"/>
+    <path d="M508.931,418.674l-0.873,1.486l4.071,5.342l1.418-0.458l2.334,2.446l1.011-4.287l2.533,0.406l-0.104-1.229l-4.165-3.646l-0.795,2.143L508.931,418.674L508.931,418.674z"/>
+    <path d="M442.708,411.084l-0.319,0.527l5.801,5.981l2.127-3.13l-0.078-1.234l-1.857-2.256L442.708,411.084L442.708,411.084z"/>
+    <path d="M616.256,457.908l-1.134,2.049l2.938,5.584l0.087,4.357l0.535,1.166l3.449,0.061l1.953-1.875l1.418,0.855l0.285,2.652l1.133-0.708l0.069-3.389l-0.951-0.112l-0.596-2.879l-2.403-0.086l-0.596-1.6l1.469-1.962l0.024-0.97h-4.269L616.256,457.908L616.256,457.908z"/>
+    <path d="M414.019,391.704l-0.554,1.383l5.947,3.925l0.4,0.051l0.375-1.094l0.837-0.588l-1.336-1.499h-0.916l-1.255-1.426L414.019,391.704L414.019,391.704z"/>
+    <path d="M457.092,414.066l0.139,4.305l1.452,3.025l5.454,0.095l2.455-1.737l2.412-0.959l-0.588-2.75l0.545-1.469l-1.228-0.641l-1.687,0.139l-1.323,1.332l-5.549,0.043L457.092,414.066L457.092,414.066z"/>
+    <path d="M689.038,515.08l-2.489,3.018l2.04,0.641l1.149-1.608L689.038,515.08L689.038,515.08z"/>
+    <path d="M286.631,618.464l5.402-10.391l0.198-8.73l10.079-6.501h5.645l4.435-7.512l0.804-14.418l-1.815-3.855l10.684-9.751l0.406-10.761l-14.514-7.105l-17.53-5.48l-8.264-0.812l2.221-4.669l-0.604-7.104l-1.808-0.596l-2.671,5.308l-1.4,1.754l-3.595-1.59l-12.093,4.261l-4.028-5.073l0.648-5.299l-3.804,3.872l-4.201-2.265l-0.424,0.597l0.009,1.841l3.622,1.945l-5.437,5.73l-3.432-0.034l-3.475-3.535l-3.933,0.121l-0.484,4.2l2.256,2.739l-2.663,8.532l-3.112,0.241l-4.953,3.13l-1.21,6.146l4.296,4.599l0.787-0.89l3.017-0.812l2.576,4.34l7.374-3.164l2.861,0.165l1.971,6.976l10.52,3.337l1.815,5.564l4.478,0.537l2.135,5.314l-1.443,4.729l1.884,2.474l-0.276,3.683l5.048-0.477l4.625,5.844l-0.363,4.105l2.74,2.316l-6.57,9.95L286.631,618.464L286.631,618.464z"/>
+    <path d="M222.121,463.112l-1.089-0.337l-0.086,2.101l1.34,1.349l0.917-1.349L222.121,463.112L222.121,463.112z"/>
+    <path d="M224.29,466.397l-1.504,0.838l1.417,2.021l0.752-1.011L224.29,466.397L224.29,466.397z"/>
+    <path d="M229.14,467.91l-1.591-0.087l0.165,1.012l1.167,1.687l1.002-1.099L229.14,467.91L229.14,467.91z"/>
+    <path d="M228.388,465.896l-2.593-1.099l-0.501-2.609l1.002-0.425l1.003,2.023l1.002,0.76L228.388,465.896L228.388,465.896z"/>
+    <path d="M225.881,460.588l-1.34-0.337l-0.251-1.686l-1.417-0.501l0.917-0.926l1.668,0.588l1.253,0.762L225.881,460.588L225.881,460.588z"/>
+    <path d="M616.108,453.561l1.34,1.833l4.528,0.034l-0.458-2.507L616.108,453.561L616.108,453.561z"/>
+    <path d="M456.418,382.861l1.297,2.135l-0.519,1.703l0.086,1.349l0.476,1.616l2.68-1.521l3.329,0.086l2.334,0.959h5.922l1.729-4.141l1.037-1.564v-1.045l-3.717-5.23l-3.285-1.305l-2.68-0.303l-2.335,0.743l0.088,2.351l-3.241,4.098L456.418,382.861L456.418,382.861z"/>
+    <path d="M191.823,483.228l-0.043,3.154h0.726l2.472-4.615h-1.677L191.823,483.228L191.823,483.228z"/>
+    <path d="M151.767,281.182l1.72,2.602l0.864,3.475l4.305,1.081l3.017-3.25l2.585,1.306l7.321,0.647l5.169-2.17l0.864,7.157h3.017v-3.034l3.017,0.216l7.538,8.895l4.953,3.035l-2.584,4.123l1.081,1.081l9.673,1.953l0.216,4.34l2.585,0.433l0.648-6.51l4.089-1.08l3.017,4.556l6.457,3.034l3.233,0.647l2.152-2.602l0.216-4.124l3.873-2.387l1.288,3.476l-3.449,6.077l0.432,3.033l1.937-3.033l3.873-3.475l0.216-4.556l-2.152-3.476l0.648-2.817l5.169-2.603l2.369,1.738l0.432,15.188l3.657-3.25l2.152,1.305l-3.017,5.204l3.873,0.865l5.602-8.679l4.737,4.986l-1.936,8.895l-4.737,2.603l-4.521-2.169l-8.177,1.736l0.864,2.818l-2.152,3.476l-6.673,1.521l-7.538,5.86l-6.673,8.896l-0.864,2.817l4.521,1.737l1.72,4.339l6.241,6.293l9.906,4.339l-2.152,9.975l-0.216,2.818l2.585,1.736l3.449-4.555l0.432-8.679l5.385-0.216l2.584-4.988l0.433-7.589l6.889-13.45l8.609,3.034l4.521,6.293l-1.937,6.292l3.449,1.954l8.394-5.646l2.368,15.404l7.754,9.327l0.216,4.771l-8.609,2.17l-4.088,4.338l-8.609-1.953l-4.305-0.217l-7.538,5.86l4.521-1.081l5.601-1.08l1.081,1.305l-1.504,4.771l0.216,4.34l2.585,1.736l2.584-0.648l1.296-1.953h1.72l-2.801,5.205l-5.385,0.215l-2.368,3.476h-3.017l-0.864-2.603l4.305-4.338l-5.169,1.737l-0.233-7.374l-1.487-0.863l-4.521,1.953l-0.432,3.691h-10.338l-8.832,6.08l-11.842,3.908l-1.288-1.738l5.964-8.902l-3.388-3.261l-2.152-4.132l-4.383-3.346l-4.702-0.389l-8.428-5.904l-61.122-10.043l-1.011-4.142l-5.602-5.204v-4.339l0.865-3.907l-0.433-2.168l-2.152-2.171l-0.432-3.475l5.602-3.908l-3.449-18.653l-4.737-0.217l-4.305-5.645L151.767,281.182L151.767,281.182z"/>
+    <path d="M130.684,350.117l-1.47,2.818l0.51,1.996l0.959,0.598l-0.225,0.812l-1.029,0.294l0.294,2.965l1.106,1.115l0.882-0.959l-1.106-2.887l0.657-2.299l1.616-2.152l-1.175-1.997L130.684,350.117L130.684,350.117z"/>
+    <path d="M135.542,367.008l-1.323,0.52l2.429,2.818l0.588,3.336l2.429,2.592l2.058-0.371v-3.406l-2.498-1.557L135.542,367.008L135.542,367.008z"/>
+    <path d="M268.15,295.833l-1.53,1.547l1.34,2.126l6.328,0.77l-4.028-4.252L268.15,295.833L268.15,295.833z"/>
+    <path d="M191.105,270.143l0.19,3.475l-6.898,7.148l1.729,5.791l4.979-1.348l2.878-4.253l7.278-2.706l5.938-0.389l-4.599-5.022l-2.299,1.737l-1.729-0.579l-0.959-2.126l-2.109-2.126L191.105,270.143L191.105,270.143z"/>
+    <path d="M200.113,259.908l-1.53,2.706l7.477,2.706l2.68-4.055l1.15,2.707h1.919l3.639-4.055l-4.409-1.158l-1.729-1.348l-2.299,2.316L200.113,259.908L200.113,259.908z"/>
+    <path d="M213.148,265.318l-5.938,2.508v1.928l7.667,2.896l-1.729,1.928l1.15,2.507l4.789-2.126h4.028l1.919,3.086l3.259-3.285l-0.77-3.095l-2.68,0.968l-0.38-3.863l1.34-2.316h-1.34l-2.109,1.349l-0.959,0.769l0.579,2.707l-1.53,1.158l-2.299-0.19l-0.579-3.476L213.148,265.318L213.148,265.318z"/>
+    <path d="M221.005,259.329l-0.579,1.927l3.639,1.738l2.68-1.547l-0.19-1.158L221.005,259.329L221.005,259.329z"/>
+    <path d="M223.875,256.044l-2.679,0.968l0.19,1.35l5.938-0.389l-0.19-1.349L223.875,256.044L223.875,256.044z"/>
+    <path d="M236.72,259.329l-0.38,1.348l-0.959,1.349v1.929l3.639-0.579l3.83,3.285h1.34v-3.285l-3.83-4.253L236.72,259.329L236.72,259.329z"/>
+    <path d="M246.497,263.191l1.53,1.738l-1.34,2.316l0.959,2.507l4.218-2.317v-1.736l-2.49-2.896L246.497,263.191L246.497,263.191z"/>
+    <path d="M252.055,258.75l0.19,3.086h5.178l1.34,1.158l-0.19,1.348l-4.599,0.58l3.259,4.443l4.409,0.77l6.128-2.705l-8.817-13.33l-2.68,1.738l0.19,2.316l-3.069-1.158L252.055,258.75L252.055,258.75z"/>
+    <path d="M207.399,280.576l-7.278,1.928l-4.219,3.673l0.38,4.054l7.667,2.317l-1.729,3.864l-5.558-3.477l-1.53,2.896l3.639,2.507l-0.19,4.054l5.558,1.547l6.708-0.389l1.149-2.126l4.979,5.601l3.449-1.157l0.579-3.864l2.49,1.737l0.38-3.864l-3.068-1.928l0.19-12.162l-2.68-2.126l-2.87,3.864L207.399,280.576L207.399,280.576z"/>
+    <path d="M230.782,289.073l-2.489-1.158l-1.34,1.737l2.68,4.253l0.19,4.054l5.749-3.475v-5.022l2.109-2.126l-2.109-1.547h-3.449L230.782,289.073L230.782,289.073z"/>
+    <path d="M243.048,287.335l-4.028,3.285l0.959,4.054h2.49l1.149-2.126l1.729,1.737l1.729-0.19l4.599-3.864L243.048,287.335L243.048,287.335z"/>
+    <path d="M242.659,280.956l-0.959,1.928l4.218,1.548l1.15-1.738L242.659,280.956L242.659,280.956z"/>
+    <path d="M240.169,273.617l-4.218,0.579l-2.49,2.315l4.599,0.19l-1.34,3.475l0.959,1.548l1.34-0.19l3.259-5.212L240.169,273.617L240.169,273.617z"/>
+    <path d="M247.456,272.27l-2.299,0.77l0.38,3.086l3.83,2.507l0.19,1.927l-1.149,1.159l0.579,3.864l14.755,4.823l4.028,1.349l4.028-3.475l-4.789-3.864l-4.409,1.158l-6.128-0.579l-2.299-2.316l-0.579-6.371l-3.83-1.928L247.456,272.27L247.456,272.27z"/>
+    <path d="M259.523,292.357l-4.218-0.39l-4.979,1.927l-2.68,3.666l0.769,10.043l8.238,0.39l7.857,3.864l5.559,6.371l4.218-0.19l-1.15,5.981l-3.829,6.371l-4.218,1.926l-3.069-0.578l-1.53-1.348l-2.299,3.086l0.959,3.086l3.259,0.189l4.028-1.928l3.449,8.886l8.626,5.603l5.938-7.529l-4.979-8.108l2.878-3.284l4.028,6.758l7.278-6.371l-1.339-2.896l-4.98,1.548l-3.448-9.466l3.259-5.403l-6.518-6.949l-3.639,2.507l-3.449-7.529l-7.277,0.968l-1.919-9.076l-5.938,4.055l-0.579,5.021h-3.259l0.38-4.443L259.523,292.357L259.523,292.357z"/>
+    <path d="M262.021,274.006v1.738l-4.218,0.968l1.149,1.927l4.789,1.928l5.368,0.58l3.831,2.705l3.829-2.127l-2.681-2.705h3.449l2.109-2.316l5.178-0.77v-1.158l-2.878-1.928l0.379-2.127l8.048,1.348l11.886-4.633l-4.41-1.348l1.15-1.547h9.197l1.531-1.547l-18.593-6.569l-4.41-1.547l-4.789,3.476l-5.368-4.443l-2.878-0.19l-0.579,3.675l-3.638-3.285l-4.218,1.349l0.769,2.126l6.328,1.35l-0.38,3.086l3.449,2.125l8.438-2.125l0.19,2.896l-6.898,3.285l-4.218-3.285l-3.83,0.389l3.83,5.411l-1.919,0.969l-2.878-2.508l-2.109,1.348l1.919,3.666h3.259l-0.769,3.475l-2.68-0.389l-3.449-3.674L262.021,274.006L262.021,274.006z"/>
+    <path d="M244.941,327.159l-3.657,4.599l-0.225,5.065l3.198-1.841h3.881l2.74,2.533l2.515-2.076L244.941,327.159L244.941,327.159z"/>
+    <path d="M289.466,386.977l-9.136,8.748l0.916,2.074l11.186,4.141l1.599-2.758l-0.916-4.599l-3.657,0.458l-2.057-2.299l3.423-3.449L289.466,386.977L289.466,386.977z"/>
+    <path d="M423.787,402.82l-3.771,4.011l0.078,0.405l1.547-0.483l1.393,1.937l2.352-0.83l1.625,1.263l0.667-0.38l2.005-3.146l-0.511-0.484l-1.979-0.051l-0.959-1.963L423.787,402.82L423.787,402.82z"/>
+  </g>
+  <g class="arcs">
+    <path class="arc" d="M491.67,550.65 Q448.33000000000004,431.185 404.99,391.72"/>
+    <path class="arc" d="M491.67,550.65 Q361.68,447.42499999999995 231.69,424.2"/>
+    <path class="arc" d="M491.67,550.65 Q455.68,439.16499999999996 419.69,407.68"/>
+  </g>
+  <g class="dots">
+    <circle class="hub-dot origin" cx="491.67" cy="550.65" r="4.2"><title>Nairobi</title></circle>
+    <circle class="hub-dot" cx="404.99" cy="391.72" r="3"><title>London</title></circle>
+    <circle class="hub-dot" cx="231.69" cy="424.2" r="3"><title>New York</title></circle>
+    <circle class="hub-dot" cx="419.69" cy="407.68" r="3"><title>Geneva</title></circle>
+  </g>
+</svg>
+</div>
+
+      <!-- Dashboard card -->
+      <div class="dash-card">
+        <div class="dash-head">
+          <h3>Executive Overview</h3>
+          <div class="dash-controls">
+            <button class="pill">Last 12 Months <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button class="pill pill-outline" id="refreshDash">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h5M20 20v-5h-5M4 9a8 8 0 0 1 14-4M20 15a8 8 0 0 1-14 4"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-top"><span>Total Projects</span><em class="up">+18%</em></div>
+            <strong>523</strong><small>vs last quarter</small>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top"><span>Organizations</span><em class="up">+12%</em></div>
+            <strong>128</strong><small>vs last quarter</small>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top"><span>Records Analyzed</span><em class="up">+24%</em></div>
+            <strong>25.7M</strong><small>vs last quarter</small>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top"><span>Satisfaction Rate</span><em class="up">+5%</em></div>
+            <strong>98%</strong><small>vs last quarter</small>
+          </div>
+        </div>
+
+        <div class="dash-row">
+          <div class="dash-panel">
+            <h4>Project Progress</h4>
+            <svg viewBox="0 0 260 110" class="line-chart" preserveAspectRatio="none">
+              <polyline points="0,70 22,55 44,35 66,50 88,20 110,42 132,25 154,60 176,45 198,15 220,38 242,20 260,32" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+            </svg>
+            <div class="axis-labels"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
+          </div>
+          <div class="dash-panel">
+            <h4>Projects by Category</h4>
+            <div class="donut-row">
+              <svg viewBox="0 0 42 42" class="donut">
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#1e3a8a" stroke-width="6" stroke-dasharray="35 65" stroke-dashoffset="25"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#16a34a" stroke-width="6" stroke-dasharray="25 75" stroke-dashoffset="-10"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#2563eb" stroke-width="6" stroke-dasharray="20 80" stroke-dashoffset="-35"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#f97316" stroke-width="6" stroke-dasharray="15 85" stroke-dashoffset="-55"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#93c5fd" stroke-width="6" stroke-dasharray="5 95" stroke-dashoffset="-70"/>
+              </svg>
+              <ul class="legend">
+                <li><i style="background:#1e3a8a"></i>Research <b>35%</b></li>
+                <li><i style="background:#16a34a"></i>M&amp;E <b>25%</b></li>
+                <li><i style="background:#2563eb"></i>Data Analysis <b>20%</b></li>
+                <li><i style="background:#f97316"></i>BI &amp; Dashboards <b>15%</b></li>
+                <li><i style="background:#93c5fd"></i>Others <b>5%</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-row">
+          <div class="dash-panel">
+            <h4>Geographic Coverage</h4>
+            <div class="geo-row">
+              <svg viewBox="350 425 185 235" xmlns="http://www.w3.org/2000/svg" class="africa-svg" aria-hidden="true">
+  <g class="land">
+    <path d="M528.466,468.135l0.753,3.008l8.522,0.752l0.596-6.172l1.644-0.897l0.448-2.257l-2.688,0.753l-2.99,4.521L528.466,468.135L528.466,468.135z"/>
+    <path d="M545.85,435.383l1.374,10.771l3.423,0.752l0.32,1.937l-2.455,2.049l4.573,3.691l8.885-3.198l0.709-3.786l5.593-3.491l2.145-8.091l1.599-1.722l-1.659-2.887l5.412-3.347l-0.691-0.968l-2.498,0.155l-0.226,2.299l-3.354-0.033l-0.062-3.068l-1.079-1.288l-1.815,1.649l0.052,1.515l-2.739,1.036l-5.059-0.319l-6.568,6.881L545.85,435.383L545.85,435.383z"/>
+    <path d="M450.679,420.438v3.984l1.142,2.152l0.82-0.096l1.409-2.566l-0.821-1.15l-0.319-2.844l-1.089-1.012L450.679,420.438L450.679,420.438z"/>
+    <path d="M507.47,420.549l4.149,5.411l-1.218,1.427l-2.939-0.51l-3.646-3.268l0.196-2.146L507.47,420.549L507.47,420.549z"/>
+    <path d="M279.05,600.613l1.677,1.571l-6.371,9.467l-2.239,2.479l0.777,10.813l4.918,5.974l-4.132,7.209l-3.129,1.35h-3.579l1.003,5.627l-5.593,1.92l1.34,4.729l-3.354,10.701l4.141,3.38l-2.239,5.515l-3.804,5.975l2.014,4.165l-4.918,0.786l-4.028-4.951l-0.674-15.432l-6.258-26.209l1.893-9.163l-4.028-11.713l2.68-15.204l2.463-2.931l-0.605-2.222l3.164-2.888l7.054,0.483l3.942,4.21l4.555,0.078l4.668,2.853l-1.375,3.217l0.329,3.25l6.612-0.312L279.05,600.613L279.05,600.613z"/>
+    <path d="M264.745,687.564l0.225,4.951l3.803-0.337l3.242-2.144l-5.48-1.124L264.745,687.564L264.745,687.564z"/>
+    <path d="M430.46,403.459l-0.562,1.167l0.483,0.83l2.015-0.415h1.711l1.857,1.572l3.95-0.717l2.904-1.729l0.743-1.167l-0.112-1.504l-2.611-1.954l-3.501,0.035l-0.294,1.988l-3.683,1.797L430.46,403.459L430.46,403.459z"/>
+    <path d="M672.961,609.067l-0.303,21.938l-3.371,2.472l-0.303,2.161l4.598,3.086l11.35-2.161h5.826l2.145-3.095l12.879-2.472l9.198,2.784l-0.614,3.708l1.228,3.708l7.055-1.236l0.303,1.851l-4.599,3.396l1.53,1.236l3.37-1.236l-0.917,10.2l6.44,4.944l3.683-1.236l1.841,1.852l10.735-1.548l10.123-16.381l3.682-0.925l7.357-13.596l1.841-11.739l-4.599-5.869l1.842-1.236l-3.684-11.436l-3.984-2.783l0.614-15.448l-3.684-2.782l-0.916-8.652h-1.842l-6.138,20.392l-3.37,0.312l-7.668-7.728l4.297-11.437l-7.971-1.547l-8.896,2.472l-2.454,7.104l-3.984,0.925l-0.304-4.944l-16.252,9.889l0.304,3.708l-2.454,3.397h-6.139l-13.19,5.56L672.961,609.067L672.961,609.067z"/>
+    <path d="M728.775,668.089l-1.531,6.181l0.304,4.322l4.599-0.312l5.213-8.03L728.775,668.089L728.775,668.089z"/>
+    <path d="M508.931,418.674l-0.873,1.486l4.071,5.342l1.418-0.458l2.334,2.446l1.011-4.287l2.533,0.406l-0.104-1.229l-4.165-3.646l-0.795,2.143L508.931,418.674L508.931,418.674z"/>
+    <path d="M442.708,411.084l-0.319,0.527l5.801,5.981l2.127-3.13l-0.078-1.234l-1.857-2.256L442.708,411.084L442.708,411.084z"/>
+    <path d="M616.256,457.908l-1.134,2.049l2.938,5.584l0.087,4.357l0.535,1.166l3.449,0.061l1.953-1.875l1.418,0.855l0.285,2.652l1.133-0.708l0.069-3.389l-0.951-0.112l-0.596-2.879l-2.403-0.086l-0.596-1.6l1.469-1.962l0.024-0.97h-4.269L616.256,457.908L616.256,457.908z"/>
+    <path d="M414.019,391.704l-0.554,1.383l5.947,3.925l0.4,0.051l0.375-1.094l0.837-0.588l-1.336-1.499h-0.916l-1.255-1.426L414.019,391.704L414.019,391.704z"/>
+    <path d="M457.092,414.066l0.139,4.305l1.452,3.025l5.454,0.095l2.455-1.737l2.412-0.959l-0.588-2.75l0.545-1.469l-1.228-0.641l-1.687,0.139l-1.323,1.332l-5.549,0.043L457.092,414.066L457.092,414.066z"/>
+    <path d="M689.038,515.08l-2.489,3.018l2.04,0.641l1.149-1.608L689.038,515.08L689.038,515.08z"/>
+    <path d="M286.631,618.464l5.402-10.391l0.198-8.73l10.079-6.501h5.645l4.435-7.512l0.804-14.418l-1.815-3.855l10.684-9.751l0.406-10.761l-14.514-7.105l-17.53-5.48l-8.264-0.812l2.221-4.669l-0.604-7.104l-1.808-0.596l-2.671,5.308l-1.4,1.754l-3.595-1.59l-12.093,4.261l-4.028-5.073l0.648-5.299l-3.804,3.872l-4.201-2.265l-0.424,0.597l0.009,1.841l3.622,1.945l-5.437,5.73l-3.432-0.034l-3.475-3.535l-3.933,0.121l-0.484,4.2l2.256,2.739l-2.663,8.532l-3.112,0.241l-4.953,3.13l-1.21,6.146l4.296,4.599l0.787-0.89l3.017-0.812l2.576,4.34l7.374-3.164l2.861,0.165l1.971,6.976l10.52,3.337l1.815,5.564l4.478,0.537l2.135,5.314l-1.443,4.729l1.884,2.474l-0.276,3.683l5.048-0.477l4.625,5.844l-0.363,4.105l2.74,2.316l-6.57,9.95L286.631,618.464L286.631,618.464z"/>
+    <path d="M234.326,498.251l-1.781-0.182l-11.773,9.707l-1.245,3.414l-1.608,0.182l0.717,7.546l-4.105,10.07l4.46,3.776l5.714,0.363l3.924,5.757l5.705,0.183l-0.182,4.312h2.135l2.316-7.909l-2.144-2.694l0.536-5.031l4.46-0.363l-0.536-11.688l-9.993-3.232l-2.316-6.293L234.326,498.251L234.326,498.251z"/>
+    <path d="M213.986,529.43l-4.088,2.541l-0.294,3.771l-0.821,1.234l2.576,2.473l-1.115,1.219l0.259,3.113l4.607,1.098l6.976-8.256l-0.017-2.878l-3.345-0.216L213.986,529.43L213.986,529.43z"/>
+    <path d="M231.5,503.558l0.38,2.239l2.809,0.892l0.64-4.124l2.965-3.068l2.965,3.475l6.82,1.859l5.774-1.211l3.933,4.849l2.965,1.858l-3.25,4.953l1.089,3.752l-1.858,2.299l-1.928,1.616l-4.175-2.102l-0.959,0.969v2.99l3.052,1.452l-2.248,2.43l-2.248,2.43l-2.965-0.242l-2.982-3.275l-0.631-12.326l-10.183-3.476l-1.85-5.42L231.5,503.558L231.5,503.558z"/>
+    <path d="M209.518,541.246l-1.677,1.695l0.113,2.703l14.643,26.694l15.205,9.802l2.351-3.941l0.562-8.669l-1.228-5.402l-4.141-6.984l-2.463,0.786l-1.115,1.236l-4.918-5.636l1.228-6.647l5.705-3.717l-0.449-3.492l-5.809-0.226l-3.017-5.064l-1.677-0.562l0.113,3.044l-7.486,8.895l-5.593-1.349L209.518,541.246L209.518,541.246z"/>
+  </g>
+  <g class="pins">
+    <circle class="geo-pin" cx="494.2" cy="546.71" r="7.5"><title>Kenya 45%</title></circle>
+    <circle class="geo-pin" cx="481.53" cy="543.76" r="5.0"><title>Uganda 20%</title></circle>
+    <circle class="geo-pin" cx="487.16" cy="566.04" r="4.5"><title>Tanzania 15%</title></circle>
+    <circle class="geo-pin" cx="475.43" cy="552.49" r="4.0"><title>Rwanda 10%</title></circle>
+    <circle class="geo-pin" cx="475.67" cy="525.7" r="3.5"><title>South Sudan 5%</title></circle>
+  </g>
+</svg>
+              <ul class="geo-list">
+                <li><span>Kenya</span><b>45%</b></li>
+                <li><span>Uganda</span><b>20%</b></li>
+                <li><span>Tanzania</span><b>15%</b></li>
+                <li><span>Rwanda</span><b>10%</b></li>
+                <li><span>South Sudan</span><b>5%</b></li>
+                <li><span>Others</span><b>5%</b></li>
+              </ul>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <h4>Data Analysis Overview <span class="chip"><i style="background:#2563eb"></i>Datasets <i style="background:#16a34a"></i>Reports</span></h4>
+            <svg viewBox="0 0 260 100" class="bar-chart" preserveAspectRatio="none">
+              <g fill="#2563eb">
+                <rect x="4" y="55" width="7" height="45"/><rect x="24" y="40" width="7" height="60"/><rect x="44" y="35" width="7" height="65"/><rect x="64" y="20" width="7" height="80"/><rect x="84" y="30" width="7" height="70"/><rect x="104" y="45" width="7" height="55"/><rect x="124" y="38" width="7" height="62"/><rect x="144" y="25" width="7" height="75"/><rect x="164" y="42" width="7" height="58"/><rect x="184" y="33" width="7" height="67"/><rect x="204" y="48" width="7" height="52"/><rect x="224" y="28" width="7" height="72"/><rect x="244" y="36" width="7" height="64"/>
+              </g>
+              <g fill="#16a34a">
+                <rect x="12" y="65" width="7" height="35"/><rect x="32" y="58" width="7" height="42"/><rect x="52" y="50" width="7" height="50"/><rect x="72" y="45" width="7" height="55"/><rect x="92" y="55" width="7" height="45"/><rect x="112" y="60" width="7" height="40"/><rect x="132" y="52" width="7" height="48"/><rect x="152" y="46" width="7" height="54"/><rect x="172" y="58" width="7" height="42"/><rect x="192" y="50" width="7" height="50"/><rect x="212" y="62" width="7" height="38"/><rect x="232" y="47" width="7" height="53"/><rect x="252" y="55" width="7" height="45"/>
+              </g>
+            </svg>
+            <div class="axis-labels"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tool stack floating card -->
+      <div class="tool-card">
+        <div class="tool"><span class="tool-ico bi">&#9632;</span>Power BI</div>
+        <div class="tool"><span class="tool-ico py">&#128013;</span>Python</div>
+        <div class="tool"><span class="tool-ico spss">SP</span>SPSS</div>
+        <div class="tool"><span class="tool-ico stata">ST</span>STATA</div>
+        <div class="tool"><span class="tool-ico r">R</span>R Programming</div>
+        <div class="tool"><span class="tool-ico sql">SQL</span>SQL</div>
+        <div class="tool"><span class="tool-ico excel">XL</span>Excel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<section class="trust-bar reveal">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by leading organizations</span>
+    <div class="trust-logos">
+      <span class="trust-logo">The World Bank</span>
+      <span class="trust-logo">UNICEF</span>
+      <span class="trust-logo">IFC</span>
+      <span class="trust-logo">USAID</span>
+      <span class="trust-logo">PATH</span>
+      <span class="trust-logo">fhi360</span>
+    </div>
+    <a href="#" class="trust-more">and 50+ more &rarr;</a>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats-bar">
+  <div class="stats-inner reveal reveal-stagger">
+    <div class="stat">
+      <span class="stat-ico navy">&#128188;</span>
+      <div><strong>500+</strong><small>Projects Completed</small></div>
+    </div>
+    <div class="stat">
+      <span class="stat-ico green">&#127970;</span>
+      <div><strong>120+</strong><small>Organizations Served</small></div>
+    </div>
+    <div class="stat">
+      <span class="stat-ico orange">&#128202;</span>
+      <div><strong>25M+</strong><small>Records Processed</small></div>
+    </div>
+    <div class="stat">
+      <span class="stat-ico navy">&#11088;</span>
+      <div><strong>98%</strong><small>Client Satisfaction</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <h2>Our Core Services</h2>
+    <div class="service-grid reveal reveal-stagger">
+      <article class="service-card">
+        <span class="s-ico blue">&#128202;</span>
+        <h3>Statistical Analysis</h3>
+        <p>Advanced statistical modeling using SPSS, STATA, R, Python.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico amber">&#128200;</span>
+        <h3>Power BI Dashboards</h3>
+        <p>Interactive dashboards that turn data into actionable insights.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico green">&#127919;</span>
+        <h3>Monitoring &amp; Evaluation</h3>
+        <p>Designing M&amp;E frameworks, data collection, analysis, and impact assessment.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico violet">&#128269;</span>
+        <h3>Research Consultancy</h3>
+        <p>Data-driven research solutions for institutions, NGOs, and businesses.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico teal">&#129529;</span>
+        <h3>Data Cleaning</h3>
+        <p>Data preparation, validation, and cleaning for accurate analysis.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico orange">&#128221;</span>
+        <h3>Survey Design</h3>
+        <p>Designing structured surveys and instruments for reliable data collection.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico indigo">&#128161;</span>
+        <h3>Business Intelligence</h3>
+        <p>Transforming raw data into meaningful insights for better decision making.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <article class="service-card">
+        <span class="s-ico green2">&#127891;</span>
+        <h3>Training &amp; Capacity</h3>
+        <p>Training on data analysis tools and research methodologies.</p>
+        <a href="#">Learn More &rarr;</a>
+      </article>
+      <button class="service-next" id="serviceNext" aria-label="More services">&rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE DASHBOARDS ============ -->
+<section class="live-dash">
+  <div class="section-inner">
+    <h2>Live Power BI Dashboards <span class="live-dot">&#9679; Live Data</span></h2>
+
+    <div class="live-grid reveal reveal-stagger">
+
+      <!-- Executive Dashboard -->
+      <div class="live-card reveal">
+        <div class="live-card-head">
+          <h3>Executive Dashboard</h3>
+          <div class="live-icons"><button title="Refresh" class="live-refresh">&#8635;</button><button title="Full Screen" class="live-fullscreen">&#9974;</button></div>
+        </div>
+        <div class="mini-kpis">
+          <div><small>Total Projects</small><strong>523</strong></div>
+          <div><small>Total Budget (KES)</small><strong>128.7M</strong></div>
+          <div><small>Active Projects</small><strong>85</strong></div>
+          <div><small>Completion Rate</small><strong>76%</strong></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-panel">
+            <small>Projects Over Time</small>
+            <svg viewBox="0 0 120 60" preserveAspectRatio="none" class="mini-line">
+              <polyline points="0,45 15,38 30,20 45,32 60,15 75,28 90,10 105,25 120,18" fill="none" stroke="#2563eb" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="mini-panel center">
+            <small>Projects by Status</small>
+            <svg viewBox="0 0 42 42" class="donut small">
+              <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#16a34a" stroke-width="7" stroke-dasharray="45 55"/>
+              <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#2563eb" stroke-width="7" stroke-dasharray="35 65" stroke-dashoffset="-45"/>
+              <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#f97316" stroke-width="7" stroke-dasharray="20 80" stroke-dashoffset="-80"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research & Survey Analytics -->
+      <div class="live-card reveal">
+        <div class="live-card-head">
+          <h3>Research &amp; Survey Analytics</h3>
+          <div class="live-icons"><button title="Refresh" class="live-refresh">&#8635;</button><button title="Full Screen" class="live-fullscreen">&#9974;</button></div>
+        </div>
+        <div class="mini-kpis">
+          <div><small>Surveys Conducted</small><strong>1,245</strong></div>
+          <div><small>Respondents</small><strong>45,678</strong></div>
+          <div><small>Data Quality</small><strong>94%</strong></div>
+          <div><small>Reports Generated</small><strong>312</strong></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-panel">
+            <small>Respondents by Region</small>
+            <div class="hbars">
+              <div class="hbar"><span>Nairobi</span><i style="width:80%"></i></div>
+              <div class="hbar"><span>Central</span><i style="width:60%"></i></div>
+              <div class="hbar"><span>Eastern</span><i style="width:45%"></i></div>
+              <div class="hbar"><span>Coastal</span><i style="width:30%"></i></div>
+              <div class="hbar"><span>Western</span><i style="width:20%"></i></div>
+            </div>
+          </div>
+          <div class="mini-panel">
+            <small>Data Collection Trend</small>
+            <svg viewBox="0 0 120 60" preserveAspectRatio="none" class="mini-line">
+              <polyline points="0,40 10,25 20,45 30,20 40,35 50,15 60,38 70,22 80,42 90,18 100,30 110,12 120,26" fill="none" stroke="#16a34a" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Overview -->
+      <div class="live-card reveal">
+        <div class="live-card-head">
+          <h3>Financial Overview</h3>
+          <div class="live-icons"><button title="Refresh" class="live-refresh">&#8635;</button><button title="Full Screen" class="live-fullscreen">&#9974;</button></div>
+        </div>
+        <div class="mini-kpis">
+          <div><small>Total Revenue</small><strong>25.7M</strong></div>
+          <div><small>Total Expenses</small><strong>18.4M</strong></div>
+          <div><small>Net Profit</small><strong>7.3M</strong></div>
+          <div><small>Profit Margin</small><strong>28%</strong></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-panel">
+            <small>Revenue vs Expenses</small>
+            <svg viewBox="0 0 120 60" class="mini-bars" preserveAspectRatio="none">
+              <g fill="#2563eb"><rect x="2" y="25" width="5" height="35"/><rect x="14" y="18" width="5" height="42"/><rect x="26" y="10" width="5" height="50"/><rect x="38" y="22" width="5" height="38"/><rect x="50" y="15" width="5" height="45"/><rect x="62" y="28" width="5" height="32"/><rect x="74" y="12" width="5" height="48"/><rect x="86" y="20" width="5" height="40"/><rect x="98" y="16" width="5" height="44"/><rect x="110" y="24" width="5" height="36"/></g>
+              <g fill="#16a34a"><rect x="8" y="35" width="5" height="25"/><rect x="20" y="30" width="5" height="30"/><rect x="32" y="25" width="5" height="35"/><rect x="44" y="32" width="5" height="28"/><rect x="56" y="28" width="5" height="32"/><rect x="68" y="38" width="5" height="22"/><rect x="80" y="26" width="5" height="34"/><rect x="92" y="30" width="5" height="30"/><rect x="104" y="27" width="5" height="33"/><rect x="116" y="34" width="5" height="26"/></g>
+            </svg>
+          </div>
+          <div class="mini-panel center">
+            <small>Expense Breakdown</small>
+            <div class="donut-row small">
+              <svg viewBox="0 0 42 42" class="donut small">
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#1e3a8a" stroke-width="7" stroke-dasharray="40 60"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#2563eb" stroke-width="7" stroke-dasharray="30 70" stroke-dashoffset="-40"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#f97316" stroke-width="7" stroke-dasharray="15 85" stroke-dashoffset="-70"/>
+                <circle r="15.9" cx="21" cy="21" fill="transparent" stroke="#93c5fd" stroke-width="7" stroke-dasharray="15 85" stroke-dashoffset="-85"/>
+              </svg>
+              <ul class="legend tiny">
+                <li><i style="background:#1e3a8a"></i>Personnel <b>40%</b></li>
+                <li><i style="background:#2563eb"></i>Operations <b>30%</b></li>
+                <li><i style="background:#f97316"></i>Transport <b>15%</b></li>
+                <li><i style="background:#93c5fd"></i>Other Costs <b>15%</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="industries" id="industries">
+  <div class="section-inner">
+    <span class="eyebrow">Industries</span>
+    <h2>Industries We Serve</h2>
+    <p class="section-sub">We bring statistical rigor and sector-specific context to organizations across East Africa and beyond.</p>
+    <div class="industry-grid reveal reveal-stagger">
+      <article class="industry-card">
+        <span class="s-ico blue">&#127970;</span>
+        <h3>Government &amp; Public Sector</h3>
+        <p>Policy research, program evaluation, and evidence-based planning support.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico green">&#127760;</span>
+        <h3>NGOs &amp; Development</h3>
+        <p>Monitoring &amp; evaluation frameworks, impact assessments, and donor reporting.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico amber">&#128176;</span>
+        <h3>Financial Services</h3>
+        <p>Risk modeling, customer analytics, and market research for banks and SACCOs.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico violet">&#127973;</span>
+        <h3>Health &amp; Population</h3>
+        <p>Health surveys, epidemiological analysis, and clinical data management.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico teal">&#127891;</span>
+        <h3>Education</h3>
+        <p>Learning outcome studies, institutional research, and enrolment analytics.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico orange">&#127806;</span>
+        <h3>Agriculture</h3>
+        <p>Yield forecasting, value-chain surveys, and food security assessments.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico indigo">&#127970;</span>
+        <h3>Private Sector &amp; Corporates</h3>
+        <p>Business intelligence, market sizing, and customer satisfaction research.</p>
+      </article>
+      <article class="industry-card">
+        <span class="s-ico green2">&#128218;</span>
+        <h3>Academia &amp; Research</h3>
+        <p>Thesis and dissertation data analysis, publication-ready statistics.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="portfolio" id="portfolio">
+  <div class="section-inner">
+    <span class="eyebrow">Portfolio</span>
+    <h2>Selected Work</h2>
+    <p class="section-sub">A snapshot of the research, analytics, and M&amp;E work we've delivered for clients.</p>
+    <div class="portfolio-grid reveal reveal-stagger">
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Monitoring &amp; Evaluation</span>
+        <h3>County Health Program Evaluation</h3>
+        <p>End-line evaluation of a maternal health program across 12 counties, covering survey design through impact reporting.</p>
+        <div class="portfolio-stats"><span><b>18,000+</b> respondents</span><span><b>12</b> counties</span></div>
+      </article>
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Business Intelligence</span>
+        <h3>Retail Performance Dashboard</h3>
+        <p>Power BI dashboard suite consolidating sales, inventory, and customer data for a regional retail chain.</p>
+        <div class="portfolio-stats"><span><b>30%</b> faster reporting</span><span><b>6</b> branches</span></div>
+      </article>
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Research Consultancy</span>
+        <h3>Youth Employment Study</h3>
+        <p>Mixed-methods research on youth employment trends commissioned by a development partner.</p>
+        <div class="portfolio-stats"><span><b>2,500</b> surveys</span><span><b>4</b> counties</span></div>
+      </article>
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Data Analysis</span>
+        <h3>Financial Risk Modeling</h3>
+        <p>Statistical modeling of loan default risk for a SACCO using historical repayment data.</p>
+        <div class="portfolio-stats"><span><b>85%</b> model accuracy</span><span><b>50k+</b> records</span></div>
+      </article>
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Survey Design</span>
+        <h3>Agricultural Value Chain Survey</h3>
+        <p>Survey instrument design and field data collection for a food security assessment.</p>
+        <div class="portfolio-stats"><span><b>3,200</b> households</span><span><b>8</b> value chains</span></div>
+      </article>
+      <article class="portfolio-card">
+        <span class="portfolio-tag">Training</span>
+        <h3>Data Analysis Capacity Building</h3>
+        <p>SPSS and Power BI training program for M&amp;E staff at a national NGO.</p>
+        <div class="portfolio-stats"><span><b>45</b> staff trained</span><span><b>5</b> workshops</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid reveal">
+      <div class="about-copy">
+        <img class="about-photo" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analyst reviewing performance dashboards"/>
+        <span class="eyebrow">About Us</span>
+        <h2>Data-Driven Insights, Grounded in Real Experience</h2>
+        <p>StatVision Research &amp; Consultancy is a Nairobi-based data analysis and research firm helping organizations turn raw data into decisions they can act on. We combine statistical expertise in SPSS, Stata, R, and Python with hands-on experience in monitoring &amp; evaluation, business intelligence, and research consultancy.</p>
+        <p>From government agencies and NGOs to private companies and academic institutions, our clients trust us to bring analytical rigor, clear reporting, and practical recommendations to every engagement.</p>
+        <div class="about-values">
+          <div class="value-item">
+            <span class="s-ico blue">&#127919;</span>
+            <div><h4>Accuracy First</h4><p>Every analysis is validated for statistical soundness.</p></div>
+          </div>
+          <div class="value-item">
+            <span class="s-ico green">&#129309;</span>
+            <div><h4>Client Partnership</h4><p>We work alongside you, not just for you.</p></div>
+          </div>
+          <div class="value-item">
+            <span class="s-ico amber">&#9889;</span>
+            <div><h4>Actionable Insights</h4><p>Reports built for decisions, not just numbers.</p></div>
+          </div>
+          <div class="value-item">
+            <span class="s-ico violet">&#128274;</span>
+            <div><h4>Confidentiality</h4><p>Client data handled with strict discretion.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-team">
+        <h3>Meet the Team</h3>
+        <div class="team-grid">
+          <div class="team-card" onclick="openTeamMember('henry')">
+            <span class="team-avatar" id="teamAvatar-henry">HM</span>
+            <h4>Henry Gitau Michuku</h4>
+            <small>Chief Executive Officer</small>
+          </div>
+          <div class="team-card" onclick="openTeamMember('simon')">
+            <span class="team-avatar" id="teamAvatar-simon">SM</span>
+            <h4>Simon Macharia</h4>
+            <small>Data Analyst</small>
+          </div>
+          <div class="team-card" onclick="openTeamMember('joseph')">
+            <span class="team-avatar" id="teamAvatar-joseph">JM</span>
+            <h4>Joseph Machuki</h4>
+            <small>Economist &amp; Statistician</small>
+          </div>
+          <div class="team-card" onclick="openTeamMember('hr')">
+            <span class="team-avatar" id="teamAvatar-hr">HR</span>
+            <h4>HR Manager</h4>
+            <small>Human Resources</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="insights" id="insights">
+  <div class="section-inner">
+    <span class="eyebrow">Insights</span>
+    <h2>Latest Insights &amp; Articles</h2>
+    <div class="insights-grid reveal reveal-stagger">
+      <article class="insight-card">
+        <span class="insight-tag">Research</span>
+        <h3>5 Signs Your Organization Needs an M&amp;E Framework</h3>
+        <p>How to know when it's time to move from ad-hoc reporting to a structured monitoring &amp; evaluation system.</p>
+        <a href="#">Read More &rarr;</a>
+      </article>
+      <article class="insight-card">
+        <span class="insight-tag">Business Intelligence</span>
+        <h3>Power BI vs Excel: Choosing the Right Tool</h3>
+        <p>A practical comparison for organizations deciding how to modernize their reporting stack.</p>
+        <a href="#">Read More &rarr;</a>
+      </article>
+      <article class="insight-card">
+        <span class="insight-tag">Statistics</span>
+        <h3>Common Data Cleaning Mistakes in SPSS</h3>
+        <p>The most frequent errors we see in raw datasets — and how to fix them before analysis.</p>
+        <a href="#">Read More &rarr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <span class="eyebrow">Contact</span>
+        <h2>Let's Talk About Your Data</h2>
+        <p class="section-sub">Tell us about your project and we'll get back to you within one business day.</p>
+        <ul class="contact-list">
+          <li><span class="s-ico blue">&#9993;</span><div><small>Email</small><b>hello@statvisionconsultancy.co.ke</b></div></li>
+          <li><span class="s-ico green">&#128222;</span><div><small>Phone / WhatsApp</small><b>+254 748 216 918</b></div></li>
+          <li><span class="s-ico amber">&#128205;</span><div><small>Location</small><b>Nairobi, Kenya</b></div></li>
+        </ul>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-field"><label for="cfName">Full Name</label><input type="text" id="cfName" name="name" required></div>
+          <div class="form-field"><label for="cfEmail">Email Address</label><input type="email" id="cfEmail" name="email" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label for="cfPhone">Phone Number</label><input type="tel" id="cfPhone" name="phone"></div>
+          <div class="form-field"><label for="cfSubject">Subject</label>
+            <select id="cfSubject" name="subject">
+              <option>Statistical Analysis</option>
+              <option>Power BI Dashboards</option>
+              <option>Monitoring &amp; Evaluation</option>
+              <option>Research Consultancy</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field"><label for="cfMessage">Message</label><textarea id="cfMessage" name="message" rows="4" required></textarea></div>
+        <button type="submit" class="btn btn-primary">Send Message <span aria-hidden="true">&rarr;</span></button>
+        <p class="form-success" id="formSuccess" hidden>Thanks! Your message has been received — we'll be in touch shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="section-inner footer-inner">
+    <div class="footer-col footer-brand">
+      <a href="#" class="logo" onclick="showPage('home');window.scrollTo(0,0);return false">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none">
+            <rect x="2" y="12" width="5" height="10" rx="1" fill="#60a5fa"/>
+            <rect x="9.5" y="7" width="5" height="15" rx="1" fill="#93c5fd"/>
+            <rect x="17" y="2" width="5" height="20" rx="1" fill="#bfdbfe"/>
+          </svg>
+        </span>
+        <span class="logo-text footer-logo-text">StatVision<small>Research &amp; Consultancy</small></span>
+      </a>
+      <p>Turning complex data into powerful business intelligence for organizations across East Africa.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About Us</a>
+      <a href="#insights">Insights</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Statistical Analysis</a>
+      <a href="#services">Power BI Dashboards</a>
+      <a href="#services">Monitoring &amp; Evaluation</a>
+      <a href="#services">Research Consultancy</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:hello@statvisionconsultancy.co.ke">hello@statvisionconsultancy.co.ke</a>
+      <a href="tel:+254748216918">+254 748 216 918</a>
+      <a href="#">Nairobi, Kenya</a>
+      <a href="#" onclick="goClient();return false">Client Login</a>
+      <a href="#" onclick="goStaff();return false" style="opacity:.6;font-size:12px">Staff Login</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 StatVision Research &amp; Consultancy. All rights reserved.</span>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top" id="scrollTop">&uarr;</button>
+</div><!-- end home -->
+
+<!-- ══════════ CLIENT AUTH (LOGIN / SIGNUP) ══════════ -->
+<div id="page-clientauth" class="page">
+  <div class="authwrap">
+    <div class="authbox">
+      <div class="authlogo">StatVision<span> Research & Consultancy</span></div>
+      <div class="authtabs">
+        <button class="authtab on" id="atab-login" onclick="authSwitch('login')">Log In</button>
+        <button class="authtab" id="atab-signup" onclick="authSwitch('signup')">Create Account</button>
+      </div>
+      <div id="authpane-login">
+        <p class="authsub">Welcome back — log in to track your orders.</p>
+        <div class="fg"><label>Email Address</label><input type="email" id="li_email" placeholder="your@email.com"/></div>
+        <div class="fg"><label>Password</label><input type="password" id="li_pass" placeholder="••••••••"/></div>
+        <p id="authError" style="color:#D13438;font-size:.8rem;display:none;margin-bottom:.6rem"></p>
+        <button class="bp" style="width:100%" onclick="clientLogin()">Log In</button>
+        <p class="authswitch">No account? <a href="#" onclick="authSwitch('signup');return false">Create one</a></p>
+      </div>
+      <div id="authpane-signup" style="display:none">
+        <p class="authsub">Create your StatVision Research and Consultancy account to submit and track orders.</p>
+        <div class="frow"><div class="fg"><label>Full Name</label><input type="text" id="su_name" placeholder="Your full name"/></div><div class="fg"><label>Phone</label><input type="tel" id="su_phone" placeholder="+254 7XX XXX XXX"/></div></div>
+        <div class="fg"><label>Email Address</label><input type="email" id="su_email" placeholder="your@email.com"/></div>
+        <div class="fg"><label>Password</label><input type="password" id="su_pass" placeholder="Create a password"/></div>
+        <p id="authError2" style="color:#D13438;font-size:.8rem;display:none;margin-bottom:.6rem"></p>
+        <button class="bp" style="width:100%" onclick="clientSignup()">Create Account</button>
+        <p class="authswitch">Already have an account? <a href="#" onclick="authSwitch('login');return false">Log in</a></p>
+      </div>
+      <p class="authback"><a href="#" onclick="showPage('home');return false">← Back to website</a></p>
+    </div>
+  </div>
+</div>
+<!-- ══════════ CLIENT DASHBOARD ══════════ -->
+<div id="page-client" class="page">
+<div class="dlayout">
+  <div class="dsb">
+    <div class="dsb-logo">StatVision<span> Research & Consultancy</span><span class="dsb-role">Client Portal</span></div>
+    <span class="slbl2">Main Menu</span>
+    <button class="snav active" onclick="cTab('overview',this)"><span class="sni">📊</span>Overview</button>
+    <button class="snav" onclick="cTab('orders',this)"><span class="sni">📋</span>My Orders</button>
+    <button class="snav" onclick="cTab('messages',this)"><span class="sni">💬</span>Messages<span class="ndot"></span></button>
+    <button class="snav" onclick="cTab('docs',this)"><span class="sni">📁</span>Documents</button>
+    <button class="snav" onclick="cTab('invoices',this)"><span class="sni">🧾</span>Invoices & Receipts</button>
+    <button class="snav" onclick="cTab('notifs',this)"><span class="sni">🔔</span>Notifications<span id="cNotifBadge" class="ndot" style="display:none"></span></button>
+    <button class="snav" onclick="cTab('profile',this)"><span class="sni">👤</span>Profile & Settings</button>
+    <div class="ssep"></div>
+    <div class="ssep"></div>
+    <button class="snav" onclick="openModal()"><span class="sni">➕</span>New Order</button>
+    <button class="snav" onclick="clientLogout()"><span class="sni">🚪</span>Log Out</button>
+    <button class="snav" onclick="showPage('home')"><span class="sni">🏠</span>Back to Website</button>
+  </div>
+  <div class="dmain">
+    <div class="dtop">
+      <div class="dtitle" id="cTabTitle">Client Overview</div>
+      <div class="dusr"><div class="dav" id="cUserAvatar">AM</div><div class="duname" id="cUserName">Amina Mwangi</div></div>
+    </div>
+    <div class="dcontent">
+      <!-- OVERVIEW (Power BI themed live dashboard) -->
+      <div id="ctab-overview">
+        <div class="pbi">
+          <div class="pbi-toolbar">
+            <h2>📊 Client Report <span class="pbi-live"><i></i>LIVE</span></h2>
+            <div class="pbi-actions">
+              <button class="pbi-btn" onclick="pbiRefresh()">⟳ Refresh</button>
+              <button class="pbi-btn" onclick="pbiPause()" id="pbiPauseBtn">⏸ Pause</button>
+              <button class="pbi-btn" onclick="cTab('orders',null)">⛶ Open Orders</button>
+            </div>
+          </div>
+          <div class="pbi-slicers">
+            <div class="pbi-slicer">📁 Client: <b id="pbiSlicerName">Guest</b></div>
+            <div class="pbi-slicer">📅 Period: <b>Last 30 days</b></div>
+            <div class="pbi-slicer">🏷️ Status: <b>All</b></div>
+          </div>
+
+          <div class="pbi-grid-kpi" id="pbiKpiRow"></div>
+
+          <div class="pbi-row">
+            <div class="pbi-visual">
+              <h3>Order Spend Trend</h3>
+              <div class="vs">KES — by week, draft vs final billing</div>
+              <div class="pbi-legend">
+                <span><i style="background:#F2C811"></i>Draft Billing</span>
+                <span><i style="background:#1565C0"></i>Final Billing</span>
+              </div>
+              <svg id="pbiBarChart" viewBox="0 0 720 190" width="100%" height="190"></svg>
+            </div>
+            <div class="pbi-visual">
+              <h3>Payment Mix</h3>
+              <div class="vs">Paid vs deposits vs balance</div>
+              <div class="pbi-donut-wrap">
+                <div style="position:relative"><svg width="120" height="120" viewBox="0 0 120 120" id="pbiDonut"></svg>
+                  <div class="pbi-donut-center" id="pbiDonutCenter" style="left:30px;top:42px"></div>
+                </div>
+                <div class="pbi-donut-list" id="pbiDonutList"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pbi-visual pbi-table-visual">
+            <h3>My Recent Orders</h3>
+            <div class="vs">Streaming order status updates</div>
+            <div style="overflow-x:auto">
+              <table>
+                <thead><tr><th>Order ID</th><th>Project</th><th>Tool</th><th>Draft Due</th><th>Final Due</th><th>Status</th></tr></thead>
+                <tbody id="pbiOrdersBody">
+                  <tr><td><strong>DB-2025-001</strong></td><td>MSc Dissertation — Regression</td><td>SPSS</td><td>25 Jun 2025</td><td>28 Jun 2025</td><td><span class="pbi-status prog">In Progress</span></td></tr>
+                  <tr><td><strong>DB-2025-002</strong></td><td>NGO Impact Evaluation</td><td>R</td><td>12 Jul 2025</td><td>15 Jul 2025</td><td><span class="pbi-status done">Confirmed</span></td></tr>
+                  <tr><td><strong>DB-2025-003</strong></td><td>Consumer Cluster Analysis</td><td>Python</td><td>18 Jul 2025</td><td>20 Jul 2025</td><td><span class="pbi-status review">Draft Review</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ORDERS -->
+      <div id="ctab-orders" style="display:none">
+        <div class="dtw" style="margin-bottom:1.2rem">
+          <div class="dth"><h3>My Submitted Orders</h3></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Order ID</th><th>Project</th><th>Tool</th><th>Analyst</th><th>Deadline</th><th>Total</th><th>Status</th><th>Completed Work</th><th>Invoice</th></tr></thead>
+            <tbody id="myOrdersBody"><tr><td colspan="9" style="text-align:center;color:var(--sl);padding:1.4rem">Log in to see your submitted orders here.</td></tr></tbody>
+          </table></div>
+        </div>
+        <div class="filt">
+          <button class="fb2 on" onclick="filt(this,'all')">All</button>
+          <button class="fb2" onclick="filt(this,'prog')">In Progress</button>
+          <button class="fb2" onclick="filt(this,'done')">Completed</button>
+          <button class="fb2" onclick="filt(this,'pend')">Pending</button>
+        </div>
+        <div class="odtl">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem">
+            <div><strong style="font-family:var(--fd);font-size:1rem">DB-2025-001</strong>&nbsp;<span class="badge b-pr">In Progress</span></div>
+            <div style="font-size:.81rem;color:var(--sl)">⏱ Final deadline: <strong>28 Jun 2025</strong> &nbsp;|&nbsp; Draft by: <strong>25 Jun 2025</strong></div>
+          </div>
+          <div class="odg">
+            <div class="odf"><label>Project Title</label><p>MSc Dissertation — Determinants of Academic Performance</p></div>
+            <div class="odf"><label>Service</label><p>Quantitative Analysis</p></div>
+            <div class="odf"><label>Tool</label><p>SPSS (IBM SPSS Statistics 27)</p></div>
+            <div class="odf"><label>Report Format</label><p>APA 7th Edition</p></div>
+            <div class="odf"><label>Assigned Analyst</label><p>Henry Gitau Michuku</p></div>
+            <div class="odf"><label>Payment Status</label><p>Deposit paid KES 12,500 | Balance: KES 12,500</p></div>
+          </div>
+          <div style="margin-top:.9rem;display:flex;gap:.65rem;flex-wrap:wrap">
+            <button class="db1 dba" onclick="cTab('messages',null)">💬 Message Analyst</button>
+            <button class="db1 dbb" onclick="cTab('docs',null)">📁 Files</button>
+            <button class="db1 dbb" onclick="cTab('invoices',null)">🧾 Invoice</button>
+          </div>
+        </div>
+        <div class="odtl">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem">
+            <div><strong style="font-family:var(--fd);font-size:1rem">DB-2025-003</strong>&nbsp;<span class="badge b-rv">Draft Review</span></div>
+            <div style="font-size:.81rem;color:var(--sl)">⏱ Final deadline: <strong>20 Jul 2025</strong></div>
+          </div>
+          <div class="odg">
+            <div class="odf"><label>Project Title</label><p>Consumer Behaviour — Cluster Analysis</p></div>
+            <div class="odf"><label>Service</label><p>Quantitative Analysis + Visualisation</p></div>
+            <div class="odf"><label>Tool</label><p>Python (pandas, scikit-learn, matplotlib)</p></div>
+            <div class="odf"><label>Report Format</label><p>Custom Corporate Format</p></div>
+            <div class="odf"><label>Analyst</label><p>Simon Macharia</p></div>
+            <div class="odf"><label>Payment</label><p>Deposit paid KES 18,000 | Balance: KES 18,000</p></div>
+          </div>
+          <div style="margin-top:.9rem;display:flex;gap:.65rem;flex-wrap:wrap">
+            <button class="db1 dba">📝 Submit Feedback</button>
+            <button class="db1 dbb">⬇ Download Draft</button>
+            <button class="db1" style="background:#E8F5E9;color:#2E7D32;border:none;padding:.36rem .88rem;border-radius:7px;font-family:var(--fd);font-weight:600;font-size:.76rem;cursor:pointer">✅ Approve Draft</button>
+          </div>
+        </div>
+      </div>
+      <!-- MESSAGES -->
+      <div id="ctab-messages" style="display:none">
+        <div class="dtw" style="max-width:700px">
+          <div class="dth"><h3>Chat — DB-2025-001 | Henry Gitau Michuku</h3></div>
+          <div class="cmsgs" id="clientMsgs" style="height:280px;padding:1.2rem">
+            <div class="msg a">Hi Amina, I've reviewed your dataset. I'll run a multiple linear regression with 4 predictors. Draft by Thursday.</div>
+            <div class="msg c">Thank you! Please include a normality test and check for multicollinearity too.</div>
+            <div class="msg a">Absolutely — Shapiro-Wilk normality test and VIF scores for all predictors. Will flag any issues in the methodology section.</div>
+            <div class="msg c">Perfect, thank you so much!</div>
+            <div class="msg a">Your draft is ready — check Documents tab. Please review within 48 hours and send feedback. Great dataset by the way! 🎉</div>
+          </div>
+          <div class="cinp" style="padding:.9rem;border-top:1px solid var(--br)">
+            <input type="text" id="clientChatIn" placeholder="Type a message to your analyst..." onkeydown="if(event.key==='Enter')clientSend()"/>
+            <button class="csend" onclick="clientSend()">➤</button>
+          </div>
+        </div>
+      </div>
+      <!-- DOCUMENTS -->
+      <div id="ctab-docs" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>Document Vault</h3><div class="dtha"><span style="font-size:.76rem;color:var(--sl)">All files uploaded by you and your analyst appear here in real time.</span></div></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>File Name</th><th>Order</th><th>Type</th><th>Uploaded By</th><th>Date</th><th>Size</th><th>Action</th></tr></thead><tbody id="clientDocsBody"><tr><td colspan="7" style="text-align:center;color:var(--sl);padding:1.4rem">Loading documents…</td></tr></tbody></table></div>
+        </div>
+      </div>
+      <!-- INVOICES -->
+      <div id="ctab-invoices" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>Invoices & Receipts</h3></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Order ID</th><th>Project</th><th>Service</th><th>Analyst</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="myInvoicesBody"><tr><td colspan="9" style="text-align:center;color:var(--sl);padding:1.4rem">Log in to see your invoices here.</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+      <!-- NOTIFICATIONS -->
+      <div id="ctab-notifs" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>Notifications</h3><div class="dtha"><button class="db1 dbb" onclick="markAllNotifsRead()">Mark All Read</button></div></div>
+          <div id="ctab-notifs-list" style="padding:0">
+            <div style="padding:1.4rem;text-align:center;color:var(--sl);font-size:.85rem">Loading notifications…</div>
+          </div>
+        </div>
+      </div>
+      <!-- PROFILE -->
+      <div id="ctab-profile" style="display:none">
+        <div class="odtl" style="max-width:560px">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.15rem">My Profile & Settings</h3>
+          <div class="frow"><div class="fg"><label>Full Name</label><input type="text" id="prof_name" value="Amina Mwangi"/></div><div class="fg"><label>Email</label><input type="email" id="prof_email" value="amina@email.com" readonly/></div></div>
+          <div class="frow"><div class="fg"><label>Phone</label><input type="tel" id="prof_phone" value="+254 712 000 000"/></div><div class="fg"><label>Organisation</label><input type="text" value="University of Nairobi"/></div></div>
+          <div class="frow"><div class="fg"><label>Country</label><input type="text" value="Kenya"/></div><div class="fg"><label>Account Created</label><input type="text" id="prof_created" value="—" readonly/></div></div>
+          <div class="fg"><label>Notification Preferences</label>
+            <select><option>Email + SMS (recommended)</option><option>Email only</option><option>SMS only</option></select></div>
+          <div style="display:flex;gap:.65rem;margin-top:.5rem">
+            <button class="db1 dba" onclick="alert('Profile saved!')">Save Changes</button>
+            <button class="db1 dbb">Change Password</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end client -->
+<!-- ══════════ ANALYST PORTAL ══════════ -->
+<!-- ══════════ STAFF AUTH (ADMIN / ANALYST — internal only) ══════════ -->
+<div id="page-staffauth" class="page">
+  <div class="authwrap">
+    <div class="authbox">
+      <div class="authlogo">StatVision<span> Research & Consultancy</span></div>
+      <p class="authsub" style="text-align:center;margin-top:-.4rem">Staff Login — internal access only</p>
+      <div class="fg"><label>Work Email</label><input type="email" id="st_email" placeholder="you@statvisionconsultancy.co.ke"/></div>
+      <div class="fg"><label>Password</label><input type="password" id="st_pass" placeholder="••••••••"/></div>
+      <p id="staffAuthError" style="color:#D13438;font-size:.8rem;display:none;margin-bottom:.6rem"></p>
+      <button class="bp" style="width:100%" onclick="staffLogin()">Log In</button>
+      <p class="authback"><a href="#" onclick="showPage('home');return false">← Back to website</a></p>
+    </div>
+  </div>
+</div>
+<div id="page-analyst" class="page">
+<div class="dlayout">
+  <div class="dsb">
+    <div class="dsb-logo">StatVision<span> Research & Consultancy</span><span class="dsb-role">Analyst Portal</span></div>
+    <span class="slbl2">Analyst Menu</span>
+    <button class="snav active" onclick="anTab('overview',this)"><span class="sni">📊</span>My Dashboard</button>
+    <button class="snav" onclick="anTab('assignments',this)"><span class="sni">📋</span>My Assignments<span class="ndot"></span></button>
+    <button class="snav" onclick="anTab('calendar',this)"><span class="sni">📅</span>Deadline Calendar</button>
+    <button class="snav" onclick="anTab('msgs',this)"><span class="sni">💬</span>Client Messages<span class="ndot"></span></button>
+    <button class="snav" onclick="anTab('upload',this)"><span class="sni">📤</span>Upload Deliverable</button>
+    <button class="snav" onclick="anTab('payslips',this)"><span class="sni">💵</span>My Payslips</button>
+    <button class="snav" onclick="anTab('profile',this)"><span class="sni">👤</span>My Profile</button>
+    <div class="ssep"></div>
+    <button class="snav" onclick="staffLogout()"><span class="sni">🚪</span>Log Out</button>
+    <button class="snav" onclick="showPage('home')"><span class="sni">🏠</span>Back to Website</button>
+  </div>
+  <div class="dmain">
+    <div class="dtop">
+      <div class="dtitle" id="anTabTitle">Analyst Dashboard</div>
+      <div class="dusr">
+        <label class="avatar-upload" title="Upload profile picture">
+          <div class="dav" id="anUserAvatar" style="background:#7B1FA2">HM</div>
+          <span class="avatar-cam">📷</span>
+          <input type="file" accept="image/*" onchange="uploadStaffAvatar(this,'analyst')" hidden/>
+        </label>
+        <div class="duname">Henry Gitau Michuku</div>
+      </div>
+    </div>
+    <div class="dcontent">
+      <!-- OVERVIEW -->
+      <div id="antab-overview">
+        <div class="kgd">
+          <div class="kpi"><div class="kpic" style="background:#E3F2FD">📋</div><div><div class="kpiv">4</div><div class="kpil">Active Assignments</div><div class="kpit tu">On track</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#FFF3E0">⚠️</div><div><div class="kpiv">1</div><div class="kpil">Due in 24hrs</div><div class="kpit td2">Action needed</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#E8F5E9">✅</div><div><div class="kpiv">28</div><div class="kpil">Completed Total</div><div class="kpit tu">100% on time</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#F3E5F5">⭐</div><div><div class="kpiv">4.9</div><div class="kpil">Avg Rating</div><div class="kpit tu">From 28 reviews</div></div></div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>Upcoming Deadlines</h3></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Order ID</th><th>Client</th><th>Project</th><th>Tool</th><th>Draft Due</th><th>Final Due</th><th>Status</th><th>Action</th></tr></thead><tbody>
+            <tr><td><strong>DB-2025-001</strong></td><td>Amina Mwangi</td><td>Dissertation Regression</td><td>SPSS</td><td style="color:var(--er);font-weight:600">TODAY</td><td>28 Jun</td><td><span class="badge b-pr">In Progress</span></td><td><button class="db1 dba" onclick="anTab('upload',null)">Upload Now</button></td></tr>
+            <tr><td><strong>DB-2025-006</strong></td><td>Peter Njoroge</td><td>Health Survey — ANOVA</td><td>SPSS</td><td>27 Jun</td><td>30 Jun</td><td><span class="badge b-pr">In Progress</span></td><td><button class="db1 dbb">Open</button></td></tr>
+            <tr><td><strong>DB-2025-009</strong></td><td>Faith Achieng</td><td>Econometrics Model</td><td>Stata</td><td>5 Jul</td><td>8 Jul</td><td><span class="badge b-pn">Confirmed</span></td><td><button class="db1 dbb">Open</button></td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="crow">
+          <div class="cc"><h3>Workload This Month</h3>
+            <div class="prw"><div class="prl"><strong>Completed</strong><span>28</span></div><div class="prb"><div class="prf" style="width:85%;background:var(--ok)"></div></div></div>
+            <div class="prw"><div class="prl"><strong>In Progress</strong><span>4</span></div><div class="prb"><div class="prf" style="width:40%;background:var(--b2)"></div></div></div>
+            <div class="prw"><div class="prl"><strong>Pending Review</strong><span>2</span></div><div class="prb"><div class="prf" style="width:20%;background:var(--am)"></div></div></div>
+          </div>
+          <div class="cc"><h3>Tool Usage (My Projects)</h3>
+            <svg width="100%" height="140" viewBox="0 0 260 140">
+              <rect x="10" y="30" width="45" height="90" rx="5" fill="#1976D2" opacity=".85"/>
+              <rect x="70" y="60" width="45" height="60" rx="5" fill="#F5A623" opacity=".85"/>
+              <rect x="130" y="75" width="45" height="45" rx="5" fill="#00897B" opacity=".85"/>
+              <rect x="190" y="90" width="45" height="30" rx="5" fill="#7B1FA2" opacity=".85"/>
+              <text x="32" y="132" text-anchor="middle" font-size="9" fill="#546E7A">SPSS</text>
+              <text x="92" y="132" text-anchor="middle" font-size="9" fill="#546E7A">Stata</text>
+              <text x="152" y="132" text-anchor="middle" font-size="9" fill="#546E7A">R</text>
+              <text x="212" y="132" text-anchor="middle" font-size="9" fill="#546E7A">Python</text>
+              <text x="32" y="24" text-anchor="middle" font-size="10" font-weight="700" fill="#1976D2">16</text>
+              <text x="92" y="54" text-anchor="middle" font-size="10" font-weight="700" fill="#F5A623">8</text>
+              <text x="152" y="69" text-anchor="middle" font-size="10" font-weight="700" fill="#00897B">5</text>
+              <text x="212" y="84" text-anchor="middle" font-size="10" font-weight="700" fill="#7B1FA2">4</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- ASSIGNMENTS -->
+      <div id="antab-assignments" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>All Assigned Orders</h3></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Order ID</th><th>Client</th><th>Project</th><th>Service</th><th>Tool</th><th>Format</th><th>Final Deadline</th><th>Status</th><th>Client Files</th><th>Actions</th></tr></thead><tbody id="anAssignBody"></tbody></table></div>
+        </div>
+      </div>
+      <!-- CALENDAR -->
+      <div id="antab-calendar" style="display:none">
+        <div class="cc" style="background:#fff;border:1px solid var(--br);border-radius:14px;padding:1.5rem;margin-bottom:1.4rem">
+          <h3>June 2025 — Deadline Calendar</h3>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:.35rem;margin-top:1rem">
+            <div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Mon</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Tue</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Wed</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Thu</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Fri</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Sat</div><div style="text-align:center;font-size:.72rem;font-weight:600;color:var(--sl);padding:.3rem">Sun</div>
+            <div style="padding:.5rem;font-size:.8rem;color:var(--ms)"></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)"></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)"></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)"></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)"></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">1</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">2</div>
+            <div style="padding:.5rem;font-size:.8rem">3</div><div style="padding:.5rem;font-size:.8rem">4</div><div style="padding:.5rem;font-size:.8rem">5</div><div style="padding:.5rem;font-size:.8rem">6</div><div style="padding:.5rem;font-size:.8rem">7</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">8</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">9</div>
+            <div style="padding:.5rem;font-size:.8rem">10</div><div style="padding:.5rem;font-size:.8rem">11</div><div style="padding:.5rem;font-size:.8rem">12</div><div style="padding:.5rem;font-size:.8rem">13</div><div style="padding:.5rem;font-size:.8rem">14</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">15</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">16</div>
+            <div style="padding:.5rem;font-size:.8rem">17</div><div style="padding:.5rem;font-size:.8rem">18</div><div style="padding:.5rem;font-size:.8rem">19</div><div style="padding:.5rem;font-size:.8rem">20</div><div style="padding:.5rem;font-size:.8rem">21</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">22</div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">23</div>
+            <div style="padding:.5rem;font-size:.8rem">24</div><div style="padding:.5rem;font-size:.8rem;background:#FFF3E0;border-radius:6px;font-weight:600">25<div style="font-size:.6rem;color:var(--wn);line-height:1.1">DB-001 Draft</div></div><div style="padding:.5rem;font-size:.8rem">26</div><div style="padding:.5rem;font-size:.8rem;background:#FFEBEE;border-radius:6px;font-weight:600">27<div style="font-size:.6rem;color:var(--er);line-height:1.1">DB-006 Draft</div></div><div style="padding:.5rem;font-size:.8rem;background:#FFEBEE;border-radius:6px;font-weight:600">28<div style="font-size:.6rem;color:var(--er);line-height:1.1">DB-001 Final</div></div><div style="padding:.5rem;font-size:.8rem;color:var(--ms)">29</div><div style="padding:.5rem;font-size:.8rem;background:#FFEBEE;border-radius:6px;font-weight:600;color:var(--ms)">30<div style="font-size:.6rem;color:var(--er);line-height:1.1">DB-006 Final</div></div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem"><div style="width:12px;height:12px;border-radius:3px;background:#FFF3E0"></div>Draft deadline</div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem"><div style="width:12px;height:12px;border-radius:3px;background:#FFEBEE"></div>Final deadline</div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem"><div style="width:12px;height:12px;border-radius:3px;background:#E8F5E9"></div>Completed</div>
+          </div>
+        </div>
+      </div>
+      <!-- MESSAGES -->
+      <div id="antab-msgs" style="display:none">
+        <div class="dtw" style="max-width:700px">
+          <div class="dth"><h3>Client Chat — DB-2025-001 | Amina Mwangi</h3></div>
+          <div class="cmsgs" id="analystMsgs" style="height:280px;padding:1.2rem">
+            <div class="msg c">Hi Dr. Kariuki, I reviewed the draft. Can you please also run a Pearson correlation matrix for all variables?</div>
+            <div class="msg a">Of course Amina! I'll add the full Pearson correlation matrix to Table 3. I'll also annotate which correlations are significant at p&lt;0.05.</div>
+            <div class="msg c">Perfect! And please add a histogram of the residuals to check normality visually.</div>
+            <div class="msg a">Done — adding both the histogram and a Q-Q plot of residuals. I'll send the revised draft by end of day.</div>
+          </div>
+          <div class="cinp" style="padding:.9rem;border-top:1px solid var(--br)">
+            <input type="text" id="analystChatIn" placeholder="Type message to client..." onkeydown="if(event.key==='Enter')analystSend()"/>
+            <button class="csend" onclick="analystSend()">➤</button>
+          </div>
+        </div>
+      </div>
+      <!-- UPLOAD -->
+      <div id="antab-upload" style="display:none">
+        <div class="odtl" style="max-width:580px">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">Upload Deliverable</h3>
+          <div class="fg"><label>Select Order</label>
+            <select id="anUploadOrder" onchange="anShowOrderFiles()"></select></div>
+          <div class="fg"><label>Client's Uploaded Files</label>
+            <div id="anClientFiles" style="font-size:.8rem">—</div></div>
+          <div class="fg"><label>Deliverable Type</label>
+            <select id="anDelivType"><option>First Draft</option><option>Revised Draft</option><option>Final Deliverable</option><option>Supporting Output File</option></select></div>
+          <div class="fg"><label>Upload File</label>
+            <div class="upl" onclick="document.getElementById('anFile').click()">
+              <p>📎 <strong>Click to upload</strong> — DOCX, PDF, SPSS output, R Markdown, Jupyter Notebook</p>
+              <input type="file" id="anFile" multiple style="display:none" onchange="document.getElementById('anFn').textContent='Selected: '+[...this.files].map(f=>f.name).join(', ')"/>
+            </div>
+            <p id="anFn" style="font-size:.76rem;color:var(--b2);margin-top:.4rem"></p>
+          </div>
+          <div class="fg"><label>Notes to Client (optional)</label>
+            <textarea id="anUploadNotes" placeholder="e.g. Please review sections 3 and 4 especially — I've flagged two findings worth discussing..."></textarea></div>
+          <p id="anUploadStatus" style="font-size:.78rem;margin-bottom:.6rem"></p>
+          <button class="db1 dba" onclick="uploadDeliverable()">📤 Upload & Notify Client</button>
+        </div>
+      </div>
+      <!-- PAYSLIPS -->
+      <div id="antab-payslips" style="display:none">
+        <div class="dtw" style="margin-bottom:1.2rem">
+          <div class="dth"><h3>💵 My Payslips</h3><div class="dtha"><span style="font-size:.76rem;color:var(--sl)">Generated by HR — click Download to get your payslip PDF</span></div></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Period</th><th>Basic</th><th>Gross Pay</th><th>PAYE</th><th>NSSF</th><th>NHIF</th><th>Net Pay</th><th>Date Issued</th><th>Action</th></tr></thead>
+            <tbody id="analystPayslipBody"><tr><td colspan="9" style="text-align:center;color:var(--sl);padding:1.4rem">No payslips yet — HR will upload them here.</td></tr></tbody>
+          </table></div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>📄 My P9 Tax Forms</h3></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Tax Year</th><th>Annual Gross</th><th>Annual PAYE</th><th>Annual NSSF</th><th>Annual NHIF</th><th>Personal Relief</th><th>Taxable Pay</th><th>Action</th></tr></thead>
+            <tbody id="analystP9Body"><tr><td colspan="8" style="text-align:center;color:var(--sl);padding:1.4rem">No P9 forms yet — HR will generate them here.</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+      <div id="antab-profile" style="display:none">
+        <div class="odtl" style="max-width:560px">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">Analyst Profile</h3>
+          <div style="display:flex;align-items:center;gap:1.1rem;margin-bottom:1.3rem">
+            <label class="avatar-upload avatar-upload-lg" title="Upload profile picture">
+              <div class="dav" id="anProfileAvatar" style="width:76px;height:76px;font-size:1.4rem;background:#7B1FA2">HM</div>
+              <span class="avatar-cam avatar-cam-lg">📷</span>
+              <input type="file" accept="image/*" onchange="uploadStaffAvatar(this,'analyst')" hidden/>
+            </label>
+            <div>
+              <div style="font-weight:700;font-size:.95rem;color:var(--ch)">Profile Picture</div>
+              <div style="font-size:.78rem;color:var(--sl)">Click your photo to upload a new one (JPG or PNG).</div>
+              <div id="anAvatarStatus" style="font-size:.75rem;color:var(--sl);margin-top:.3rem"></div>
+            </div>
+          </div>
+          <div class="frow"><div class="fg"><label>Full Name</label><input type="text" value="Simon Macharia"/></div><div class="fg"><label>Email</label><input type="email" value="simon@statvisionconsultancy.co.ke"/></div></div>
+          <div class="frow"><div class="fg"><label>Phone</label><input type="tel" value="+254 700 222 333"/></div><div class="fg"><label>Role</label><input type="text" value="Chief Analyst" readonly/></div></div>
+          <div class="fg"><label>Specialisation</label><input type="text" value="Data Science, Machine Learning, Mixed Methods"/></div>
+          <div class="fg"><label>Tools Proficiency</label><input type="text" value="Python, R, Power BI, Advanced Excel"/></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem;margin-top:.5rem;padding:.9rem;background:var(--bl);border-radius:10px">
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--b2)">28</div><div style="font-size:.72rem;color:var(--sl)">Completed</div></div>
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--am)">4.9★</div><div style="font-size:.72rem;color:var(--sl)">Avg Rating</div></div>
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--ok)">100%</div><div style="font-size:.72rem;color:var(--sl)">On Time</div></div>
+          </div>
+          <button class="db1 dba" style="margin-top:1rem" onclick="alert('Profile saved!')">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end analyst -->
+
+<!-- ══════════ HR MANAGER PORTAL ══════════ -->
+<div id="page-hr" class="page">
+<div class="dlayout">
+  <div class="dsb">
+    <div class="dsb-logo">StatVision<span> Research & Consultancy</span><span class="dsb-role">HR Portal</span></div>
+    <span class="slbl2">Human Resources</span>
+    <button class="snav active" onclick="hrTab('employees',this)"><span class="sni">👥</span>Employees</button>
+    <button class="snav" onclick="hrTab('profiles',this)"><span class="sni">📇</span>Employee Profiles</button>
+    <button class="snav" onclick="hrTab('payroll',this)"><span class="sni">💵</span>Payroll Management</button>
+    <button class="snav" onclick="hrTab('p9',this)"><span class="sni">📄</span>P9 Forms</button>
+    <button class="snav" onclick="hrTab('reports',this)"><span class="sni">📊</span>HR Reports</button>
+    <div class="ssep"></div>
+    <button class="snav" onclick="staffLogout()"><span class="sni">🚪</span>Log Out</button>
+    <button class="snav" onclick="showPage('home')"><span class="sni">🏠</span>Back to Website</button>
+  </div>
+  <div class="dmain">
+    <div class="dtop">
+      <div class="dtitle" id="hrTabTitle">Employee Management</div>
+      <div class="dusr"><div class="dav" style="background:#00897B">HR</div><div class="duname">HR Manager — StatVision Research & Consultancy</div></div>
+    </div>
+    <div class="dcontent">
+
+      <!-- EMPLOYEES LIST -->
+      <div id="hrtab-employees">
+        <div class="kgd" style="margin-bottom:1.2rem">
+          <div class="kpi"><div class="kpic" style="background:#E3F2FD">👥</div><div><div class="kpiv" id="hrKpiTotal">0</div><div class="kpil">Total Analysts</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#E8F5E9">✅</div><div><div class="kpiv" id="hrKpiActive">0</div><div class="kpil">Active Employees</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#FFF3E0">💰</div><div><div class="kpiv" id="hrKpiPayroll">KES 0</div><div class="kpil">Monthly Payroll (Est.)</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#F3E5F5">📅</div><div><div class="kpiv" id="hrKpiNew">0</div><div class="kpil">New This Month</div></div></div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>All Analyst Employees</h3><div class="dtha"><button class="db1 dbb" onclick="exportHrCSV()">⬇ Export CSV</button></div></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Date Employed</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="hrEmployeesBody"><tr><td colspan="7" style="text-align:center;color:var(--sl);padding:1.4rem">Loading employees…</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- EMPLOYEE PROFILES (detail/edit view) -->
+      <div id="hrtab-profiles" style="display:none">
+        <div class="dtw" style="margin-bottom:1.2rem">
+          <div class="dth"><h3>Select Employee</h3></div>
+          <div style="padding:1rem 1.4rem">
+            <select id="hrProfileSelect" onchange="hrLoadProfile()" style="max-width:400px">
+              <option value="">— Select an employee —</option>
+            </select>
+          </div>
+        </div>
+        <div id="hrProfileDetail"></div>
+      </div>
+
+      <!-- PAYROLL MANAGEMENT -->
+      <div id="hrtab-payroll" style="display:none">
+        <!-- PAYROLL BUILDER -->
+        <div class="odtl" style="max-width:700px;margin-bottom:1.4rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">💵 Payroll Builder — Auto Kenya PAYE Calculator</h3>
+          <div class="frow">
+            <div class="fg"><label>Select Employee</label><select id="payEmployee" onchange="hrAutoFillSalary()"></select></div>
+            <div class="fg"><label>Pay Period</label><input type="month" id="payPeriod"/></div>
+          </div>
+          <!-- EARNINGS -->
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:1rem;margin-bottom:.9rem">
+            <div style="font-size:.78rem;font-weight:700;color:#15803d;margin-bottom:.7rem">📥 EARNINGS</div>
+            <div class="frow">
+              <div class="fg"><label>Basic Salary (KES)</label><input type="number" id="payBasic" placeholder="60000" oninput="hrCalcPayroll()"/></div>
+              <div class="fg"><label>House Allowance (KES)</label><input type="number" id="payHouse" placeholder="15000" oninput="hrCalcPayroll()"/></div>
+            </div>
+            <div class="frow">
+              <div class="fg"><label>Transport Allowance (KES)</label><input type="number" id="payTransport" placeholder="5000" oninput="hrCalcPayroll()"/></div>
+              <div class="fg"><label>Other Allowances (KES)</label><input type="number" id="payOther" placeholder="0" oninput="hrCalcPayroll()"/></div>
+            </div>
+          </div>
+          <!-- DEDUCTIONS -->
+          <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:1rem;margin-bottom:.9rem">
+            <div style="font-size:.78rem;font-weight:700;color:#c2410c;margin-bottom:.7rem">📤 STATUTORY DEDUCTIONS (Auto-calculated)</div>
+            <div class="frow">
+              <div class="fg"><label>PAYE Tax (KES)</label><input type="number" id="payPAYE" readonly style="background:#fef9f0;color:#c2410c;font-weight:700"/></div>
+              <div class="fg"><label>NSSF (KES)</label><input type="number" id="payNSSF" readonly style="background:#fef9f0;color:#c2410c;font-weight:700"/></div>
+            </div>
+            <div class="frow">
+              <div class="fg"><label>NHIF / SHA (KES)</label><input type="number" id="payNHIF" readonly style="background:#fef9f0;color:#c2410c;font-weight:700"/></div>
+              <div class="fg"><label>Other Deductions (KES)</label><input type="number" id="payOtherDed" placeholder="0" oninput="hrCalcPayroll()"/></div>
+            </div>
+          </div>
+          <!-- SUMMARY -->
+          <div id="paySummaryBox" style="background:linear-gradient(135deg,#0D1B2A,#16243A);border-radius:12px;padding:1.2rem;margin-bottom:.9rem;display:none">
+            <div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;margin-bottom:.8rem">PAYROLL SUMMARY</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem">
+              <div style="text-align:center">
+                <div style="font-size:.65rem;color:rgba(255,255,255,.5)">Gross Pay</div>
+                <div id="sumGross" style="font-size:1.1rem;font-weight:700;color:#4FD1A5;font-family:monospace">KES 0</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-size:.65rem;color:rgba(255,255,255,.5)">Total Deductions</div>
+                <div id="sumDeductions" style="font-size:1.1rem;font-weight:700;color:#fc8181;font-family:monospace">KES 0</div>
+              </div>
+              <div style="text-align:center;background:rgba(255,255,255,.08);border-radius:8px;padding:.5rem">
+                <div style="font-size:.65rem;color:rgba(255,255,255,.5)">NET PAY</div>
+                <div id="sumNet" style="font-size:1.3rem;font-weight:700;color:#fff;font-family:monospace">KES 0</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.7rem">
+              <div style="font-size:.66rem;color:rgba(255,255,255,.5);text-align:center">PAYE: <span id="sumPAYE" style="color:#fbd38d">0</span></div>
+              <div style="font-size:.66rem;color:rgba(255,255,255,.5);text-align:center">NSSF: <span id="sumNSSF" style="color:#fbd38d">0</span></div>
+              <div style="font-size:.66rem;color:rgba(255,255,255,.5);text-align:center">NHIF: <span id="sumNHIF" style="color:#fbd38d">0</span></div>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:.9rem"><label>Notes (optional)</label>
+            <textarea id="payNotes" placeholder="e.g. Includes overtime for June..." style="min-height:55px"></textarea></div>
+          <p id="payStatus" style="font-size:.78rem;margin-bottom:.6rem;min-height:1rem"></p>
+          <div style="display:flex;gap:.65rem;flex-wrap:wrap">
+            <button class="db1 dba" onclick="savePayslip()">💾 Save & Generate Payslip PDF</button>
+            <button class="db1 dbb" onclick="hrCalcPayroll()">🔄 Recalculate</button>
+          </div>
+        </div>
+
+        <!-- PAYROLL HISTORY -->
+        <div class="dtw">
+          <div class="dth">
+            <h3>Payroll History — All Employees</h3>
+            <div class="dtha">
+              <button class="db1 dbb" onclick="exportPayrollCSV()">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Employee</th><th>Period</th><th>Basic</th><th>Gross</th><th>PAYE</th><th>NSSF</th><th>NHIF</th><th>Net Pay</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="hrPayrollBody"><tr><td colspan="10" style="text-align:center;color:var(--sl);padding:1.4rem">No payslips yet — use the builder above.</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- P9 FORMS -->
+      <div id="hrtab-p9" style="display:none">
+        <div class="odtl" style="max-width:640px;margin-bottom:1.4rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">📄 Generate / Upload P9 Tax Form</h3>
+          <div class="frow">
+            <div class="fg"><label>Select Employee</label><select id="p9Employee"></select></div>
+            <div class="fg"><label>Tax Year</label><input type="number" id="p9Year" placeholder="2025" value="2025"/></div>
+          </div>
+          <div class="fg"><label>Upload P9 PDF (if pre-prepared)</label>
+            <div class="upl" onclick="document.getElementById('p9File').click()">
+              <p>📎 <strong>Click to upload</strong> P9 form PDF</p>
+              <input type="file" id="p9File" accept=".pdf" style="display:none" onchange="document.getElementById('p9Fn').textContent='Selected: '+this.files[0]?.name"/>
+            </div>
+            <p id="p9Fn" style="font-size:.76rem;color:var(--b2);margin-top:.4rem"></p>
+          </div>
+          <p id="p9Status" style="font-size:.78rem;margin-bottom:.6rem"></p>
+          <div style="display:flex;gap:.65rem">
+            <button class="db1 dba" onclick="uploadP9Form()">📤 Upload P9</button>
+            <button class="db1" style="background:#00897B;color:#fff;border:none;padding:.45rem 1rem;border-radius:8px;font-weight:600;cursor:pointer" onclick="generateP9PDF()">⚡ Auto-Generate from Payroll</button>
+          </div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>P9 Forms Issued</h3></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Employee</th><th>Tax Year</th><th>Date Issued</th><th>Form</th></tr></thead>
+            <tbody id="hrP9Body"><tr><td colspan="4" style="text-align:center;color:var(--sl);padding:1.4rem">No P9 forms issued yet.</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- HR REPORTS -->
+      <div id="hrtab-reports" style="display:none">
+        <div class="crow" style="margin-bottom:1.4rem">
+          <div class="cc"><h3>Payroll Cost Trend</h3>
+            <svg width="100%" height="140" viewBox="0 0 320 140" id="hrPayrollChart"></svg>
+          </div>
+          <div class="cc"><h3>Employee Tenure</h3>
+            <div id="hrTenureList" style="margin-top:.5rem"></div>
+          </div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>Full Employee & Payroll Report</h3><div class="dtha"><button class="db1 dba" onclick="exportHrCSV()">⬇ Export CSV</button></div></div>
+          <div style="overflow-x:auto" id="hrFullReportWrap"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div><!-- end hr -->
+
+<!-- ══════════ ADMIN DASHBOARD ══════════ -->
+<div id="page-admin" class="page">
+<div class="dlayout">
+  <div class="dsb">
+    <div class="dsb-logo">StatVision<span> Research & Consultancy</span><span class="dsb-role">Admin Panel</span></div>
+    <span class="slbl2">Administration</span>
+    <button class="snav active" onclick="adTab('overview',this)"><span class="sni">📊</span>Overview</button>
+    <button class="snav" onclick="adTab('orders',this)"><span class="sni">📋</span>All Orders<span class="ndot"></span></button>
+    <button class="snav" onclick="adTab('tracker',this)"><span class="sni">📡</span>Project Tracker</button>
+    <button class="snav" onclick="adTab('clients',this)"><span class="sni">👥</span>Clients</button>
+    <button class="snav" onclick="adTab('analysts',this)"><span class="sni">🔬</span>Analysts</button>
+    <button class="snav" onclick="adTab('finance',this)"><span class="sni">💰</span>Finance</button>
+    <button class="snav" onclick="adTab('reports',this)"><span class="sni">📈</span>Reports</button>
+    <button class="snav" onclick="adTab('notifs',this)"><span class="sni">🔔</span>Notifications<span class="ndot"></span></button>
+    <button class="snav" onclick="adTab('content',this)"><span class="sni">🌐</span>Website Content</button>
+    <button class="snav" onclick="adTab('team',this)"><span class="sni">🧑‍💼</span>Team Profiles</button>
+    <button class="snav" onclick="adTab('profile',this)"><span class="sni">👤</span>My Profile</button>
+    <div class="ssep"></div>
+    <button class="snav" onclick="adTab('analysts',this)"><span class="sni">➕</span>Add Analyst</button>
+    <button class="snav" onclick="staffLogout()"><span class="sni">🚪</span>Log Out</button>
+    <button class="snav" onclick="showPage('home')"><span class="sni">🏠</span>Back to Website</button>
+  </div>
+  <div class="dmain">
+    <div class="dtop">
+      <div class="dtitle" id="adTabTitle">Admin Overview</div>
+      <div class="dusr">
+        <label class="avatar-upload" title="Upload profile picture">
+          <div class="dav" id="adUserAvatar" style="background:var(--am);color:#0D1B2A">AD</div>
+          <span class="avatar-cam">📷</span>
+          <input type="file" accept="image/*" onchange="uploadStaffAvatar(this,'admin')" hidden/>
+        </label>
+        <div class="duname">Admin — StatVision Research and Consultancy</div>
+      </div>
+    </div>
+    <div class="dcontent">
+      <!-- OVERVIEW -->
+      <div id="adtab-overview">
+        <div class="dxshell">
+          <!-- LEFT: white panel -->
+          <div class="dxleft">
+            <div class="dxkpis">
+              <div class="dxkpi">
+                <div class="dxkpi-lbl">Active Orders</div>
+                <div class="dxkpi-val" id="adKpiActive">0</div>
+                <div class="dxkpi-sub" id="adKpiActiveSub">No orders yet</div>
+              </div>
+              <div class="dxkpi">
+                <div class="dxkpi-lbl">Revenue Collected</div>
+                <div class="dxkpi-val" id="adKpiRevenue">KES 0</div>
+                <div class="dxkpi-sub" id="adKpiRevenueSub">From deposits paid</div>
+              </div>
+            </div>
+            <div class="dxchart-card">
+              <div class="dxchart-head">
+                <span>Order Volume — Last 6 Months</span>
+                <span class="dxlive"><i></i>Live</span>
+              </div>
+              <svg id="dxBarChart" viewBox="0 0 320 140" width="100%" height="140"></svg>
+            </div>
+            <div class="dxchart-card" style="margin-top:1rem">
+              <div class="dxchart-head"><span>Recent Activity</span></div>
+              <div id="adRecentActivity" style="margin-top:.4rem"></div>
+            </div>
+          </div>
+          <!-- RIGHT: dark navy panel -->
+          <div class="dxright">
+            <div class="dxkpis-dark">
+              <div class="dxkpi-dark">
+                <div class="dxkpi-dark-lbl">Total Clients</div>
+                <div class="dxkpi-dark-val" id="adKpiClients">0</div>
+                <div class="dxkpi-dark-sub" id="adKpiClientsSub">Unique clients</div>
+              </div>
+              <div class="dxkpi-dark">
+                <div class="dxkpi-dark-lbl">Outstanding Balance</div>
+                <div class="dxkpi-dark-val" id="adKpiBalance">KES 0</div>
+                <div class="dxkpi-dark-sub" id="adKpiBalanceSub">Across all orders</div>
+              </div>
+            </div>
+            <div class="dxdonut-card">
+              <div class="dxchart-head dark"><span>Order Status Mix</span></div>
+              <div class="dxdonut-wrap">
+                <svg width="130" height="130" viewBox="0 0 130 130" id="adStatusChart"></svg>
+                <div class="dxdonut-center" id="adStatusCenter"></div>
+              </div>
+              <div class="dxdonut-legend" id="adStatusLegend"></div>
+            </div>
+            <div class="dxanalyst-card">
+              <div class="dxchart-head dark"><span>Top Analysts</span></div>
+              <div id="adTopAnalysts" style="margin-top:.5rem"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ALL ORDERS -->
+      <div id="adtab-orders" style="display:none">
+        <!-- PROJECTS TABLE -->
+        <div class="dtw" style="margin-bottom:1.4rem">
+          <div class="dth" style="background:var(--b3);border-radius:14px 14px 0 0">
+            <h3 style="color:#fff;font-family:var(--fd)">📋 Projects Table</h3>
+            <div class="dtha">
+              <button class="db1" style="background:var(--am);color:#0D1B2A;border:none" onclick="openAddProjectModal()">+ New Project</button>
+              <button class="db1 dbb" onclick="exportProjects()">⬇ Export</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table id="projectsTable">
+              <thead><tr>
+                <th>Ref No</th><th>Client Name</th><th>Email</th><th>Phone</th>
+                <th>Project Title</th><th>Service Category</th><th>Tool / Platform</th>
+                <th>Date Received</th><th>Deadline</th><th>Budget (KES)</th>
+                <th>Assigned Analyst</th><th>Status</th><th>Actions</th>
+              </tr></thead>
+              <tbody id="projectsBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- ADD PROJECT INLINE FORM -->
+        <div id="addProjectForm" style="display:none;background:#fff;border:1px solid var(--br);border-radius:14px;padding:1.5rem;margin-bottom:1.4rem">
+          <h4 style="font-family:var(--fd);font-size:.97rem;color:var(--ch);margin-bottom:1.1rem">➕ Add New Project</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem">
+            <div class="fg"><label>Ref No</label><input type="text" id="np_ref" placeholder="DBA-003"/></div>
+            <div class="fg"><label>Client Name</label><input type="text" id="np_client" placeholder="Full name"/></div>
+            <div class="fg"><label>Email</label><input type="email" id="np_email" placeholder="client@email.com"/></div>
+            <div class="fg"><label>Phone</label><input type="tel" id="np_phone" placeholder="+254..."/></div>
+            <div class="fg"><label>Project Title</label><input type="text" id="np_title" placeholder="e.g. MSc Thesis Analysis"/></div>
+            <div class="fg"><label>Service Category</label>
+              <select id="np_service">
+                <optgroup label="Research & Academic"><option>Thesis Data Analysis</option><option>Dissertation Analysis</option><option>Proposal Development</option><option>Research Design</option><option>Questionnaire Design</option></optgroup>
+                <optgroup label="Statistical Analysis"><option>SPSS Analysis</option><option>STATA Analysis</option><option>R Analysis</option><option>Python Analysis</option><option>Excel Analytics</option></optgroup>
+                <optgroup label="Monitoring & Evaluation"><option>Baseline Surveys</option><option>Mid-Term Reviews</option><option>Endline Evaluations</option><option>Impact Assessment</option><option>Logical Frameworks</option><option>Theory of Change</option></optgroup>
+                <optgroup label="Data Management"><option>Data Cleaning</option><option>Data Validation</option><option>Data Entry</option><option>Database Design</option></optgroup>
+                <optgroup label="Visualization"><option>Power BI Dashboards</option><option>Tableau Dashboards</option><option>Interactive Reports</option><option>Executive Dashboards</option></optgroup>
+                <optgroup label="Advanced Analytics"><option>Predictive Analytics</option><option>Machine Learning</option><option>Time Series Analysis</option><option>Regression Analysis</option></optgroup>
+                <optgroup label="Survey Services"><option>KoboToolbox</option><option>ODK</option><option>SurveyCTO</option><option>Qualtrics</option></optgroup>
+                <optgroup label="GIS & Mapping"><option>ArcGIS</option><option>QGIS</option><option>Spatial Analysis</option></optgroup>
+                <optgroup label="Business Analytics"><option>KPI Tracking</option><option>Customer Analytics</option><option>Sales Analytics</option></optgroup>
+              </select>
+            </div>
+            <div class="fg"><label>Tool / Platform</label><input type="text" id="np_tool" placeholder="SPSS, R, Python, Power BI..."/></div>
+            <div class="fg"><label>Date Received</label><input type="date" id="np_date"/></div>
+            <div class="fg"><label>Deadline</label><input type="date" id="np_deadline"/></div>
+            <div class="fg"><label>Budget (KES)</label><input type="number" id="np_budget" placeholder="25000"/></div>
+            <div class="fg"><label>Assigned Analyst</label>
+              <select id="np_analyst"><option>Henry Gitau Michuku</option><option>Simon Macharia</option><option>Joseph Machuki</option><option>Unassigned</option></select>
+            </div>
+            <div class="fg"><label>Status</label>
+              <select id="np_status"><option>Pending</option><option>In Progress</option><option>Draft Review</option><option>Completed</option><option>Overdue</option></select>
+            </div>
+          </div>
+          <div style="display:flex;gap:.65rem;margin-top:.5rem">
+            <button class="db1 dba" onclick="saveProject()">Save Project</button>
+            <button class="db1 dbb" onclick="document.getElementById('addProjectForm').style.display='none'">Cancel</button>
+          </div>
+        </div>
+        <!-- STATUS SUMMARY CHIPS -->
+        <div class="filt">
+          <button class="fb2 on" onclick="filterProjects(this,'all')">All Projects</button>
+          <button class="fb2" onclick="filterProjects(this,'In Progress')" style="border-color:#FFE0B2">🔵 In Progress</button>
+          <button class="fb2" onclick="filterProjects(this,'Pending')" style="border-color:#BBDEFB">🟡 Pending</button>
+          <button class="fb2" onclick="filterProjects(this,'Draft Review')" style="border-color:#E1BEE7">🟣 Draft Review</button>
+          <button class="fb2" onclick="filterProjects(this,'Completed')" style="border-color:#C8E6C9">🟢 Completed</button>
+          <button class="fb2" onclick="filterProjects(this,'Overdue')" style="color:var(--er);border-color:#FFCDD2">🔴 Overdue</button>
+        </div>
+        <!-- FULL SQL ORDERS TABLE -->
+        <div class="dtw">
+          <div class="dth"><h3>Detailed Order Ledger</h3><div class="dtha"><button class="db1 dba" onclick="addRow()">+ Add</button><button class="db1 dbb" onclick="exportCSV()">⬇ Export CSV</button></div></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Order ID</th><th>Client</th><th>Project</th><th>Tool</th><th>Analyst</th><th>Deadline</th><th>Total</th><th>Deposit</th><th>Status</th><th>Client Files</th><th>Actions</th></tr></thead>
+          <tbody id="adminOrderBody"></tbody></table></div>
+        </div>
+      </div>
+      <!-- PROJECT TRACKER (moved from public site) -->
+      <div id="adtab-tracker" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>📡 Live Order & Progress Tracker</h3>
+            <div class="dtha">
+              <button class="db1 dba" onclick="addRow()">+ Add Order</button>
+              <button class="db1 dbb" onclick="exportCSV()">⬇ Export CSV</button>
+            </div>
+          </div>
+          <p style="padding:.9rem 1.4rem 0;font-size:.82rem;color:var(--sl)">Real-time SQL-style table tracking all orders, statuses, deadlines, payments, and assigned analysts.</p>
+          <div class="sqwrap"><table id="sqlTable">
+            <thead><tr><th>Order ID</th><th>Client</th><th>Email</th><th>Phone</th><th>Organisation</th><th>Project</th><th>Service</th><th>Tool</th><th>Format</th><th>Analyst</th><th>Deadline</th><th>Total (KES)</th><th>Deposit</th><th>Balance</th><th>Status</th></tr></thead>
+            <tbody id="sqlBody"></tbody>
+          </table></div>
+        </div>
+      </div>
+      <!-- CLIENTS -->
+      <div id="adtab-clients" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>Client Management</h3><div class="dtha"><button class="db1 dbb" onclick="exportCSV()">⬇ Export</button></div></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Country</th><th>Orders</th><th>Total Spent</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+            <tr><td><strong>Amina Mwangi</strong></td><td>amina@email.com</td><td>+254 712 000 000</td><td>Kenya</td><td>3</td><td>KES 61,000</td><td>1 Jun 2025</td><td><span class="badge b-dn">Active</span></td><td><button class="db1 dbb">View</button> <button class="db1 dbc">Suspend</button></td></tr>
+            <tr><td><strong>Kevin Omondi</strong></td><td>kevin@ngo.org</td><td>+254 722 111 222</td><td>Kenya</td><td>2</td><td>KES 45,000</td><td>5 Jun 2025</td><td><span class="badge b-dn">Active</span></td><td><button class="db1 dbb">View</button> <button class="db1 dbc">Suspend</button></td></tr>
+            <tr><td><strong>Sarah Njoki</strong></td><td>sarah@brand.co</td><td>+254 733 222 333</td><td>Kenya</td><td>1</td><td>KES 36,000</td><td>10 Jun 2025</td><td><span class="badge b-pr">New</span></td><td><button class="db1 dbb">View</button> <button class="db1 dbc">Suspend</button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+      <!-- ANALYSTS -->
+      <div id="adtab-analysts" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.35rem;flex-wrap:wrap;gap:.5rem">
+          <h3 style="font-family:var(--fd);font-size:.97rem;color:var(--ch)">Staff Accounts</h3>
+          <button class="db1 dba" onclick="toggleCreateAnalyst()">➕ Create Staff Account</button>
+        </div>
+        <div id="createAnalystForm" style="display:none;background:#fff;border:1px solid var(--br);border-radius:14px;padding:1.5rem;margin-bottom:1.35rem;max-width:600px">
+          <h4 style="font-family:var(--fd);margin-bottom:1rem;color:var(--ch)">New Staff Account</h4>
+          <div class="frow"><div class="fg"><label>Full Name</label><input type="text" id="newStaffName" placeholder="Full name"/></div><div class="fg"><label>Email</label><input type="email" id="newStaffEmail" placeholder="name@statvisionconsultancy.co.ke"/></div></div>
+          <div class="frow"><div class="fg"><label>Account Type</label><select id="newStaffRole"><option value="analyst">Analyst</option><option value="admin">Administrator</option><option value="hr">HR Manager</option></select></div><div class="fg"><label>Temporary Password</label><input type="password" id="newStaffPass" placeholder="At least 8 characters"/></div></div>
+          <p style="font-size:.76rem;color:var(--sl);margin-top:.3rem">Tell them this password directly (phone, in person, etc.) — it isn't saved anywhere after this form submits, so this is the only time you'll see it.</p>
+          <div id="createStaffStatus" style="font-size:.8rem;margin-top:.6rem"></div>
+          <div style="display:flex;gap:.65rem;margin-top:.7rem">
+            <button class="db1 dba" id="createStaffBtn" onclick="submitCreateStaff()">Create Account</button>
+            <button class="db1 dbb" onclick="document.getElementById('createAnalystForm').style.display='none'">Cancel</button>
+          </div>
+        </div>
+        <div class="dtw">
+          <div style="overflow-x:auto"><table><thead><tr><th>Name</th><th>Email</th><th>Specialisation</th><th>Tools</th><th>Active</th><th>Completed</th><th>Rating</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+            <tr><td><strong>Henry Gitau Michuku</strong><br/><span style="font-size:.7rem;color:var(--sl)">Administrator</span></td><td>henry@statvisionconsultancy.co.ke</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="badge b-dn">Active</span></td><td><button class="db1 dbb">Edit</button></td></tr>
+            <tr><td><strong>Simon Macharia</strong><br/><span style="font-size:.7rem;color:var(--sl)">Chief Analyst</span></td><td>simon@statvisionconsultancy.co.ke</td><td>Data Science</td><td>Python, R</td><td>3</td><td>15</td><td>⭐ 4.8</td><td><span class="badge b-dn">Active</span></td><td><button class="db1 dbb">Edit</button> <button class="db1 dbc">Deactivate</button></td></tr>
+            <tr><td><strong>Joseph Machuki</strong><br/><span style="font-size:.7rem;color:var(--sl)">Analyst · Economist & Statistician</span></td><td>joseph@statvisionconsultancy.co.ke</td><td>Econometrics, Statistics</td><td>Stata, SPSS</td><td>2</td><td>19</td><td>⭐ 5.0</td><td><span class="badge b-dn">Active</span></td><td><button class="db1 dbb">Edit</button> <button class="db1 dbc">Deactivate</button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+      <!-- FINANCE -->
+      <div id="adtab-finance" style="display:none">
+        <div class="kgd">
+          <div class="kpi"><div class="kpic" style="background:#E8F5E9">💰</div><div><div class="kpiv">KES 284k</div><div class="kpil">Revenue This Month</div><div class="kpit tu">▲ 18%</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#E3F2FD">💳</div><div><div class="kpiv">KES 142k</div><div class="kpil">Deposits Received</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#FFF3E0">⏳</div><div><div class="kpiv">KES 96k</div><div class="kpil">Balances Pending</div></div></div>
+          <div class="kpi"><div class="kpic" style="background:#FFEBEE">↩️</div><div><div class="kpiv">KES 0</div><div class="kpil">Refunds Issued</div></div></div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>Payment Ledger</h3><div class="dtha"><button class="db1 dbb" onclick="exportCSV()">⬇ Export</button></div></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>Order</th><th>Client</th><th>Type</th><th>Method</th><th>Amount</th><th>Status</th></tr></thead><tbody>
+            <tr><td>12 Jun 2025</td><td>DB-2025-001</td><td>Amina Mwangi</td><td>Deposit</td><td>M-Pesa</td><td>KES 12,500</td><td><span class="badge b-dn">Confirmed</span></td></tr>
+            <tr><td>15 Jun 2025</td><td>DB-2025-003</td><td>Sarah Njoki</td><td>Deposit</td><td>Card</td><td>KES 18,000</td><td><span class="badge b-dn">Confirmed</span></td></tr>
+            <tr><td>18 Jun 2025</td><td>DB-2025-005</td><td>Kevin Omondi</td><td>Full Payment</td><td>PayPal</td><td>KES 32,000</td><td><span class="badge b-dn">Confirmed</span></td></tr>
+            <tr><td>20 Jun 2025</td><td>DB-2025-002</td><td>John Kamau</td><td>Balance</td><td>M-Pesa</td><td>KES 14,000</td><td><span class="badge b-pn">Pending</span></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+      <!-- REPORTS -->
+      <div id="adtab-reports" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem;margin-bottom:1.65rem">
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="exportCSV()"><div class="kpic" style="background:#E3F2FD">📊</div><div><div class="kpiv" style="font-size:.97rem">Project Report</div><div class="kpil">All orders — client, analyst, status</div></div></div>
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="alert('Generating Revenue Report...')"><div class="kpic" style="background:#E8F5E9">💰</div><div><div class="kpiv" style="font-size:.97rem">Revenue Report</div><div class="kpil">Monthly income, methods, outstanding</div></div></div>
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="alert('Generating Analyst Report...')"><div class="kpic" style="background:#F3E5F5">🔬</div><div><div class="kpiv" style="font-size:.97rem">Analyst Report</div><div class="kpil">Performance, on-time rate, ratings</div></div></div>
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="alert('Generating Client Report...')"><div class="kpic" style="background:#FFF3E0">👥</div><div><div class="kpiv" style="font-size:.97rem">Client Report</div><div class="kpil">Activity, spend, retention</div></div></div>
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="exportCSV()"><div class="kpic" style="background:#E0F2F0">🗂️</div><div><div class="kpiv" style="font-size:.97rem">Export SQL Table</div><div class="kpil">Download full order tracker as CSV</div></div></div>
+          <div class="kpi" style="flex-direction:column;align-items:flex-start;gap:.4rem;cursor:pointer" onclick="alert('Generating Geography Report...')"><div class="kpic" style="background:#FCE4EC">🌍</div><div><div class="kpiv" style="font-size:.97rem">Geography Report</div><div class="kpil">Where clients are from</div></div></div>
+        </div>
+        <div class="dtw">
+          <div class="dth"><h3>Full Project Report</h3><div class="dtha"><button class="db1 dba" onclick="exportCSV()">⬇ Export CSV</button></div></div>
+          <div style="overflow-x:auto" id="reportTableWrap"></div>
+        </div>
+      </div>
+      <!-- NOTIFICATIONS -->
+      <div id="adtab-notifs" style="display:none">
+        <div class="dtw">
+          <div class="dth"><h3>Notification Centre</h3><div class="dtha"><button class="db1 dbb">Mark All Read</button></div></div>
+          <div style="padding:0">
+            <div style="padding:.88rem 1.4rem;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.85rem;background:#FFF8E1"><span>🆕</span><div style="flex:1"><strong style="font-size:.84rem">New client registered — John Kamau</strong><div style="font-size:.75rem;color:var(--sl)">10 min ago · john@email.com · +254 733 000 000 · Kenya</div></div><button class="db1 dbb">View</button></div>
+            <div style="padding:.88rem 1.4rem;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.85rem;background:#FFF3F3"><span>⚠️</span><div style="flex:1"><strong style="font-size:.84rem">Deadline in 24hrs — DB-2025-001</strong><div style="font-size:.75rem;color:var(--sl)">Analyst: Henry Gitau Michuku · Client: Amina Mwangi · Due: Today 11:59 PM</div></div><button class="db1 dbc">Alert Analyst</button></div>
+            <div style="padding:.88rem 1.4rem;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.85rem"><span>💳</span><div style="flex:1"><strong style="font-size:.84rem">Deposit received — DB-2025-008</strong><div style="font-size:.75rem;color:var(--sl)">Sarah Njoki paid KES 18,000 via M-Pesa · 2 hours ago</div></div><button class="db1 dbb">Receipt</button></div>
+            <div style="padding:.88rem 1.4rem;display:flex;align-items:center;gap:.85rem"><span>📤</span><div style="flex:1"><strong style="font-size:.84rem">Draft uploaded — DB-2025-003</strong><div style="font-size:.75rem;color:var(--sl)">Simon Macharia uploaded draft for Sarah Njoki · 3 hours ago</div></div><button class="db1 dbb">View</button></div>
+          </div>
+        </div>
+      </div>
+      <!-- CONTENT -->
+      <div id="adtab-content" style="display:none">
+        <div class="odtl">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">Website Content Management</h3>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+            <div class="fg"><label>Projects Completed (stat)</label><input type="number" value="342"/></div>
+            <div class="fg"><label>Satisfied Clients (stat)</label><input type="number" value="218"/></div>
+            <div class="fg"><label>Countries Reached (stat)</label><input type="number" value="24"/></div>
+          </div>
+          <div class="fg"><label>Hero Tagline</label><input type="text" value="Your data, expertly decoded."/></div>
+          <div class="fg"><label>Contact Phone (displayed on site)</label><input type="tel" value="+254 748 216 918"/></div>
+          <div class="fg"><label>Contact Email</label><input type="email" value="hello@statvisionconsultancy.co.ke"/></div>
+          <button class="db1 dba" onclick="alert('Website content updated!')">Save & Update Website</button>
+        </div>
+
+        <div class="odtl" style="margin-top:1.2rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">🖼️ Website Photo Banner</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1rem">Upload photos here and they'll appear automatically in the rotating banner on the homepage — no code changes needed.</p>
+
+          <div class="fg">
+            <label>Choose image(s)</label>
+            <input type="file" id="siteImageInput" accept="image/*" multiple/>
+          </div>
+          <button class="db1 dba" onclick="uploadSiteImages()">⬆ Upload to Website</button>
+          <div id="siteImageStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
+
+          <div id="siteImageGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem;margin-top:1.2rem">
+            <!-- populated by loadSiteImages() -->
+          </div>
+        </div>
+      </div>
+      <!-- TEAM PROFILES -->
+      <div id="adtab-team" style="display:none">
+        <div class="odtl">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">🧑‍💼 Team Profiles</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1.2rem">Upload each team member's real photo and write their bio here — it updates the "Meet the Team" section on the public About page automatically.</p>
+          <div id="adTeamGrid" style="display:grid;grid-template-columns:1fr;gap:1.2rem">
+            <!-- populated by renderAdminTeamPanel() -->
+          </div>
+        </div>
+      </div>
+      <!-- PROFILE -->
+      <div id="adtab-profile" style="display:none">
+        <div class="odtl" style="max-width:560px">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:1.1rem">Admin Profile</h3>
+          <div style="display:flex;align-items:center;gap:1.1rem;margin-bottom:1.3rem">
+            <label class="avatar-upload avatar-upload-lg" title="Upload profile picture">
+              <div class="dav" id="adProfileAvatar" style="width:76px;height:76px;font-size:1.4rem;background:var(--am);color:#0D1B2A">AD</div>
+              <span class="avatar-cam avatar-cam-lg">📷</span>
+              <input type="file" accept="image/*" onchange="uploadStaffAvatar(this,'admin')" hidden/>
+            </label>
+            <div>
+              <div style="font-weight:700;font-size:.95rem;color:var(--ch)">Profile Picture</div>
+              <div style="font-size:.78rem;color:var(--sl)">Click your photo to upload a new one (JPG or PNG).</div>
+              <div id="adAvatarStatus" style="font-size:.75rem;color:var(--sl);margin-top:.3rem"></div>
+            </div>
+          </div>
+          <div class="frow"><div class="fg"><label>Full Name</label><input type="text" value="Admin"/></div><div class="fg"><label>Email</label><input type="email" value="admin@statvisionconsultancy.co.ke"/></div></div>
+          <div class="fg"><label>Role</label><input type="text" value="System Administrator" readonly/></div>
+          <button class="db1 dba" style="margin-top:1rem" onclick="alert('Profile saved!')">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end admin -->
+<!-- TEAM MEMBER MODAL (view only — edited from the Admin Portal) -->
+<div class="mov" id="teamModal" onclick="if(event.target===this)closeTeamModal()">
+  <div class="modal" style="max-width:640px">
+    <div class="mhd">
+      <div style="display:flex;align-items:center;gap:1.1rem">
+        <div class="dav" id="teamModalAvatar" style="width:76px;height:76px;font-size:1.4rem;background:var(--b2)">--</div>
+        <div>
+          <h2 id="teamModalName" style="margin-bottom:.2rem">—</h2>
+          <p id="teamModalRole" style="color:var(--sl);font-size:.86rem">—</p>
+        </div>
+      </div>
+      <button class="mcls" onclick="closeTeamModal()">✕</button>
+    </div>
+    <div class="mbdy">
+      <div id="teamModalBio" style="font-size:.92rem;line-height:1.75;color:var(--ch);white-space:pre-line"></div>
+      <p id="teamModalStatus" style="font-size:.78rem;color:var(--sl);margin-top:.8rem"></p>
+    </div>
+    <div class="mft">
+      <button class="bsec" onclick="closeTeamModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="mov" id="orderModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="mhd">
+      <h2>Start Your Project</h2>
+      <p>Fill in the details — your analyst confirms within 4 hours. Call: +254 748 216 918</p>
+      <button class="mcls" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mbdy">
+      <div class="sdts"><div class="sdt on" id="sd1"></div><div class="sdt" id="sd2"></div><div class="sdt" id="sd3"></div></div>
+      <div id="ms1">
+        <div class="frow"><div class="fg"><label>Full Name</label><input type="text" id="ord_name" placeholder="Your full name"/></div><div class="fg"><label>Email Address</label><input type="email" id="ord_email" placeholder="your@email.com"/></div></div>
+        <div class="frow"><div class="fg"><label>Phone Number</label><input type="tel" id="ord_phone" placeholder="+254 748 216 918"/></div><div class="fg"><label>Organisation (optional)</label><input type="text" id="ord_org" placeholder="University, Company, NGO..."/></div></div>
+        <div class="fg"><label>Country</label><select id="ord_country"><option>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Nigeria</option><option>South Africa</option><option>United Kingdom</option><option>United States</option><option>Other</option></select></div>
+        <div class="fg"><label>Service Type</label>
+          <select id="ord_service"><option value="">Select service...</option><option>Data Analysis Only (I have data)</option><option>Data Collection + Analysis</option><option>Data Cleaning + Analysis</option><option>Statistical Consultation Only</option></select></div>
+      </div>
+      <div id="ms2" style="display:none">
+        <div class="frow"><div class="fg"><label>Data Type</label><select id="ord_datatype"><option>Quantitative</option><option>Qualitative</option><option>Mixed Methods</option><option>Secondary Data</option><option>Not sure yet</option></select></div>
+        <div class="fg"><label>Preferred Tool</label><select id="ord_tool"><option>SPSS</option><option>Stata</option><option>R</option><option>Python</option><option>Power BI</option><option>Advanced Excel</option><option>EViews</option><option>JMP</option><option>Minitab</option><option>Analyst's Discretion</option></select></div></div>
+        <div class="frow"><div class="fg"><label>Report Format</label><select id="ord_format"><option>APA 7th Edition</option><option>Harvard</option><option>Chicago</option><option>MLA</option><option>Raw Output Only</option><option>Custom</option></select></div>
+        <div class="fg"><label>Deliverable Type</label><select id="ord_deliverable"><option>Full Written Report</option><option>Tables & Charts Only</option><option>Interpreted Results Summary</option><option>Annotated Output File</option></select></div></div>
+        <div class="fg"><label>Project Description & Research Objectives</label>
+          <textarea id="ord_desc" placeholder="Describe your research objectives, research questions, what tests or models you need, and what you want to learn from the data..."></textarea></div>
+      </div>
+      <div id="ms3" style="display:none">
+        <div class="frow"><div class="fg"><label>Draft Deadline</label><input type="date" id="ord_draftdue"/></div><div class="fg"><label>Final Delivery Deadline</label><input type="date" id="ord_finaldue"/></div></div>
+        <div class="fg"><label>Upload Files (dataset, questionnaire, codebook, instructions)</label>
+          <div class="upl" onclick="document.getElementById('mfile').click()">
+            <p>📎 <strong>Click to upload</strong> or drag & drop here</p>
+            <p style="margin-top:.35rem;font-size:.76rem">SPSS (.sav), Stata (.dta), Excel, CSV, PDF, DOCX, ZIP — max 50MB</p>
+            <input type="file" id="mfile" multiple style="display:none" onchange="document.getElementById('mfn').textContent='Selected: '+[...this.files].map(f=>f.name).join(', ')"/>
+          </div>
+          <p id="mfn" style="font-size:.75rem;color:var(--b2);margin-top:.38rem"></p>
+        </div>
+        <div class="fg"><label>Special Instructions (optional)</label>
+          <textarea id="ord_notes" placeholder="Any extra notes — specific software versions, variable naming, specific tables needed, etc." style="min-height:65px"></textarea></div>
+      </div>
+    </div>
+    <div class="mft">
+      <span id="ordStatus" style="font-size:.78rem;color:var(--sl);margin-right:auto"></span>
+      <button class="bsec" id="mprev" onclick="mPrev()" style="display:none">← Back</button>
+      <button class="bp" id="mnext" onclick="mNext()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT WIDGET -->
+<button class="chatbub" onclick="openChat()" aria-label="Chat with analyst">💬<span class="cbdg">1</span></button>
+<div class="chatpan" id="chatPan">
+  <div class="cphead"><div class="cav2">👩‍💻</div><div><h4>StatVision Research and Consultancy Analyst</h4><p>Typically replies in minutes · +254 748 216 918</p></div><div class="odot"></div></div>
+  <div class="cmsgs" id="chatMsgs"><div class="msg a">Hi! 👋 Welcome to StatVision Research and Consultancy. I'm here to help with your project. What kind of data analysis do you need?</div></div>
+  <div class="cinp"><input type="text" id="chatIn" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()"/><button class="csend" onclick="sendChat()">➤</button></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</body>
+</html>
