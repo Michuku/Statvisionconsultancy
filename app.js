@@ -424,6 +424,37 @@ const SERVICE_PROCESS_STEPS=[
 function svcIconHTML(icon,iconURL){
   return iconURL ? `<img src="${iconURL}" alt="">` : (icon||'📊')
 }
+const BENEFIT_ICONS=['📊','⚡','📈','🔍','✅','💡','🎯','🚀']
+function featureCardsHTML(list){
+  return (list||[]).map(f=>`<div class="sm-feature-card"><span class="sm-feature-check">✓</span><span>${escapeHtml(f)}</span></div>`).join('')
+}
+function benefitCardsHTML(list){
+  return (list||[]).map((b,i)=>`<li><span class="sm-benefit-ico">${BENEFIT_ICONS[i%BENEFIT_ICONS.length]}</span><span>${escapeHtml(b)}</span></li>`).join('')
+}
+// Sets the featured image panel to a branded gradient placeholder using the service's own colour/icon
+function setFeaturedPlaceholder(s){
+  const wrap=document.getElementById('serviceModalFeatured')
+  wrap.dataset.url=''
+  wrap.style.cursor='default'
+  wrap.style.background=`linear-gradient(135deg,${s.color},${s.color}99)`
+  document.getElementById('serviceModalFeaturedPlaceholder').style.display='flex'
+  document.getElementById('serviceModalFeaturedIcon').textContent=s.icon||'📊'
+  document.getElementById('serviceModalFeaturedLabel').textContent=s.title
+  const existingImg=wrap.querySelector('img')
+  if(existingImg) existingImg.remove()
+}
+// Promotes the first uploaded gallery image into the large featured panel
+function setFeaturedImage(url){
+  const wrap=document.getElementById('serviceModalFeatured')
+  wrap.dataset.url=url
+  wrap.style.cursor='zoom-in'
+  wrap.style.background='none'
+  document.getElementById('serviceModalFeaturedPlaceholder').style.display='none'
+  let img=wrap.querySelector('img')
+  if(!img){ img=document.createElement('img'); img.loading='lazy'; wrap.appendChild(img) }
+  img.src=url
+  img.alt=''
+}
 // ---- lightweight markdown renderer for admin-entered descriptions/notes ----
 function mdInline(s){
   return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*(?!\*)(.+?)\*(?!\*)/g,'$1<em>$2</em>')
@@ -492,11 +523,12 @@ async function openServiceModal(id){
   document.getElementById('serviceModalTitle').textContent=s.title
   document.getElementById('serviceModalTag').textContent=s.tag
   document.getElementById('serviceModalDesc').innerHTML=mdLite(s.desc)
-  document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+  document.getElementById('serviceModalFeatures').innerHTML=featureCardsHTML(s.features)
   document.getElementById('serviceModalNotesWrap').style.display='none'
   document.getElementById('serviceModalGalleryWrap').style.display='none'
   document.getElementById('serviceModalSubList').innerHTML=(s.subServices||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')
-  document.getElementById('serviceModalBenefits').innerHTML=(s.benefits||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')
+  document.getElementById('serviceModalBenefits').innerHTML=benefitCardsHTML(s.benefits)
+  setFeaturedPlaceholder(s)
   document.getElementById('serviceModalProcess').innerHTML=SERVICE_PROCESS_STEPS.map((p,i)=>
     `<div class="sm-process-step"><span class="sm-process-num">${i+1}</span><div><h5>${escapeHtml(p.title)}</h5><p>${escapeHtml(p.desc)}</p></div></div>`
   ).join('')
@@ -527,22 +559,27 @@ async function openServiceModal(id){
     if(data.title) document.getElementById('serviceModalTitle').textContent=data.title
     if(data.tag) document.getElementById('serviceModalTag').textContent=data.tag
     if(data.desc) document.getElementById('serviceModalDesc').innerHTML=mdLite(data.desc)
-    if(data.features && data.features.length) document.getElementById('serviceModalFeatures').innerHTML=data.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+    if(data.features && data.features.length) document.getElementById('serviceModalFeatures').innerHTML=featureCardsHTML(data.features)
     if(data.subServices && data.subServices.length) document.getElementById('serviceModalSubList').innerHTML=data.subServices.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
-    if(data.benefits && data.benefits.length) document.getElementById('serviceModalBenefits').innerHTML=data.benefits.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+    if(data.benefits && data.benefits.length) document.getElementById('serviceModalBenefits').innerHTML=benefitCardsHTML(data.benefits)
     if(data.analysisNotes){
       document.getElementById('serviceModalNotes').innerHTML=mdLite(data.analysisNotes)
       document.getElementById('serviceModalNotesWrap').style.display='block'
     }
-    // gallery — the "second blue panel" is gone; real uploaded images are the only visual here, hidden when there are none
+    // gallery — real uploaded images are the only visual here besides the branded placeholder.
+    // The most recent upload is promoted into the large Featured Image panel; the rest fill the gallery grid.
     const gsnap = await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
     if(!gsnap.empty){
-      document.getElementById('serviceModalGallery').innerHTML = gsnap.docs.map(d=>{
-        const g=d.data()
-        const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
-        return `<div class="sm-gallery-item" onclick="openLightbox('${g.url}')"><img src="${g.url}" alt="${safeName}" loading="lazy"/></div>`
-      }).join('')
-      document.getElementById('serviceModalGalleryWrap').style.display='block'
+      const [first,...rest] = gsnap.docs
+      setFeaturedImage(first.data().url)
+      if(rest.length){
+        document.getElementById('serviceModalGallery').innerHTML = rest.map(d=>{
+          const g=d.data()
+          const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
+          return `<div class="sm-gallery-item" onclick="openLightbox('${g.url}')"><img src="${g.url}" alt="${safeName}" loading="lazy"/></div>`
+        }).join('')
+        document.getElementById('serviceModalGalleryWrap').style.display='block'
+      }
     }
   }catch(e){ /* no overrides saved yet — defaults already shown */ }
 }

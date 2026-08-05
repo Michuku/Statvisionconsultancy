@@ -1778,38 +1778,72 @@
     <div class="mbdy">
       <div class="sm-inner sm-content">
 
-        <!-- Service Description -->
-        <div id="serviceModalDesc" class="sm-desc sm-reveal"></div>
-        <div class="sm-features sm-reveal">
-          <h4>✅ What's Included</h4>
-          <ul id="serviceModalFeatures"></ul>
-        </div>
-        <div class="sm-notes sm-reveal" id="serviceModalNotesWrap" style="display:none">
-          <h4>📝 Analysis Notes</h4>
-          <div id="serviceModalNotes"></div>
-        </div>
+        <!-- Two-column layout: 60% written content / 40% visual content -->
+        <div class="sm-layout sm-reveal">
 
-        <!-- Service Gallery — only shown when real images have been uploaded -->
-        <div class="sm-gallery sm-reveal" id="serviceModalGalleryWrap" style="display:none">
-          <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
-          <div class="sm-gallery-grid" id="serviceModalGallery"></div>
-        </div>
+          <!-- LEFT COLUMN — written information -->
+          <div class="sm-col-left">
 
-        <!-- Available Services — expandable accordion -->
-        <div class="sm-section sm-reveal">
-          <button class="sm-accordion-toggle" id="serviceModalAccordionBtn" onclick="toggleServiceAccordion()" aria-expanded="false">
-            <span>📋 Available Services</span>
-            <span class="sm-accordion-caret" id="serviceModalAccordionCaret">▼ Click to View Services</span>
-          </button>
-          <div class="sm-accordion-panel" id="serviceModalAccordionPanel">
-            <ul class="sm-sub-list" id="serviceModalSubList"></ul>
+            <!-- Service Description -->
+            <div id="serviceModalDesc" class="sm-desc"></div>
+
+            <!-- Key Features — attractive cards -->
+            <div class="sm-features">
+              <h4>✅ What's Included</h4>
+              <div class="sm-features-grid" id="serviceModalFeatures"></div>
+            </div>
+
+            <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
+              <h4>📝 Analysis Notes</h4>
+              <div id="serviceModalNotes"></div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="sm-section">
+              <h4>💎 Benefits</h4>
+              <ul class="sm-benefits-list" id="serviceModalBenefits"></ul>
+            </div>
+
+            <!-- Available Services — expandable accordion -->
+            <div class="sm-section">
+              <button class="sm-accordion-toggle" id="serviceModalAccordionBtn" onclick="toggleServiceAccordion()" aria-expanded="false">
+                <span>📋 Available Services</span>
+                <span class="sm-accordion-caret" id="serviceModalAccordionCaret">▼ Click to View Services</span>
+              </button>
+              <div class="sm-accordion-panel" id="serviceModalAccordionPanel">
+                <ul class="sm-sub-list" id="serviceModalSubList"></ul>
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <!-- Benefits -->
-        <div class="sm-section sm-reveal">
-          <h4>💎 Benefits</h4>
-          <ul class="sm-benefits-list" id="serviceModalBenefits"></ul>
+          <!-- RIGHT COLUMN — visual content -->
+          <div class="sm-col-right">
+
+            <!-- Featured Image -->
+            <div class="sm-featured" id="serviceModalFeatured" onclick="if(this.dataset.url)openLightbox(this.dataset.url)">
+              <div class="sm-featured-placeholder" id="serviceModalFeaturedPlaceholder">
+                <span class="sm-fp-ico" id="serviceModalFeaturedIcon">📊</span>
+                <span class="sm-fp-label" id="serviceModalFeaturedLabel">Sample deliverables coming soon</span>
+              </div>
+            </div>
+
+            <!-- Image Gallery — only shown when more real images have been uploaded -->
+            <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
+              <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
+              <div class="sm-gallery-grid" id="serviceModalGallery"></div>
+            </div>
+
+            <!-- Facts Card -->
+            <div class="sm-facts">
+              <div class="sm-fact-card"><strong>500+</strong><small>Projects Completed</small></div>
+              <div class="sm-fact-card"><strong>120+</strong><small>Organisations Served</small></div>
+              <div class="sm-fact-card"><strong>98%</strong><small>Client Satisfaction</small></div>
+              <div class="sm-fact-card"><strong>25M+</strong><small>Records Processed</small></div>
+            </div>
+
+          </div>
+
         </div>
 
         <!-- Process -->
