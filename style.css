@@ -1029,6 +1029,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .service-card:has(.s-ico.green2):hover::after{background:#10b981;transform:scaleX(1);}
 .service-card:has(.s-ico.green2):hover .s-ico{transform:rotate(8deg) scale(1.12);}
 
+.s-ico.cyan{background:#cffafe;color:#0e7490;}
+.service-card:has(.s-ico.cyan)::before{background:radial-gradient(circle at 30% 20%,#0891b2 0%,transparent 60%);}
+.service-card:has(.s-ico.cyan):hover{transform:translateY(-8px);box-shadow:0 16px 32px -12px rgba(8,145,178,.35);border-color:#67e8f9;}
+.service-card:has(.s-ico.cyan):hover::before{opacity:.08;}
+.service-card:has(.s-ico.cyan):hover::after{background:#0891b2;transform:scaleX(1);}
+.service-card:has(.s-ico.cyan):hover .s-ico{transform:rotate(-8deg) scale(1.12);}
+
 .service-next{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--navy);}
 
 /* Fallback for browsers without :has() support — still get colour + lift, just not per-icon targeting */

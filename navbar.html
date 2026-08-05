@@ -1,0 +1,53 @@
+<!--
+  StatVision — Services mega-dropdown navigation (reference markup)
+  ===================================================================
+  This file documents the reusable nav component as a standalone
+  fragment. Because the live site is a single static index.html
+  (no server-side includes), this exact markup is embedded directly
+  inside index.html's <header class="navbar"> and <div class="mm">
+  blocks — copy this file's contents there if you ever rebuild the
+  header from scratch, or use it as the source of truth for the
+  Services menu structure.
+
+  Pairs with:
+    - navbar.css  (all dropdown styling & animation)
+    - navbar.js   (rendering the category lists + all interactivity)
+
+  The two containers below — #servicesMegaMenu (desktop) and
+  #servicesMobilePanel (mobile) — start empty on purpose. navbar.js
+  fills them from its SERVICE_MENU data array on page load, so the
+  service list only has to be maintained in one place (navbar.js).
+-->
+
+<!-- ============ DESKTOP: place inside .nav-links ============ -->
+<div class="nav-item-dropdown" id="navServicesItem">
+  <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    Services <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="services-mega" id="servicesMegaMenu" role="menu" aria-label="Services"></div>
+</div>
+
+<!-- ============ MOBILE: place inside .mm ============ -->
+<div class="mm-item-dropdown" id="mmServicesItem">
+  <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    Services <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="mm-services-panel" id="servicesMobilePanel"></div>
+</div>
+
+<!--
+  Required <head> tags on any page that uses this component:
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navbar.css">
+    ... (page scripts, e.g. app.js, which must define
+         window.openServiceModal(id)) ...
+    <script src="navbar.js" defer></script>
+
+  navbar.js calls window.openServiceModal(id) when a service link is
+  clicked, and expects window.setActiveServiceNav(id) to be invoked
+  by the host page whenever a service page opens/closes, so the
+  correct menu link can be highlighted in StatVision blue. On
+  StatVision's site, app.js's openServiceModal()/closeServiceModal()
+  already call window.setActiveServiceNav for you.
+-->

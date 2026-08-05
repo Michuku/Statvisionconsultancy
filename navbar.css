@@ -1,0 +1,117 @@
+/* ===================================================================
+   StatVision — Services mega-dropdown navigation
+   Reuses the site's existing design tokens (--navy, --blue, --border,
+   --card, --muted, --text, --fheading) defined in style.css so the
+   dropdown always matches the current corporate branding.
+   =================================================================== */
+
+/* ---------- DESKTOP TRIGGER ---------- */
+.nav-item-dropdown{position:relative;display:flex;align-items:center;}
+.nav-dropdown-trigger{
+  display:flex;align-items:center;gap:5px;
+  font:inherit;font-size:14.5px;font-weight:500;color:#344054;
+  background:none;border:none;cursor:pointer;padding:0;
+  transition:color .2s ease;
+}
+.nav-dropdown-trigger:hover,
+.nav-item-dropdown.open .nav-dropdown-trigger{color:var(--navy);}
+.nav-dropdown-trigger .caret{font-size:10px;line-height:1;transition:transform .25s ease;color:var(--muted);}
+.nav-item-dropdown.open .nav-dropdown-trigger .caret{transform:rotate(180deg);color:var(--blue);}
+.nav-dropdown-trigger:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:4px;}
+
+/* ---------- DESKTOP MEGA PANEL ---------- */
+.services-mega{
+  position:absolute;
+  top:calc(100% + 18px);
+  left:50%;
+  transform:translateX(-50%) translateY(-10px);
+  width:780px;
+  max-width:88vw;
+  background:var(--card,#fff);
+  border-radius:16px;
+  border:1px solid var(--border,#e6eaf1);
+  box-shadow:0 20px 48px rgba(15,45,99,.16),0 4px 14px rgba(15,45,99,.06);
+  padding:1.7rem 1.8rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem 2rem;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .28s ease,transform .28s ease,visibility .28s;
+  z-index:500;
+}
+.nav-item-dropdown.open .services-mega{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.services-mega-group h5{
+  font-family:var(--fheading,serif);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.01em;
+  color:var(--navy);
+  margin-bottom:.65rem;
+  padding-bottom:.55rem;
+  border-bottom:1px solid var(--border,#eef2fb);
+}
+.services-mega-group ul{list-style:none;display:flex;flex-direction:column;gap:1px;margin:0;padding:0;}
+.services-mega-group li a{
+  display:block;
+  padding:.4rem .55rem;
+  border-radius:8px;
+  font-size:.83rem;
+  color:#475467;
+  text-decoration:none;
+  transition:background .16s ease,color .16s ease,padding-left .16s ease;
+}
+.services-mega-group li a:hover,
+.services-mega-group li a:focus-visible{
+  background:#eef4ff;
+  color:var(--navy);
+  padding-left:.8rem;
+  outline:none;
+}
+.services-mega-group li a.is-active{
+  background:var(--blue);
+  color:#fff;
+  font-weight:600;
+}
+
+@media (max-width:1100px){
+  .services-mega{width:620px;grid-template-columns:repeat(2,1fr);}
+}
+
+/* ---------- MOBILE ACCORDION (inside .mm) ---------- */
+.mm-item-dropdown{display:flex;flex-direction:column;}
+.mm-dropdown-trigger{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;background:none;border:none;text-align:left;padding:.3rem 0;
+  font:inherit;font-size:.95rem;font-weight:500;color:#344054;cursor:pointer;
+}
+.mm-dropdown-trigger .caret{font-size:11px;color:var(--muted);transition:transform .25s ease;}
+.mm-item-dropdown.open .mm-dropdown-trigger .caret{transform:rotate(180deg);color:var(--blue);}
+.mm-services-panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
+.mm-item-dropdown.open .mm-services-panel{max-height:2000px;}
+.mm-services-group{margin:.85rem 0 .2rem .6rem;}
+.mm-services-group h5{
+  font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.4rem;
+}
+.mm-services-group ul{list-style:none;margin:0;padding:0;}
+.mm-services-group li a{
+  display:block;padding:.45rem .5rem;font-size:.87rem;color:#475467;
+  text-decoration:none;border-radius:6px;
+}
+.mm-services-group li a:hover{background:#eef4ff;color:var(--navy);}
+.mm-services-group li a.is-active{background:var(--blue);color:#fff;font-weight:600;}
+
+@media (prefers-reduced-motion:reduce){
+  .services-mega,.nav-dropdown-trigger .caret,.mm-dropdown-trigger .caret,.mm-services-panel{transition-duration:.001ms;}
+}

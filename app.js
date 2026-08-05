@@ -405,6 +405,13 @@ const SERVICES_DATA = {
     features:['SPSS, STATA, R & Excel training','Survey & M&E methodology workshops','Power BI / dashboard skills training','Customised in-house curricula','Certificates of completion'],
     subServices:['SPSS Training','STATA Training','R Programming Training','Excel for Data Analysis','Power BI / Dashboard Training','Survey Methodology Workshops','M&E Methodology Training','Data Cleaning Workshops','Research Writing Workshops','Customised In-House Curricula'],
     benefits:['Builds lasting in-house capacity','Reduces future reliance on external consultants','Hands-on, practical, tool-based learning','Certificates of completion for participants']
+  },
+  gis:{
+    title:'GIS & Mapping', tag:'Spatial Analysis & Interactive Mapping', icon:'🗺️', color:'#0891b2',
+    desc:'We turn location data into clear, decision-ready maps. From field GPS collection to spatial analysis and interactive web maps, our GIS team helps you see the geographic patterns behind your data — where needs are highest, where coverage is weak, and where to act next.',
+    features:['GIS mapping & cartographic design','Spatial & geospatial data analysis','GPS field data collection','Interactive, shareable web maps','Boundary, catchment & coverage mapping'],
+    subServices:['GIS Mapping','Spatial Analysis','GPS Data Collection','Interactive Web Maps','Choropleth & Heat Maps','Catchment & Coverage Mapping','Remote Sensing & Satellite Data','Geo-Referencing & Digitisation'],
+    benefits:['See geographic patterns hidden in raw data','Target resources to where they are needed most','Shareable interactive maps for reports & funders','Field-collected location data you can trust']
   }
 }
 // Shared 4-step engagement process, shown on every service page
@@ -507,6 +514,7 @@ async function openServiceModal(id){
   contentEl.classList.add('sm-animate-in')
   document.getElementById('serviceModal').style.display='flex'
   document.body.style.overflow='hidden'
+  if(typeof window.setActiveServiceNav==='function') window.setActiveServiceNav(id)
   // push a history entry so the browser/back button and our Back button both work naturally
   if(!(history.state && history.state.serviceModal)){
     history.pushState({serviceModal:id},'','#service-'+id)
@@ -542,6 +550,7 @@ function closeServiceModal(fromPopState){
   document.getElementById('serviceModal').style.display='none'
   document.body.style.overflow=''
   closeLightbox()
+  if(typeof window.setActiveServiceNav==='function') window.setActiveServiceNav(null)
   if(!fromPopState && history.state && history.state.serviceModal){
     history.back()
   }
