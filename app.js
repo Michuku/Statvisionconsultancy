@@ -354,118 +354,66 @@ const SERVICES_DATA = {
     title:'Statistical Analysis', tag:'SPSS · STATA · R · Python', icon:'📊', color:'#3b82f6',
     desc:'We turn raw numbers into defensible conclusions. Our analysts run descriptive and inferential statistics, regression modelling, hypothesis testing, and predictive analytics using industry-standard tools — so your decisions are backed by rigorous, reproducible evidence.',
     features:['Descriptive & inferential statistics','Regression & predictive modelling','Hypothesis testing & significance analysis','Custom SPSS, STATA, R & Python scripts','Clear, decision-ready result summaries'],
-    chartType:'bar', chartLabel:'📈 Sample Output — Model Accuracy by Method',
-    chartData:{labels:['Linear Reg.','Logistic Reg.','Random Forest','XGBoost'],datasets:[{label:'Accuracy %',data:[78,84,91,93],backgroundColor:'#3b82f6'}]}
+    subServices:['Descriptive Statistics','Inferential Statistics','Regression Analysis','Time Series Analysis','ANOVA','Survey Data Analysis','Predictive Analytics','Experimental Design','Statistical Modelling','Data Interpretation'],
+    benefits:['Evidence-based decisions instead of guesswork','Reduced risk through statistically validated findings','Clear, defensible results for stakeholders & funders','Faster turnaround using industry-standard software']
   },
   powerbi:{
     title:'Power BI Dashboards', tag:'Interactive Business Dashboards', icon:'📈', color:'#f59e0b',
     desc:'We design live, interactive Power BI dashboards that turn scattered spreadsheets into a single source of truth — so your team can track KPIs, spot trends, and make decisions in real time instead of waiting on monthly reports.',
     features:['Custom KPI & executive dashboards','Live data connections & auto-refresh','Drill-down reports by team, region or product','Mobile-friendly dashboard design','Staff training on dashboard use'],
-    chartType:'line', chartLabel:'📈 Sample Output — Monthly KPI Trend',
-    chartData:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{label:'Revenue Index',data:[62,68,71,80,86,94],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.15)',fill:true,tension:.35}]}
+    subServices:['KPI Dashboard Design','Real-Time Data Connections','Executive Reporting Dashboards','Sales & Revenue Dashboards','Financial Performance Tracking','Custom Data Visualizations','Drill-Down & Filter Reports','Mobile Dashboard Access','Automated Report Scheduling','Dashboard Training & Handover'],
+    benefits:['See performance in real time, not month-end','One dashboard replaces a dozen spreadsheets','Faster, more confident executive decisions','Fully branded to your organisation']
   },
   monitoring:{
     title:'Monitoring & Evaluation', tag:'M&E Frameworks & Impact Assessment', icon:'🎯', color:'#22c55e',
     desc:'We design end-to-end M&E frameworks for NGOs, government programmes and businesses — from theory of change and indicator selection to field data collection and impact assessment — so you can prove and improve what your programme actually achieves.',
     features:['Theory of change & log-frame design','Indicator & baseline development','Field data collection & KoBo/ODK setup','Impact & outcome evaluation','Donor-ready M&E reports'],
-    chartType:'doughnut', chartLabel:'📈 Sample Output — Project Outcomes Achieved',
-    chartData:{labels:['Fully Achieved','Partially Achieved','Not Achieved'],datasets:[{data:[64,27,9],backgroundColor:['#22c55e','#fbbf24','#ef4444']}]}
+    subServices:['Theory of Change Design','Log-Frame Development','Indicator & Baseline Setting','Field Data Collection (KoBo/ODK)','Outcome & Impact Evaluation','Mid-Term & End-Term Reviews','Beneficiary Feedback Systems','Data Quality Assessments','Donor Reporting Support','M&E Capacity Building'],
+    benefits:['Prove programme impact to donors & boards','Catch problems early through real-time monitoring','Stronger, evidence-backed funding proposals','Built-in accountability & transparency']
   },
   research:{
     title:'Research Consultancy', tag:'Data-Driven Research Solutions', icon:'🔍', color:'#8b5cf6',
     desc:'From concept notes to final publication, we support institutions, NGOs and businesses through the full research lifecycle — study design, ethical clearance support, data collection, analysis, and writing up findings for policy or publication.',
     features:['Research design & proposal development','Mixed-methods (qualitative + quantitative)','Ethical review & IRB support','Peer-review-ready analysis & writing','Policy brief & publication support'],
-    chartType:'radar', chartLabel:'📈 Sample Output — Research Focus Areas Covered',
-    chartData:{labels:['Health','Education','Economics','Agriculture','Governance','Environment'],datasets:[{label:'Projects Delivered',data:[8,6,9,5,7,4],backgroundColor:'rgba(139,92,246,.2)',borderColor:'#8b5cf6',pointBackgroundColor:'#8b5cf6'}]}
+    subServices:['Research Proposal Development','Literature Review','Qualitative Research (Interviews/FGDs)','Quantitative Research Design','Mixed-Methods Studies','Ethical Review & IRB Support','Market Research','Policy Analysis','Academic & Technical Writing','Publication & Dissemination Support'],
+    benefits:['Rigorous methodology from design to write-up','Findings ready for policy or publication','Access to experienced multi-sector researchers','End-to-end support — no need for multiple vendors']
   },
   cleaning:{
     title:'Data Cleaning', tag:'Preparation, Validation & Quality Control', icon:'🧹', color:'#14b8a6',
     desc:'Messy data leads to wrong conclusions. We detect and fix missing values, duplicates, inconsistent coding and outliers, and validate your dataset against its own logic — so every analysis built on it stands on solid ground.',
     features:['Missing value & outlier treatment','De-duplication & consistency checks','Variable coding & standardisation','Data validation against source logic','Clean, analysis-ready dataset delivery'],
-    chartType:'bar', chartLabel:'📈 Sample Output — Data Quality Before vs After',
-    chartData:{labels:['Missing Values','Duplicates','Coding Errors','Outliers'],datasets:[
-      {label:'Before Cleaning (%)',data:[18,9,12,7],backgroundColor:'#fca5a5'},
-      {label:'After Cleaning (%)',data:[1,0,0.5,1],backgroundColor:'#14b8a6'}
-    ]}
+    subServices:['Missing Data Treatment','Duplicate Detection & Removal','Outlier Identification','Variable Coding & Labelling','Data Consistency Checks','Data Format Standardisation','Dataset Merging & Restructuring','Data Validation Rules','Anonymisation & Confidentiality Checks','Analysis-Ready Dataset Delivery'],
+    benefits:['Reliable analysis built on trustworthy data','Fewer errors and false conclusions downstream','Saves your team hours of manual cleanup','Documented, repeatable cleaning process']
   },
   survey:{
     title:'Survey Design', tag:'Structured Data Collection Instruments', icon:'📝', color:'#f97316',
     desc:'A survey is only as good as its design. We build structured, bias-tested questionnaires and digital data collection tools tailored to your research questions — piloted and refined before they ever reach your respondents.',
     features:['Questionnaire design & question wording','Digital tools: KoBo, ODK, Google Forms','Sampling strategy & respondent targeting','Pilot testing & instrument refinement','Multi-language survey adaptation'],
-    chartType:'pie', chartLabel:'📈 Sample Output — Survey Response Channels',
-    chartData:{labels:['Online','In-Person','Phone','SMS'],datasets:[{data:[42,31,18,9],backgroundColor:['#f97316','#fb923c','#fdba74','#ffedd5']}]}
+    subServices:['Questionnaire Design','Digital Survey Setup (KoBo/ODK/Forms)','Sampling Strategy Design','Survey Piloting & Testing','Enumerator Training','Multi-Language Translation','Paper-to-Digital Survey Conversion','Response Quality Control','Survey Logistics Planning','Data Collection Supervision'],
+    benefits:['Higher-quality, less biased responses','Tools built for your specific research questions','Field-tested before full rollout','Faster data collection with digital tools']
   },
   bi:{
     title:'Business Intelligence', tag:'Turning Data into Decisions', icon:'💡', color:'#6366f1',
     desc:'We help organisations build the data infrastructure and reporting culture to compete on insight — consolidating data sources, building BI pipelines, and delivering the kind of intelligence that shows up directly in the bottom line.',
     features:['Data warehousing & pipeline setup','Cross-department reporting systems','Trend & competitor benchmarking','Automated reporting workflows','Executive-level insight briefings'],
-    chartType:'line', chartLabel:'📈 Sample Output — Revenue Growth After BI Adoption',
-    chartData:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Revenue (KES M)',data:[4.2,4.8,5.9,7.1],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.15)',fill:true,tension:.3}]}
+    subServices:['Data Warehousing Setup','BI Pipeline Development','Cross-Department Reporting','Competitor & Market Benchmarking','Automated Reporting Workflows','Business Performance Analytics','Trend & Forecast Analysis','Executive Insight Briefings','Data Source Integration','BI Strategy Consulting'],
+    benefits:['Insight that shows up directly in the bottom line','One source of truth across departments','Less manual reporting, more analysis time','Data-backed strategy, not guesswork']
   },
   training:{
     title:'Training & Capacity Building', tag:'Data Skills & Research Methodology Training', icon:'🎓', color:'#10b981',
     desc:'We build lasting in-house capacity, not just one-off reports. Our hands-on workshops train your team on statistical tools, survey methods and dashboard use — so your organisation keeps generating insight long after our engagement ends.',
     features:['SPSS, STATA, R & Excel training','Survey & M&E methodology workshops','Power BI / dashboard skills training','Customised in-house curricula','Certificates of completion'],
-    chartType:'bar', chartLabel:'📈 Sample Output — Participant Skill Score (Pre vs Post)',
-    chartData:{labels:['Statistics','Data Cleaning','Dashboards','Survey Design'],datasets:[
-      {label:'Before Training',data:[38,42,29,35],backgroundColor:'#a7f3d0'},
-      {label:'After Training',data:[81,88,76,84],backgroundColor:'#10b981'}
-    ]}
+    subServices:['SPSS Training','STATA Training','R Programming Training','Excel for Data Analysis','Power BI / Dashboard Training','Survey Methodology Workshops','M&E Methodology Training','Data Cleaning Workshops','Research Writing Workshops','Customised In-House Curricula'],
+    benefits:['Builds lasting in-house capacity','Reduces future reliance on external consultants','Hands-on, practical, tool-based learning','Certificates of completion for participants']
   }
 }
-let serviceChartInstance=null
-function svcHeroSVG(color,icon){
-  return `<svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="svcGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="${color}" stop-opacity="0.98"/>
-        <stop offset="100%" stop-color="${color}" stop-opacity="0.6"/>
-      </linearGradient>
-      <pattern id="svcDots" width="22" height="22" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1.4" fill="#fff" opacity=".3"/>
-      </pattern>
-    </defs>
-    <rect width="400" height="220" fill="url(#svcGrad)"/>
-    <rect width="400" height="220" fill="url(#svcDots)"/>
-    <circle cx="365" cy="25" r="85" fill="#fff" opacity=".07"/>
-    <circle cx="20" cy="205" r="65" fill="#fff" opacity=".07"/>
-    <g transform="translate(30,110)">
-      <rect x="0" y="50" width="18" height="34" fill="#FDE68A" rx="3"/>
-      <rect x="26" y="30" width="18" height="54" fill="#FCA5A5" rx="3"/>
-      <rect x="52" y="10" width="18" height="74" fill="#BFDBFE" rx="3"/>
-      <rect x="78" y="-10" width="18" height="94" fill="#fff" rx="3"/>
-    </g>
-    <g transform="translate(215,55)">
-      <polyline points="0,92 24,64 48,72 72,32 96,46 120,12" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5,5" opacity=".85"/>
-      <circle cx="0" cy="92" r="4" fill="#FDE68A"/>
-      <circle cx="24" cy="64" r="4" fill="#FCA5A5"/>
-      <circle cx="48" cy="72" r="4" fill="#BFDBFE"/>
-      <circle cx="72" cy="32" r="4" fill="#FDE68A"/>
-      <circle cx="96" cy="46" r="4" fill="#FCA5A5"/>
-      <circle cx="120" cy="12" r="4" fill="#BFDBFE"/>
-    </g>
-    <text x="72" y="36" font-size="19" opacity=".9">📈</text>
-    <text x="330" y="196" font-size="19" opacity=".9">🧮</text>
-    <text x="345" y="60" font-size="17" opacity=".85">Σ</text>
-    <circle cx="200" cy="112" r="46" fill="#fff"/>
-    <text x="200" y="113" font-size="46" text-anchor="middle" dominant-baseline="central">${icon}</text>
-  </svg>`
-}
-function svcHeroBlock(color,icon,iconURL){
-  if(iconURL){
-    return `<div class="sm-hero-custom" style="background:linear-gradient(135deg,${color},${color}cc)">
-      <div class="sm-hero-dots"></div>
-      <div class="sm-hero-blob" style="width:170px;height:170px;top:-45px;right:-35px;background:rgba(255,255,255,.1)"></div>
-      <div class="sm-hero-blob" style="width:120px;height:120px;bottom:-30px;left:-20px;background:rgba(255,255,255,.1)"></div>
-      <span class="sm-hero-float f1">📊</span>
-      <span class="sm-hero-float f2">📈</span>
-      <span class="sm-hero-float sm-hero-float-img"><img src="${iconURL}" alt=""></span>
-      <span class="sm-hero-float f4">Σ</span>
-      <div class="sm-hero-badge"><img src="${iconURL}" alt=""></div>
-    </div>`
-  }
-  return svcHeroSVG(color,icon)
-}
+// Shared 4-step engagement process, shown on every service page
+const SERVICE_PROCESS_STEPS=[
+  {title:'Consultation & Scoping',desc:"We start by understanding your goals, data, and constraints — so the engagement is scoped around what you actually need."},
+  {title:'Data Collection & Preparation',desc:'We gather, clean, and organise your data (or design the tools to collect it) so every analysis stands on solid ground.'},
+  {title:'Analysis & Modelling',desc:'We apply the right statistical, analytical, or design methods for your questions, using industry-standard tools.'},
+  {title:'Reporting & Handover',desc:'You receive clear, decision-ready deliverables — plus training and support so your team can keep using them.'}
+]
 function svcIconHTML(icon,iconURL){
   return iconURL ? `<img src="${iconURL}" alt="">` : (icon||'📊')
 }
@@ -492,6 +440,40 @@ function mdLite(raw){
   closeList()
   return html
 }
+
+// ---- Available Services accordion (smooth expand/collapse) ----
+let serviceAccordionOpen=false
+function resetServiceAccordion(){
+  serviceAccordionOpen=false
+  document.getElementById('serviceModalAccordionPanel').style.maxHeight='0px'
+  document.getElementById('serviceModalAccordionCaret').textContent='▼ Click to View Services'
+  document.getElementById('serviceModalAccordionBtn').setAttribute('aria-expanded','false')
+}
+function toggleServiceAccordion(){
+  serviceAccordionOpen=!serviceAccordionOpen
+  const panel=document.getElementById('serviceModalAccordionPanel')
+  const caret=document.getElementById('serviceModalAccordionCaret')
+  const btn=document.getElementById('serviceModalAccordionBtn')
+  if(serviceAccordionOpen){
+    panel.style.maxHeight=panel.scrollHeight+'px'
+    caret.textContent='▲ Hide Services'
+    btn.setAttribute('aria-expanded','true')
+  } else {
+    panel.style.maxHeight='0px'
+    caret.textContent='▼ Click to View Services'
+    btn.setAttribute('aria-expanded','false')
+  }
+}
+
+// ---- Full-screen lightbox for gallery images ----
+function openLightbox(url){
+  document.getElementById('serviceLightboxImg').src=url
+  document.getElementById('serviceLightbox').classList.add('open')
+}
+function closeLightbox(){
+  document.getElementById('serviceLightbox').classList.remove('open')
+}
+
 async function openServiceModal(id){
   const s = SERVICES_DATA[id]
   if(!s) return
@@ -503,44 +485,74 @@ async function openServiceModal(id){
   document.getElementById('serviceModalTitle').textContent=s.title
   document.getElementById('serviceModalTag').textContent=s.tag
   document.getElementById('serviceModalDesc').innerHTML=mdLite(s.desc)
-  document.getElementById('serviceModalHero').innerHTML=svcHeroSVG(s.color,s.icon)
   document.getElementById('serviceModalFeatures').innerHTML=s.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
   document.getElementById('serviceModalNotesWrap').style.display='none'
   document.getElementById('serviceModalGalleryWrap').style.display='none'
+  document.getElementById('serviceModalSubList').innerHTML=(s.subServices||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')
+  document.getElementById('serviceModalBenefits').innerHTML=(s.benefits||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')
+  document.getElementById('serviceModalProcess').innerHTML=SERVICE_PROCESS_STEPS.map((p,i)=>
+    `<div class="sm-process-step"><span class="sm-process-num">${i+1}</span><div><h5>${escapeHtml(p.title)}</h5><p>${escapeHtml(p.desc)}</p></div></div>`
+  ).join('')
+  const allKeys=Object.keys(SERVICES_DATA), idx=allKeys.indexOf(id)
+  const relatedKeys=[allKeys[(idx+1)%allKeys.length],allKeys[(idx+2)%allKeys.length],allKeys[(idx+3)%allKeys.length]]
+  document.getElementById('serviceModalRelated').innerHTML=relatedKeys.map(k=>{
+    const o=SERVICES_DATA[k]
+    return `<button class="sm-related-card" onclick="openServiceModal('${k}')"><span class="sm-related-ico" style="background:${o.color}22;color:${o.color}">${o.icon}</span><span>${escapeHtml(o.title)}</span></button>`
+  }).join('')
+  resetServiceAccordion()
+  // trigger the fade/slide-in animation fresh each time the modal opens
+  const contentEl=document.getElementById('serviceModal').querySelector('.sm-content')
+  contentEl.classList.remove('sm-animate-in')
+  void contentEl.offsetWidth // force reflow so the animation restarts
+  contentEl.classList.add('sm-animate-in')
   document.getElementById('serviceModal').style.display='flex'
   document.body.style.overflow='hidden'
+  // push a history entry so the browser/back button and our Back button both work naturally
+  if(!(history.state && history.state.serviceModal)){
+    history.pushState({serviceModal:id},'','#service-'+id)
+  }
   // 2) layer in any admin-uploaded overrides (icon, text, gallery, notes)
   try{
     const doc = await fbDB.collection('services').doc(id).get()
     const data = doc.exists ? doc.data() : {}
-    if(data.iconURL){
-      iconEl.innerHTML=svcIconHTML(null,data.iconURL)
-      document.getElementById('serviceModalHero').innerHTML=svcHeroBlock(s.color,s.icon,data.iconURL)
-    }
+    if(data.iconURL) iconEl.innerHTML=svcIconHTML(null,data.iconURL)
     if(data.title) document.getElementById('serviceModalTitle').textContent=data.title
     if(data.tag) document.getElementById('serviceModalTag').textContent=data.tag
     if(data.desc) document.getElementById('serviceModalDesc').innerHTML=mdLite(data.desc)
     if(data.features && data.features.length) document.getElementById('serviceModalFeatures').innerHTML=data.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+    if(data.subServices && data.subServices.length) document.getElementById('serviceModalSubList').innerHTML=data.subServices.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
+    if(data.benefits && data.benefits.length) document.getElementById('serviceModalBenefits').innerHTML=data.benefits.map(f=>`<li>${escapeHtml(f)}</li>`).join('')
     if(data.analysisNotes){
       document.getElementById('serviceModalNotes').innerHTML=mdLite(data.analysisNotes)
       document.getElementById('serviceModalNotesWrap').style.display='block'
     }
+    // gallery — the "second blue panel" is gone; real uploaded images are the only visual here, hidden when there are none
     const gsnap = await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
     if(!gsnap.empty){
       document.getElementById('serviceModalGallery').innerHTML = gsnap.docs.map(d=>{
         const g=d.data()
         const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
-        return `<img src="${g.url}" alt="${safeName}" onclick="window.open('${g.url}','_blank')"/>`
+        return `<div class="sm-gallery-item" onclick="openLightbox('${g.url}')"><img src="${g.url}" alt="${safeName}" loading="lazy"/></div>`
       }).join('')
       document.getElementById('serviceModalGalleryWrap').style.display='block'
     }
   }catch(e){ /* no overrides saved yet — defaults already shown */ }
 }
-function closeServiceModal(){
+function closeServiceModal(fromPopState){
   document.getElementById('serviceModal').style.display='none'
   document.body.style.overflow=''
-  if(serviceChartInstance){ serviceChartInstance.destroy(); serviceChartInstance=null }
+  closeLightbox()
+  if(!fromPopState && history.state && history.state.serviceModal){
+    history.back()
+  }
 }
+// Browser/hardware back button also closes the service page cleanly
+window.addEventListener('popstate',()=>{
+  const modal=document.getElementById('serviceModal')
+  if(modal.style.display==='flex' && !(history.state && history.state.serviceModal)){
+    closeServiceModal(true)
+  }
+})
 // ---- PUBLIC — reflect admin icon/title/tools overrides on the Services grid cards ----
 async function loadServiceCardOverrides(){
   for(const id of Object.keys(SERVICES_DATA)){
@@ -579,6 +591,8 @@ function renderAdminServicesPanel(){
       <div class="fg"><label>Tagline</label><input id="adSvcTag-${id}" placeholder="${s.tag}"/></div>
       <div class="fg"><label>Description</label><textarea id="adSvcDesc-${id}" placeholder="${s.desc}" style="min-height:80px"></textarea></div>
       <div class="fg"><label>What's Included (one feature per line)</label><textarea id="adSvcFeatures-${id}" placeholder="${s.features.join('\n')}" style="min-height:90px"></textarea></div>
+      <div class="fg"><label>📋 Available Services (one sub-service per line)</label><textarea id="adSvcSubs-${id}" placeholder="${(s.subServices||[]).join('\n')}" style="min-height:100px"></textarea></div>
+      <div class="fg"><label>💎 Benefits (one per line)</label><textarea id="adSvcBenefits-${id}" placeholder="${(s.benefits||[]).join('\n')}" style="min-height:80px"></textarea></div>
       <div class="fg"><label>📝 Analysis Notes / Write-up (shown under the sample chart)</label><textarea id="adSvcNotes-${id}" placeholder="Optional write-up describing a real project's analysis, methodology or results..." style="min-height:80px"></textarea></div>
       <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem">
         <button class="db1 dba" onclick="saveServiceAdmin('${id}')">Save ${s.title}</button>
@@ -602,6 +616,8 @@ function renderAdminServicesPanel(){
       document.getElementById('adSvcTag-'+id).value = data.tag||''
       document.getElementById('adSvcDesc-'+id).value = data.desc||''
       document.getElementById('adSvcFeatures-'+id).value = (data.features||[]).join('\n')
+      document.getElementById('adSvcSubs-'+id).value = (data.subServices||[]).join('\n')
+      document.getElementById('adSvcBenefits-'+id).value = (data.benefits||[]).join('\n')
       document.getElementById('adSvcNotes-'+id).value = data.analysisNotes||''
     }catch(e){ /* leave fields blank if nothing saved yet */ }
     loadServiceGalleryAdmin(id)
@@ -646,11 +662,15 @@ async function resetServiceIconAdmin(id){
 async function saveServiceAdmin(id){
   const statusEl = document.getElementById('adSvcStatus-'+id)
   const featuresText = document.getElementById('adSvcFeatures-'+id).value.trim()
+  const subsText = document.getElementById('adSvcSubs-'+id).value.trim()
+  const benefitsText = document.getElementById('adSvcBenefits-'+id).value.trim()
   const payload = {
     title: document.getElementById('adSvcTitle-'+id).value.trim(),
     tag: document.getElementById('adSvcTag-'+id).value.trim(),
     desc: document.getElementById('adSvcDesc-'+id).value.trim(),
     features: featuresText ? featuresText.split('\n').map(f=>f.trim()).filter(Boolean) : [],
+    subServices: subsText ? subsText.split('\n').map(f=>f.trim()).filter(Boolean) : [],
+    benefits: benefitsText ? benefitsText.split('\n').map(f=>f.trim()).filter(Boolean) : [],
     analysisNotes: document.getElementById('adSvcNotes-'+id).value.trim()
   }
   // don't overwrite with blanks — only save fields the admin actually filled in

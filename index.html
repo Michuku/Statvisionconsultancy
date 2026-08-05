@@ -1744,50 +1744,84 @@
           </svg>
         </span>
         <span class="logo-text" style="font-size:15px">StatVision<small>Research &amp; Consultancy</small></span>
-        <button class="sm-back-btn" onclick="closeServiceModal()">← <span class="sm-back-label">Back</span></button>
+        <button class="sm-back-btn" onclick="closeServiceModal()">← <span class="sm-back-label">Back to Services</span></button>
       </div>
       <div class="sm-headband" id="serviceModalHeadband">
-        <div class="sm-inner" style="display:flex;align-items:center;gap:1rem;width:100%">
+        <div class="sm-headband-row">
           <span class="sm-ico" id="serviceModalIcon">📊</span>
-          <div>
-            <h2 id="serviceModalTitle" style="margin-bottom:.15rem">—</h2>
-            <p id="serviceModalTag" style="font-size:.82rem">—</p>
+          <div class="sm-headband-text">
+            <h2 id="serviceModalTitle">—</h2>
+            <p id="serviceModalTag">—</p>
           </div>
         </div>
       </div>
       <button class="mcls" onclick="closeServiceModal()">✕</button>
     </div>
     <div class="mbdy">
-      <div class="sm-inner">
-        <div class="sm-cols">
-          <div class="sm-col-left">
-            <div id="serviceModalDesc" class="sm-desc"></div>
-            <div class="sm-features">
-              <h4 style="font-family:var(--fd);font-size:.85rem;margin-bottom:.6rem">✅ What's Included</h4>
-              <ul id="serviceModalFeatures" style="font-size:.85rem;color:var(--sl);line-height:1.9;padding-left:1.1rem"></ul>
-            </div>
-            <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
-              <h4>📝 Analysis Notes</h4>
-              <div id="serviceModalNotes"></div>
-            </div>
-          </div>
-          <div class="sm-col-right">
-            <div id="serviceModalHero" class="sm-hero"></div>
-            <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
-              <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
-              <div class="sm-gallery-grid" id="serviceModalGallery"></div>
-            </div>
+      <div class="sm-inner sm-content">
+
+        <!-- Service Description -->
+        <div id="serviceModalDesc" class="sm-desc sm-reveal"></div>
+        <div class="sm-features sm-reveal">
+          <h4>✅ What's Included</h4>
+          <ul id="serviceModalFeatures"></ul>
+        </div>
+        <div class="sm-notes sm-reveal" id="serviceModalNotesWrap" style="display:none">
+          <h4>📝 Analysis Notes</h4>
+          <div id="serviceModalNotes"></div>
+        </div>
+
+        <!-- Service Gallery — only shown when real images have been uploaded -->
+        <div class="sm-gallery sm-reveal" id="serviceModalGalleryWrap" style="display:none">
+          <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
+          <div class="sm-gallery-grid" id="serviceModalGallery"></div>
+        </div>
+
+        <!-- Available Services — expandable accordion -->
+        <div class="sm-section sm-reveal">
+          <button class="sm-accordion-toggle" id="serviceModalAccordionBtn" onclick="toggleServiceAccordion()" aria-expanded="false">
+            <span>📋 Available Services</span>
+            <span class="sm-accordion-caret" id="serviceModalAccordionCaret">▼ Click to View Services</span>
+          </button>
+          <div class="sm-accordion-panel" id="serviceModalAccordionPanel">
+            <ul class="sm-sub-list" id="serviceModalSubList"></ul>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="mft">
-      <div class="sm-inner" style="display:flex;gap:1rem;justify-content:flex-end;width:100%">
-        <button class="bsec" onclick="closeServiceModal()">Close</button>
-        <button class="bp" onclick="closeServiceModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request This Service →</button>
+
+        <!-- Benefits -->
+        <div class="sm-section sm-reveal">
+          <h4>💎 Benefits</h4>
+          <ul class="sm-benefits-list" id="serviceModalBenefits"></ul>
+        </div>
+
+        <!-- Process -->
+        <div class="sm-section sm-reveal">
+          <h4>🔄 Our Process</h4>
+          <div class="sm-process" id="serviceModalProcess"></div>
+        </div>
+
+        <!-- Related Services -->
+        <div class="sm-section sm-reveal">
+          <h4>🔗 Related Services</h4>
+          <div class="sm-related" id="serviceModalRelated"></div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="sm-cta sm-reveal">
+          <h3>Ready to get started?</h3>
+          <p>Let's talk about how this service can help your organisation.</p>
+          <button class="bp" onclick="closeServiceModal();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),80)">Request This Service →</button>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
+
+<!-- Full-screen image lightbox for the service gallery -->
+<div class="sm-lightbox" id="serviceLightbox" onclick="closeLightbox()">
+  <img id="serviceLightboxImg" src="" alt=""/>
+  <button class="sm-lightbox-close" onclick="closeLightbox()">✕</button>
 </div>
 
 <!-- TEAM MEMBER MODAL (view only — edited from the Admin Portal) -->
