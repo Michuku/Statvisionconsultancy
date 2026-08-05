@@ -1,53 +1,107 @@
 <!--
-  StatVision — Services mega-dropdown navigation (reference markup)
+  StatVision — Services / Industries / About Us mega-dropdown navigation
+  (reference markup)
   ===================================================================
-  This file documents the reusable nav component as a standalone
-  fragment. Because the live site is a single static index.html
-  (no server-side includes), this exact markup is embedded directly
-  inside index.html's <header class="navbar"> and <div class="mm">
-  blocks — copy this file's contents there if you ever rebuild the
-  header from scratch, or use it as the source of truth for the
-  Services menu structure.
+  The live site is a single static index.html (no server-side
+  includes), so this exact markup is embedded directly inside
+  index.html's <header class="navbar"> and <div class="mm"> blocks.
+  Use this file as the source of truth for the three dropdown menus.
 
   Pairs with:
-    - navbar.css  (all dropdown styling & animation)
-    - navbar.js   (rendering the category lists + all interactivity)
+    - navbar.css  (all dropdown + info-modal styling & animation)
+    - navbar.js   (renders the three menus from data arrays + all
+                   interactivity: hover/click, one-open-at-a-time,
+                   outside-click/Esc close, keyboard nav, routing)
 
-  The two containers below — #servicesMegaMenu (desktop) and
-  #servicesMobilePanel (mobile) — start empty on purpose. navbar.js
-  fills them from its SERVICE_MENU data array on page load, so the
-  service list only has to be maintained in one place (navbar.js).
+  All six containers below start empty on purpose — navbar.js fills
+  them from its SERVICES_MENU / INDUSTRIES_MENU / ABOUT_MENU data
+  arrays on page load, so each list only has to be maintained once.
 -->
 
 <!-- ============ DESKTOP: place inside .nav-links ============ -->
+<div class="nav-item-dropdown" id="navAboutItem">
+  <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    About Us <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="nav-dd-panel nav-dd-panel--wide" id="aboutMegaMenu" role="menu" aria-label="About Us"></div>
+</div>
+
 <div class="nav-item-dropdown" id="navServicesItem">
   <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
     Services <span class="caret" aria-hidden="true">▾</span>
   </button>
-  <div class="services-mega" id="servicesMegaMenu" role="menu" aria-label="Services"></div>
+  <div class="nav-dd-panel" id="servicesMegaMenu" role="menu" aria-label="Services"></div>
+</div>
+
+<div class="nav-item-dropdown" id="navIndustriesItem">
+  <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    Industries <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="nav-dd-panel nav-dd-panel--wide" id="industriesMegaMenu" role="menu" aria-label="Industries"></div>
 </div>
 
 <!-- ============ MOBILE: place inside .mm ============ -->
+<div class="mm-item-dropdown" id="mmAboutItem">
+  <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    About Us <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="mm-dd-panel" id="aboutMobilePanel"></div>
+</div>
+
 <div class="mm-item-dropdown" id="mmServicesItem">
   <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
     Services <span class="caret" aria-hidden="true">▾</span>
   </button>
-  <div class="mm-services-panel" id="servicesMobilePanel"></div>
+  <div class="mm-dd-panel" id="servicesMobilePanel"></div>
+</div>
+
+<div class="mm-item-dropdown" id="mmIndustriesItem">
+  <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+    Industries <span class="caret" aria-hidden="true">▾</span>
+  </button>
+  <div class="mm-dd-panel" id="industriesMobilePanel"></div>
+</div>
+
+<!-- ============ INFO MODAL: place once, anywhere in <body> ============
+     Used for Industries and the About Us items that don't have a
+     dedicated page/section yet (Company Profile, Our Story, Vision &
+     Mission, Core Values, Why Choose StatVision, Partners & Clients,
+     Careers). "Meet the CEO" reuses the existing team-member modal
+     (openTeamMember), and "Our Team" / "Contact Us" scroll to their
+     existing sections on the home page. -->
+<div class="info-modal" id="infoModal" onclick="if(event.target===this) closeInfoModal()">
+  <div class="info-modal-content">
+    <button type="button" class="info-modal-close" aria-label="Close" onclick="closeInfoModal()">&times;</button>
+    <div class="info-modal-head">
+      <span class="info-modal-ico" id="infoModalIcon"></span>
+      <div>
+        <h2 id="infoModalTitle"></h2>
+        <p class="info-modal-tag" id="infoModalTag"></p>
+      </div>
+    </div>
+    <div class="info-modal-body" id="infoModalBody"></div>
+  </div>
 </div>
 
 <!--
-  Required <head> tags on any page that uses this component:
+  Required <head>/<body> wiring on any page that uses this component:
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="navbar.css">
     ... (page scripts, e.g. app.js, which must define
-         window.openServiceModal(id)) ...
+         window.openServiceModal(id), window.openTeamMember(id),
+         window.showPage(id) and window.scrollTo2(id)) ...
     <script src="navbar.js" defer></script>
 
-  navbar.js calls window.openServiceModal(id) when a service link is
-  clicked, and expects window.setActiveServiceNav(id) to be invoked
-  by the host page whenever a service page opens/closes, so the
-  correct menu link can be highlighted in StatVision blue. On
-  StatVision's site, app.js's openServiceModal()/closeServiceModal()
-  already call window.setActiveServiceNav for you.
+  navbar.js calls:
+    - window.openServiceModal(id)   for the 6 core services
+    - window.openInfoModal(item)    for Industries + generic About items
+    - window.openTeamMember(id)     for "Meet the CEO"
+    - window.showPage()/scrollTo2() for "Our Team" / "Contact Us"
+
+  and expects window.setActiveServiceNav(id) to be invoked by the host
+  page whenever a service page opens/closes, so the correct menu link
+  is highlighted in StatVision blue. On StatVision's site, app.js's
+  openServiceModal()/closeServiceModal() already call
+  window.setActiveServiceNav for you.
 -->

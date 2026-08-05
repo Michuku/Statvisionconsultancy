@@ -46,14 +46,24 @@
     <div class="nav-links">
       <a href="#" class="nav-client" onclick="goClient();return false">Client Login</a>
       <a href="#" class="active">Home</a>
-      <a href="#about">About Us</a>
+      <div class="nav-item-dropdown" id="navAboutItem">
+        <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          About Us <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dd-panel nav-dd-panel--wide" id="aboutMegaMenu" role="menu" aria-label="About Us"></div>
+      </div>
       <div class="nav-item-dropdown" id="navServicesItem">
         <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
           Services <span class="caret" aria-hidden="true">▾</span>
         </button>
-        <div class="services-mega" id="servicesMegaMenu" role="menu" aria-label="Services"></div>
+        <div class="nav-dd-panel" id="servicesMegaMenu" role="menu" aria-label="Services"></div>
       </div>
-      <a href="#industries">Industries</a>
+      <div class="nav-item-dropdown" id="navIndustriesItem">
+        <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Industries <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dd-panel nav-dd-panel--wide" id="industriesMegaMenu" role="menu" aria-label="Industries"></div>
+      </div>
       <a href="#portfolio">Portfolio</a>
       <a href="#insights">Insights</a>
       <a href="#contact">Contact</a>
@@ -72,17 +82,42 @@
 <div class="mm" id="mmenu">
   <a href="#" onclick="goClient();toggleMM();return false">Client Login</a>
   <a href="#" onclick="toggleMM();return false">Home</a>
-  <a href="#about" onclick="toggleMM()">About Us</a>
+  <div class="mm-item-dropdown" id="mmAboutItem">
+    <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+      About Us <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mm-dd-panel" id="aboutMobilePanel"></div>
+  </div>
   <div class="mm-item-dropdown" id="mmServicesItem">
     <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
       Services <span class="caret" aria-hidden="true">▾</span>
     </button>
-    <div class="mm-services-panel" id="servicesMobilePanel"></div>
+    <div class="mm-dd-panel" id="servicesMobilePanel"></div>
   </div>
-  <a href="#industries" onclick="toggleMM()">Industries</a>
+  <div class="mm-item-dropdown" id="mmIndustriesItem">
+    <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+      Industries <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mm-dd-panel" id="industriesMobilePanel"></div>
+  </div>
   <a href="#portfolio" onclick="toggleMM()">Portfolio</a>
   <a href="#insights" onclick="toggleMM()">Insights</a>
   <a href="#contact" onclick="toggleMM()">Contact</a>
+</div>
+
+<!-- ============ INFO MODAL (Industries / About Us detail pages) ============ -->
+<div class="info-modal" id="infoModal" onclick="if(event.target===this) closeInfoModal()">
+  <div class="info-modal-content">
+    <button type="button" class="info-modal-close" aria-label="Close" onclick="closeInfoModal()">&times;</button>
+    <div class="info-modal-head">
+      <span class="info-modal-ico" id="infoModalIcon"></span>
+      <div>
+        <h2 id="infoModalTitle"></h2>
+        <p class="info-modal-tag" id="infoModalTag"></p>
+      </div>
+    </div>
+    <div class="info-modal-body" id="infoModalBody"></div>
+  </div>
 </div>
 
 <div id="page-home" class="page active">
