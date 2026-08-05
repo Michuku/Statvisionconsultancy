@@ -355,65 +355,106 @@ const SERVICES_DATA = {
     desc:'We turn raw numbers into defensible conclusions. Our analysts run descriptive and inferential statistics, regression modelling, hypothesis testing, and predictive analytics using industry-standard tools — so your decisions are backed by rigorous, reproducible evidence.',
     features:['Descriptive & inferential statistics','Regression & predictive modelling','Hypothesis testing & significance analysis','Custom SPSS, STATA, R & Python scripts','Clear, decision-ready result summaries'],
     subServices:['Descriptive Statistics','Inferential Statistics','Regression Analysis','Time Series Analysis','ANOVA','Survey Data Analysis','Predictive Analytics','Experimental Design','Statistical Modelling','Data Interpretation'],
-    benefits:['Evidence-based decisions instead of guesswork','Reduced risk through statistically validated findings','Clear, defensible results for stakeholders & funders','Faster turnaround using industry-standard software']
+    benefits:['Evidence-based decisions instead of guesswork','Reduced risk through statistically validated findings','Clear, defensible results for stakeholders & funders','Faster turnaround using industry-standard software'],
+    tools:['spss','stata','r','python']
   },
   powerbi:{
     title:'Power BI Dashboards', tag:'Interactive Business Dashboards', icon:'📈', color:'#f59e0b',
     desc:'We design live, interactive Power BI dashboards that turn scattered spreadsheets into a single source of truth — so your team can track KPIs, spot trends, and make decisions in real time instead of waiting on monthly reports.',
     features:['Custom KPI & executive dashboards','Live data connections & auto-refresh','Drill-down reports by team, region or product','Mobile-friendly dashboard design','Staff training on dashboard use'],
     subServices:['KPI Dashboard Design','Real-Time Data Connections','Executive Reporting Dashboards','Sales & Revenue Dashboards','Financial Performance Tracking','Custom Data Visualizations','Drill-Down & Filter Reports','Mobile Dashboard Access','Automated Report Scheduling','Dashboard Training & Handover'],
-    benefits:['See performance in real time, not month-end','One dashboard replaces a dozen spreadsheets','Faster, more confident executive decisions','Fully branded to your organisation']
+    benefits:['See performance in real time, not month-end','One dashboard replaces a dozen spreadsheets','Faster, more confident executive decisions','Fully branded to your organisation'],
+    tools:['powerbi','excel','sql']
   },
   monitoring:{
     title:'Monitoring & Evaluation', tag:'M&E Frameworks & Impact Assessment', icon:'🎯', color:'#22c55e',
     desc:'We design end-to-end M&E frameworks for NGOs, government programmes and businesses — from theory of change and indicator selection to field data collection and impact assessment — so you can prove and improve what your programme actually achieves.',
     features:['Theory of change & log-frame design','Indicator & baseline development','Field data collection & KoBo/ODK setup','Impact & outcome evaluation','Donor-ready M&E reports'],
     subServices:['Theory of Change Design','Log-Frame Development','Indicator & Baseline Setting','Field Data Collection (KoBo/ODK)','Outcome & Impact Evaluation','Mid-Term & End-Term Reviews','Beneficiary Feedback Systems','Data Quality Assessments','Donor Reporting Support','M&E Capacity Building'],
-    benefits:['Prove programme impact to donors & boards','Catch problems early through real-time monitoring','Stronger, evidence-backed funding proposals','Built-in accountability & transparency']
+    benefits:['Prove programme impact to donors & boards','Catch problems early through real-time monitoring','Stronger, evidence-backed funding proposals','Built-in accountability & transparency'],
+    tools:['kobo','odk','excel','spss']
   },
   research:{
     title:'Research Consultancy', tag:'Data-Driven Research Solutions', icon:'🔍', color:'#8b5cf6',
     desc:'From concept notes to final publication, we support institutions, NGOs and businesses through the full research lifecycle — study design, ethical clearance support, data collection, analysis, and writing up findings for policy or publication.',
     features:['Research design & proposal development','Mixed-methods (qualitative + quantitative)','Ethical review & IRB support','Peer-review-ready analysis & writing','Policy brief & publication support'],
     subServices:['Research Proposal Development','Literature Review','Qualitative Research (Interviews/FGDs)','Quantitative Research Design','Mixed-Methods Studies','Ethical Review & IRB Support','Market Research','Policy Analysis','Academic & Technical Writing','Publication & Dissemination Support'],
-    benefits:['Rigorous methodology from design to write-up','Findings ready for policy or publication','Access to experienced multi-sector researchers','End-to-end support — no need for multiple vendors']
+    benefits:['Rigorous methodology from design to write-up','Findings ready for policy or publication','Access to experienced multi-sector researchers','End-to-end support — no need for multiple vendors'],
+    tools:['spss','stata','excel','r']
   },
   cleaning:{
     title:'Data Cleaning', tag:'Preparation, Validation & Quality Control', icon:'🧹', color:'#14b8a6',
     desc:'Messy data leads to wrong conclusions. We detect and fix missing values, duplicates, inconsistent coding and outliers, and validate your dataset against its own logic — so every analysis built on it stands on solid ground.',
     features:['Missing value & outlier treatment','De-duplication & consistency checks','Variable coding & standardisation','Data validation against source logic','Clean, analysis-ready dataset delivery'],
     subServices:['Missing Data Treatment','Duplicate Detection & Removal','Outlier Identification','Variable Coding & Labelling','Data Consistency Checks','Data Format Standardisation','Dataset Merging & Restructuring','Data Validation Rules','Anonymisation & Confidentiality Checks','Analysis-Ready Dataset Delivery'],
-    benefits:['Reliable analysis built on trustworthy data','Fewer errors and false conclusions downstream','Saves your team hours of manual cleanup','Documented, repeatable cleaning process']
+    benefits:['Reliable analysis built on trustworthy data','Fewer errors and false conclusions downstream','Saves your team hours of manual cleanup','Documented, repeatable cleaning process'],
+    tools:['excel','r','python','sql']
   },
   survey:{
     title:'Survey Design', tag:'Structured Data Collection Instruments', icon:'📝', color:'#f97316',
     desc:'A survey is only as good as its design. We build structured, bias-tested questionnaires and digital data collection tools tailored to your research questions — piloted and refined before they ever reach your respondents.',
     features:['Questionnaire design & question wording','Digital tools: KoBo, ODK, Google Forms','Sampling strategy & respondent targeting','Pilot testing & instrument refinement','Multi-language survey adaptation'],
     subServices:['Questionnaire Design','Digital Survey Setup (KoBo/ODK/Forms)','Sampling Strategy Design','Survey Piloting & Testing','Enumerator Training','Multi-Language Translation','Paper-to-Digital Survey Conversion','Response Quality Control','Survey Logistics Planning','Data Collection Supervision'],
-    benefits:['Higher-quality, less biased responses','Tools built for your specific research questions','Field-tested before full rollout','Faster data collection with digital tools']
+    benefits:['Higher-quality, less biased responses','Tools built for your specific research questions','Field-tested before full rollout','Faster data collection with digital tools'],
+    tools:['kobo','odk','excel']
   },
   bi:{
     title:'Business Intelligence', tag:'Turning Data into Decisions', icon:'💡', color:'#6366f1',
     desc:'We help organisations build the data infrastructure and reporting culture to compete on insight — consolidating data sources, building BI pipelines, and delivering the kind of intelligence that shows up directly in the bottom line.',
     features:['Data warehousing & pipeline setup','Cross-department reporting systems','Trend & competitor benchmarking','Automated reporting workflows','Executive-level insight briefings'],
     subServices:['Data Warehousing Setup','BI Pipeline Development','Cross-Department Reporting','Competitor & Market Benchmarking','Automated Reporting Workflows','Business Performance Analytics','Trend & Forecast Analysis','Executive Insight Briefings','Data Source Integration','BI Strategy Consulting'],
-    benefits:['Insight that shows up directly in the bottom line','One source of truth across departments','Less manual reporting, more analysis time','Data-backed strategy, not guesswork']
+    benefits:['Insight that shows up directly in the bottom line','One source of truth across departments','Less manual reporting, more analysis time','Data-backed strategy, not guesswork'],
+    tools:['powerbi','sql','excel','tableau']
   },
   training:{
     title:'Training & Capacity Building', tag:'Data Skills & Research Methodology Training', icon:'🎓', color:'#10b981',
     desc:'We build lasting in-house capacity, not just one-off reports. Our hands-on workshops train your team on statistical tools, survey methods and dashboard use — so your organisation keeps generating insight long after our engagement ends.',
     features:['SPSS, STATA, R & Excel training','Survey & M&E methodology workshops','Power BI / dashboard skills training','Customised in-house curricula','Certificates of completion'],
     subServices:['SPSS Training','STATA Training','R Programming Training','Excel for Data Analysis','Power BI / Dashboard Training','Survey Methodology Workshops','M&E Methodology Training','Data Cleaning Workshops','Research Writing Workshops','Customised In-House Curricula'],
-    benefits:['Builds lasting in-house capacity','Reduces future reliance on external consultants','Hands-on, practical, tool-based learning','Certificates of completion for participants']
+    benefits:['Builds lasting in-house capacity','Reduces future reliance on external consultants','Hands-on, practical, tool-based learning','Certificates of completion for participants'],
+    tools:['spss','stata','r','python','excel','powerbi']
   },
   gis:{
     title:'GIS & Mapping', tag:'Spatial Analysis & Interactive Mapping', icon:'🗺️', color:'#0891b2',
     desc:'We turn location data into clear, decision-ready maps. From field GPS collection to spatial analysis and interactive web maps, our GIS team helps you see the geographic patterns behind your data — where needs are highest, where coverage is weak, and where to act next.',
     features:['GIS mapping & cartographic design','Spatial & geospatial data analysis','GPS field data collection','Interactive, shareable web maps','Boundary, catchment & coverage mapping'],
     subServices:['GIS Mapping','Spatial Analysis','GPS Data Collection','Interactive Web Maps','Choropleth & Heat Maps','Catchment & Coverage Mapping','Remote Sensing & Satellite Data','Geo-Referencing & Digitisation'],
-    benefits:['See geographic patterns hidden in raw data','Target resources to where they are needed most','Shareable interactive maps for reports & funders','Field-collected location data you can trust']
+    benefits:['See geographic patterns hidden in raw data','Target resources to where they are needed most','Shareable interactive maps for reports & funders','Field-collected location data you can trust'],
+    tools:['qgis','gps','excel']
   }
 }
+// Software/tools catalog referenced by each service's `tools` array (Interactive Panel > Tools tab)
+const TOOLS_CATALOG = {
+  spss:{name:'SPSS',icon:'📊',desc:'Statistical analysis & survey data processing'},
+  stata:{name:'STATA',icon:'📈',desc:'Econometric & panel data analysis'},
+  r:{name:'R',icon:'📉',desc:'Statistical computing & visualization'},
+  python:{name:'Python',icon:'🐍',desc:'Data science & predictive modelling'},
+  sql:{name:'SQL',icon:'🗄️',desc:'Database querying & data management'},
+  excel:{name:'Excel',icon:'📑',desc:'Spreadsheet modelling & reporting'},
+  powerbi:{name:'Power BI',icon:'💡',desc:'Interactive business dashboards'},
+  tableau:{name:'Tableau',icon:'📐',desc:'Advanced data visualization'},
+  kobo:{name:'KoBoToolbox',icon:'📱',desc:'Digital field data collection'},
+  odk:{name:'ODK',icon:'📲',desc:'Offline survey data collection'},
+  qgis:{name:'QGIS',icon:'🗺️',desc:'Geographic information mapping'},
+  gps:{name:'GPS Devices',icon:'📍',desc:'Field coordinate & spatial data capture'}
+}
+// Technical workflow shown in the Interactive Panel's "Process" tab (distinct from the
+// general 4-step engagement process further down the page)
+const SERVICE_WORKFLOW_STEPS=[
+  {icon:'📥',title:'Data Collection',desc:'Gathering raw data from surveys, systems, or field sources.'},
+  {icon:'🧹',title:'Cleaning',desc:'Validating, de-duplicating and preparing the dataset.'},
+  {icon:'📊',title:'Analysis',desc:'Applying the right statistical or analytical methods.'},
+  {icon:'📈',title:'Visualization',desc:'Turning results into clear charts and dashboards.'},
+  {icon:'📄',title:'Reporting',desc:'Compiling findings into a clear, decision-ready report.'},
+  {icon:'💡',title:'Recommendations',desc:'Translating insight into practical next steps.'}
+]
+// Company-wide achievement stats shown (with count-up animation) in the "Results" tab
+const SERVICE_RESULTS_STATS=[
+  {value:500,suffix:'+',label:'Projects Completed'},
+  {value:120,suffix:'+',label:'Organisations Served'},
+  {value:98,suffix:'%',label:'Client Satisfaction'},
+  {value:25,suffix:'M+',label:'Records Analysed'}
+]
 // Shared 4-step engagement process, shown on every service page
 const SERVICE_PROCESS_STEPS=[
   {title:'Consultation & Scoping',desc:"We start by understanding your goals, data, and constraints — so the engagement is scoped around what you actually need."},
@@ -432,29 +473,136 @@ function benefitCardsHTML(list){
   return (list||[]).map((b,i)=>`<li><span class="sm-benefit-ico">${BENEFIT_ICONS[i%BENEFIT_ICONS.length]}</span><span>${escapeHtml(b)}</span></li>`).join('')
 }
 // Sets the featured image panel to a branded gradient placeholder using the service's own colour/icon
-function setFeaturedPlaceholder(s){
-  const wrap=document.getElementById('serviceModalFeatured')
-  wrap.dataset.url=''
-  wrap.style.cursor='default'
-  wrap.style.background=`linear-gradient(135deg,${s.color},${s.color}99)`
-  document.getElementById('serviceModalFeaturedPlaceholder').style.display='flex'
-  document.getElementById('serviceModalFeaturedIcon').textContent=s.icon||'📊'
-  document.getElementById('serviceModalFeaturedLabel').textContent=s.title
-  const existingImg=wrap.querySelector('img')
-  if(existingImg) existingImg.remove()
+// ══════════════════════════════════════════════════════════════════
+// SERVICE MODAL — Interactive Panel: automatic image carousel
+// (carousel.js logic — autoplay, arrows, dots, pause-on-hover, swipe, fade)
+// ══════════════════════════════════════════════════════════════════
+let svcCarouselImages=[]
+let svcCarouselIndex=0
+let svcCarouselTimer=null
+function renderServiceCarousel(images,placeholderIcon,placeholderColor){
+  svcCarouselImages = images||[]
+  svcCarouselIndex = 0
+  stopServiceCarouselAutoplay()
+  const track=document.getElementById('serviceCarouselTrack')
+  const dots=document.getElementById('serviceCarouselDots')
+  const prev=document.getElementById('serviceCarouselPrev')
+  const next=document.getElementById('serviceCarouselNext')
+  if(!svcCarouselImages.length){
+    track.innerHTML = `<div class="sm-carousel-placeholder" style="background:linear-gradient(135deg,${placeholderColor},${placeholderColor}99)"><span>${placeholderIcon||'📊'}</span><small>Sample deliverables coming soon</small></div>`
+    dots.innerHTML=''; prev.style.display='none'; next.style.display='none'
+    return
+  }
+  track.innerHTML = svcCarouselImages.map((img,i)=>
+    `<div class="sm-carousel-slide${i===0?' active':''}" onclick="openLightbox('${img.url}')"><img src="${img.url}" alt="${(img.name||'Sample output').replace(/"/g,'&quot;')}" loading="lazy"/></div>`
+  ).join('')
+  if(svcCarouselImages.length>1){
+    // more than one image — show arrows, dots, and start autoplay
+    dots.innerHTML = svcCarouselImages.map((_,i)=>`<button class="sm-carousel-dot${i===0?' active':''}" onclick="svcCarouselGoTo(${i})" aria-label="Go to image ${i+1}"></button>`).join('')
+    prev.style.display='flex'; next.style.display='flex'
+    startServiceCarouselAutoplay()
+  } else {
+    // exactly one image — hide arrows & dots per spec
+    dots.innerHTML=''; prev.style.display='none'; next.style.display='none'
+  }
 }
-// Promotes the first uploaded gallery image into the large featured panel
-function setFeaturedImage(url){
-  const wrap=document.getElementById('serviceModalFeatured')
-  wrap.dataset.url=url
-  wrap.style.cursor='zoom-in'
-  wrap.style.background='none'
-  document.getElementById('serviceModalFeaturedPlaceholder').style.display='none'
-  let img=wrap.querySelector('img')
-  if(!img){ img=document.createElement('img'); img.loading='lazy'; wrap.appendChild(img) }
-  img.src=url
-  img.alt=''
+function svcCarouselGoTo(i){
+  if(!svcCarouselImages.length) return
+  svcCarouselIndex = (i+svcCarouselImages.length)%svcCarouselImages.length
+  document.querySelectorAll('#serviceCarouselTrack .sm-carousel-slide').forEach((el,j)=>el.classList.toggle('active',j===svcCarouselIndex))
+  document.querySelectorAll('#serviceCarouselDots .sm-carousel-dot').forEach((el,j)=>el.classList.toggle('active',j===svcCarouselIndex))
 }
+function svcCarouselNext(){ svcCarouselGoTo(svcCarouselIndex+1) }
+function svcCarouselPrev(){ svcCarouselGoTo(svcCarouselIndex-1) }
+function startServiceCarouselAutoplay(){
+  stopServiceCarouselAutoplay()
+  svcCarouselTimer=setInterval(svcCarouselNext,4000)
+}
+function stopServiceCarouselAutoplay(){
+  if(svcCarouselTimer){ clearInterval(svcCarouselTimer); svcCarouselTimer=null }
+}
+// Pause on hover + touch-swipe support, wired once to the static carousel container
+document.addEventListener('DOMContentLoaded',()=>{
+  const car=document.getElementById('serviceCarousel')
+  if(!car) return
+  car.addEventListener('mouseenter',stopServiceCarouselAutoplay)
+  car.addEventListener('mouseleave',()=>{ if(svcCarouselImages.length>1) startServiceCarouselAutoplay() })
+  let touchStartX=null
+  car.addEventListener('touchstart',e=>{ touchStartX=e.touches[0].clientX; stopServiceCarouselAutoplay() },{passive:true})
+  car.addEventListener('touchend',e=>{
+    if(touchStartX===null) return
+    const dx=e.changedTouches[0].clientX-touchStartX
+    if(Math.abs(dx)>40){ dx<0?svcCarouselNext():svcCarouselPrev() }
+    touchStartX=null
+    if(svcCarouselImages.length>1) startServiceCarouselAutoplay()
+  },{passive:true})
+})
+
+// ══════════════════════════════════════════════════════════════════
+// SERVICE MODAL — Interactive Panel: tab system
+// (tabs.js logic — Gallery / Dashboards / Process / Tools / Results)
+// ══════════════════════════════════════════════════════════════════
+function switchServiceTab(name){
+  document.querySelectorAll('#serviceTabBar .sm-tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name))
+  document.querySelectorAll('#serviceTabPanels .sm-tab-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===name))
+  if(name==='results') animateServiceResultCounters()
+}
+function resetServiceTabs(){ switchServiceTab('gallery') }
+
+// (gallery.js logic — shared grid renderer used by both the Gallery and Dashboards tabs)
+function renderImageGrid(containerId,docs){
+  const el=document.getElementById(containerId)
+  if(!el) return
+  if(!docs.length){
+    el.classList.add('sm-gallery-grid-empty')
+    el.innerHTML='<p class="sm-empty-note">No images uploaded yet for this section.</p>'
+    return
+  }
+  el.classList.remove('sm-gallery-grid-empty')
+  el.innerHTML = docs.map(g=>{
+    const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
+    return `<div class="sm-gallery-item" onclick="openLightbox('${g.url}')"><img src="${g.url}" alt="${safeName}" loading="lazy"/></div>`
+  }).join('')
+}
+function renderServiceWorkflow(){
+  const el=document.getElementById('serviceModalWorkflow')
+  el.innerHTML = SERVICE_WORKFLOW_STEPS.map((w,i)=>
+    `<div class="sm-workflow-step"><div class="sm-workflow-ico">${w.icon}</div><h5>${escapeHtml(w.title)}</h5><p>${escapeHtml(w.desc)}</p></div>`+
+    (i<SERVICE_WORKFLOW_STEPS.length-1 ? '<div class="sm-workflow-arrow">↓</div>' : '')
+  ).join('')
+}
+function renderServiceTools(toolKeys){
+  const el=document.getElementById('serviceModalTools')
+  el.innerHTML=(toolKeys||[]).map(k=>{
+    const t=TOOLS_CATALOG[k]
+    if(!t) return ''
+    return `<div class="sm-tool-card"><span class="sm-tool-ico">${t.icon}</span><div><h5>${escapeHtml(t.name)}</h5><p>${escapeHtml(t.desc)}</p></div></div>`
+  }).join('')
+}
+let svcCountersAnimated=false
+function renderServiceResults(){
+  const el=document.getElementById('serviceModalResults')
+  el.innerHTML = SERVICE_RESULTS_STATS.map((s,i)=>
+    `<div class="sm-result-card"><strong id="svcCounter${i}">0${s.suffix}</strong><small>${escapeHtml(s.label)}</small></div>`
+  ).join('')
+  svcCountersAnimated=false
+}
+function animateServiceResultCounters(){
+  if(svcCountersAnimated) return
+  svcCountersAnimated=true
+  SERVICE_RESULTS_STATS.forEach((s,i)=>{
+    const el=document.getElementById('svcCounter'+i)
+    if(!el) return
+    const dur=1200, start=performance.now()
+    function tick(now){
+      const p=Math.min(1,(now-start)/dur)
+      el.textContent=Math.floor(p*s.value)+s.suffix
+      if(p<1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  })
+}
+
 // ---- lightweight markdown renderer for admin-entered descriptions/notes ----
 function mdInline(s){
   return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*(?!\*)(.+?)\*(?!\*)/g,'$1<em>$2</em>')
@@ -525,10 +673,13 @@ async function openServiceModal(id){
   document.getElementById('serviceModalDesc').innerHTML=mdLite(s.desc)
   document.getElementById('serviceModalFeatures').innerHTML=featureCardsHTML(s.features)
   document.getElementById('serviceModalNotesWrap').style.display='none'
-  document.getElementById('serviceModalGalleryWrap').style.display='none'
   document.getElementById('serviceModalSubList').innerHTML=(s.subServices||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')
   document.getElementById('serviceModalBenefits').innerHTML=benefitCardsHTML(s.benefits)
-  setFeaturedPlaceholder(s)
+  renderServiceCarousel([],s.icon,s.color)
+  renderServiceWorkflow()
+  renderServiceTools(s.tools)
+  renderServiceResults()
+  resetServiceTabs()
   document.getElementById('serviceModalProcess').innerHTML=SERVICE_PROCESS_STEPS.map((p,i)=>
     `<div class="sm-process-step"><span class="sm-process-num">${i+1}</span><div><h5>${escapeHtml(p.title)}</h5><p>${escapeHtml(p.desc)}</p></div></div>`
   ).join('')
@@ -566,21 +717,18 @@ async function openServiceModal(id){
       document.getElementById('serviceModalNotes').innerHTML=mdLite(data.analysisNotes)
       document.getElementById('serviceModalNotesWrap').style.display='block'
     }
-    // gallery — real uploaded images are the only visual here besides the branded placeholder.
-    // The most recent upload is promoted into the large Featured Image panel; the rest fill the gallery grid.
-    const gsnap = await fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get()
-    if(!gsnap.empty){
-      const [first,...rest] = gsnap.docs
-      setFeaturedImage(first.data().url)
-      if(rest.length){
-        document.getElementById('serviceModalGallery').innerHTML = rest.map(d=>{
-          const g=d.data()
-          const safeName=(g.caption||g.name||'Sample output').replace(/"/g,'&quot;')
-          return `<div class="sm-gallery-item" onclick="openLightbox('${g.url}')"><img src="${g.url}" alt="${safeName}" loading="lazy"/></div>`
-        }).join('')
-        document.getElementById('serviceModalGalleryWrap').style.display='block'
-      }
-    }
+    // gallery & dashboards — real admin-uploaded images are the only visuals here.
+    // Gallery images drive both the auto-play carousel and the Gallery tab grid;
+    // dashboard screenshots are a separate upload set shown in the Dashboards tab.
+    const [gsnap,dsnap] = await Promise.all([
+      fbDB.collection('services').doc(id).collection('gallery').orderBy('uploadedAt','desc').get(),
+      fbDB.collection('services').doc(id).collection('dashboards').orderBy('uploadedAt','desc').get()
+    ])
+    const galleryDocs = gsnap.docs.map(d=>d.data())
+    const dashDocs = dsnap.docs.map(d=>d.data())
+    renderServiceCarousel(galleryDocs,s.icon,s.color)
+    renderImageGrid('serviceModalGallery',galleryDocs)
+    renderImageGrid('serviceModalDashboards',dashDocs)
   }catch(e){ /* no overrides saved yet — defaults already shown */ }
 }
 function closeServiceModal(fromPopState){
@@ -651,6 +799,13 @@ function renderAdminServicesPanel(){
       <button class="bsec" onclick="uploadServiceGalleryAdmin('${id}')">⬆ Upload Images</button>
       <span id="adSvcGalleryStatus-${id}" style="font-size:.78rem;color:var(--sl);margin-left:.6rem"></span>
       <div class="svc-gallery-admin" id="adSvcGallery-${id}"></div>
+      <div class="fg" style="margin:1rem 0 .4rem">
+        <label>📊 Dashboard Screenshots (Power BI, Excel, SPSS, R, STATA output...)</label>
+        <input type="file" id="adSvcDashInput-${id}" accept="image/*" multiple/>
+      </div>
+      <button class="bsec" onclick="uploadServiceDashboardAdmin('${id}')">⬆ Upload Dashboards</button>
+      <span id="adSvcDashStatus-${id}" style="font-size:.78rem;color:var(--sl);margin-left:.6rem"></span>
+      <div class="svc-gallery-admin" id="adSvcDash-${id}"></div>
     </div>`
   }).join('')
   Object.keys(SERVICES_DATA).forEach(async id=>{
@@ -667,6 +822,7 @@ function renderAdminServicesPanel(){
       document.getElementById('adSvcNotes-'+id).value = data.analysisNotes||''
     }catch(e){ /* leave fields blank if nothing saved yet */ }
     loadServiceGalleryAdmin(id)
+    loadServiceDashboardAdmin(id)
   })
 }
 async function uploadServiceIconAdmin(input,id){
@@ -774,6 +930,52 @@ async function deleteServiceGalleryImage(id,galleryId,path){
     if(path) await fbStorage.ref(path).delete()
     await fbDB.collection('services').doc(id).collection('gallery').doc(galleryId).delete()
     loadServiceGalleryAdmin(id)
+  }catch(e){
+    alert('Could not delete: '+e.message)
+  }
+}
+async function uploadServiceDashboardAdmin(id){
+  const input=document.getElementById('adSvcDashInput-'+id)
+  const statusEl=document.getElementById('adSvcDashStatus-'+id)
+  if(!input || !input.files || !input.files.length){
+    if(statusEl){statusEl.style.color='#D13438';statusEl.textContent='⚠ Choose at least one image first.'}
+    return
+  }
+  if(statusEl){statusEl.style.color='var(--sl)';statusEl.textContent='Uploading...'}
+  try{
+    for(const f of [...input.files]){
+      const path=`service-dashboards/${id}/${Date.now()}_${f.name}`
+      const ref=fbStorage.ref(path)
+      await ref.put(f)
+      const url=await ref.getDownloadURL()
+      await fbDB.collection('services').doc(id).collection('dashboards').add({url,path,name:f.name,uploadedAt:Date.now()})
+    }
+    if(statusEl){statusEl.style.color='#107C10';statusEl.textContent='✓ Uploaded! Now visible in the Dashboards tab.'}
+    input.value=''
+    loadServiceDashboardAdmin(id)
+  }catch(e){
+    if(statusEl){statusEl.style.color='#D13438';statusEl.textContent='⚠ Upload failed: '+e.message}
+  }
+}
+async function loadServiceDashboardAdmin(id){
+  const grid=document.getElementById('adSvcDash-'+id)
+  if(!grid) return
+  try{
+    const snap=await fbDB.collection('services').doc(id).collection('dashboards').orderBy('uploadedAt','desc').get()
+    grid.innerHTML=snap.empty ? '' : snap.docs.map(d=>{
+      const data=d.data()
+      return `<div><img src="${data.url}"/><button onclick="deleteServiceDashboardImage('${id}','${d.id}','${(data.path||'').replace(/'/g,"\\'")}')" title="Remove">✕</button></div>`
+    }).join('')
+  }catch(e){
+    grid.innerHTML='<div style="color:#D13438;font-size:.78rem">Could not load images: '+e.message+'</div>'
+  }
+}
+async function deleteServiceDashboardImage(id,dashId,path){
+  if(!confirm('Remove this dashboard screenshot?')) return
+  try{
+    if(path) await fbStorage.ref(path).delete()
+    await fbDB.collection('services').doc(id).collection('dashboards').doc(dashId).delete()
+    loadServiceDashboardAdmin(id)
   }catch(e){
     alert('Could not delete: '+e.message)
   }

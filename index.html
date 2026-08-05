@@ -1817,29 +1817,47 @@
 
           </div>
 
-          <!-- RIGHT COLUMN — visual content -->
+          <!-- RIGHT COLUMN — Interactive Panel: carousel + tabs -->
           <div class="sm-col-right">
 
-            <!-- Featured Image -->
-            <div class="sm-featured" id="serviceModalFeatured" onclick="if(this.dataset.url)openLightbox(this.dataset.url)">
-              <div class="sm-featured-placeholder" id="serviceModalFeaturedPlaceholder">
-                <span class="sm-fp-ico" id="serviceModalFeaturedIcon">📊</span>
-                <span class="sm-fp-label" id="serviceModalFeaturedLabel">Sample deliverables coming soon</span>
+            <div class="sm-interactive-panel">
+
+              <!-- Automatic image carousel, sourced from admin-uploaded gallery images -->
+              <div class="sm-carousel" id="serviceCarousel">
+                <div class="sm-carousel-track" id="serviceCarouselTrack"></div>
+                <button class="sm-carousel-arrow sm-carousel-prev" id="serviceCarouselPrev" onclick="svcCarouselPrev()" aria-label="Previous image">‹</button>
+                <button class="sm-carousel-arrow sm-carousel-next" id="serviceCarouselNext" onclick="svcCarouselNext()" aria-label="Next image">›</button>
+                <div class="sm-carousel-dots" id="serviceCarouselDots"></div>
               </div>
-            </div>
 
-            <!-- Image Gallery — only shown when more real images have been uploaded -->
-            <div class="sm-gallery" id="serviceModalGalleryWrap" style="display:none">
-              <h4>🖼️ Sample Graphs &amp; Deliverables</h4>
-              <div class="sm-gallery-grid" id="serviceModalGallery"></div>
-            </div>
+              <!-- Tabbed content: Gallery / Dashboards / Process / Tools / Results -->
+              <div class="sm-tabs">
+                <div class="sm-tab-bar" id="serviceTabBar" role="tablist">
+                  <button class="sm-tab-btn" data-tab="gallery" role="tab" onclick="switchServiceTab('gallery')">Gallery</button>
+                  <button class="sm-tab-btn" data-tab="dashboards" role="tab" onclick="switchServiceTab('dashboards')">Dashboards</button>
+                  <button class="sm-tab-btn" data-tab="process" role="tab" onclick="switchServiceTab('process')">Process</button>
+                  <button class="sm-tab-btn" data-tab="tools" role="tab" onclick="switchServiceTab('tools')">Tools</button>
+                  <button class="sm-tab-btn" data-tab="results" role="tab" onclick="switchServiceTab('results')">Results</button>
+                </div>
+                <div class="sm-tab-panels" id="serviceTabPanels">
+                  <div class="sm-tab-panel" data-panel="gallery" id="serviceTabGallery">
+                    <div class="sm-gallery-grid sm-gallery-grid-empty" id="serviceModalGallery"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="dashboards" id="serviceTabDashboards">
+                    <div class="sm-gallery-grid sm-gallery-grid-empty" id="serviceModalDashboards"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="process" id="serviceTabProcess">
+                    <div class="sm-workflow" id="serviceModalWorkflow"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="tools" id="serviceTabTools">
+                    <div class="sm-tools-grid" id="serviceModalTools"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="results" id="serviceTabResults">
+                    <div class="sm-results-grid" id="serviceModalResults"></div>
+                  </div>
+                </div>
+              </div>
 
-            <!-- Facts Card -->
-            <div class="sm-facts">
-              <div class="sm-fact-card"><strong>500+</strong><small>Projects Completed</small></div>
-              <div class="sm-fact-card"><strong>120+</strong><small>Organisations Served</small></div>
-              <div class="sm-fact-card"><strong>98%</strong><small>Client Satisfaction</small></div>
-              <div class="sm-fact-card"><strong>25M+</strong><small>Records Processed</small></div>
             </div>
 
           </div>

@@ -1,0 +1,160 @@
+<!--
+  service-details.html — StatVision service detail page (full-page modal)
+  Requires: service-details.css, carousel.js, tabs.js, gallery.js, service-details.js
+  (service-details.js must load after carousel.js/tabs.js/gallery.js)
+  This markup is injected into the page as an overlay and opened via openServiceModal(id).
+-->
+<!-- SERVICE DETAIL MODAL (full page) -->
+<div class="mov fullpage" id="serviceModal" onclick="if(event.target===this)closeServiceModal()">
+  <div class="modal modal-fullpage" id="serviceModalCard">
+    <div class="mhd sm-mhd" id="serviceModalHead">
+      <div class="sm-topbar">
+        <span class="cube-wrap" aria-hidden="true">
+          <span class="cube3d">
+            <span class="cube-face cube-front"></span>
+            <span class="cube-face cube-back"></span>
+            <span class="cube-face cube-right"></span>
+            <span class="cube-face cube-left"></span>
+            <span class="cube-face cube-top"></span>
+            <span class="cube-face cube-bottom"></span>
+          </span>
+        </span>
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <rect x="2" y="12" width="5" height="10" rx="1" fill="#1e3a8a"/>
+            <rect x="9.5" y="7" width="5" height="15" rx="1" fill="#2563eb"/>
+            <rect x="17" y="2" width="5" height="20" rx="1" fill="#60a5fa"/>
+          </svg>
+        </span>
+        <span class="logo-text" style="font-size:15px">StatVision<small>Research &amp; Consultancy</small></span>
+        <button class="sm-back-btn" onclick="closeServiceModal()">← <span class="sm-back-label">Back to Services</span></button>
+      </div>
+      <div class="sm-headband" id="serviceModalHeadband">
+        <div class="sm-headband-row">
+          <span class="sm-ico" id="serviceModalIcon">📊</span>
+          <div class="sm-headband-text">
+            <h2 id="serviceModalTitle">—</h2>
+            <p id="serviceModalTag">—</p>
+          </div>
+        </div>
+      </div>
+      <button class="mcls" onclick="closeServiceModal()">✕</button>
+    </div>
+    <div class="mbdy">
+      <div class="sm-inner sm-content">
+
+        <!-- Two-column layout: 60% written content / 40% visual content -->
+        <div class="sm-layout sm-reveal">
+
+          <!-- LEFT COLUMN — written information -->
+          <div class="sm-col-left">
+
+            <!-- Service Description -->
+            <div id="serviceModalDesc" class="sm-desc"></div>
+
+            <!-- Key Features — attractive cards -->
+            <div class="sm-features">
+              <h4>✅ What's Included</h4>
+              <div class="sm-features-grid" id="serviceModalFeatures"></div>
+            </div>
+
+            <div class="sm-notes" id="serviceModalNotesWrap" style="display:none">
+              <h4>📝 Analysis Notes</h4>
+              <div id="serviceModalNotes"></div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="sm-section">
+              <h4>💎 Benefits</h4>
+              <ul class="sm-benefits-list" id="serviceModalBenefits"></ul>
+            </div>
+
+            <!-- Available Services — expandable accordion -->
+            <div class="sm-section">
+              <button class="sm-accordion-toggle" id="serviceModalAccordionBtn" onclick="toggleServiceAccordion()" aria-expanded="false">
+                <span>📋 Available Services</span>
+                <span class="sm-accordion-caret" id="serviceModalAccordionCaret">▼ Click to View Services</span>
+              </button>
+              <div class="sm-accordion-panel" id="serviceModalAccordionPanel">
+                <ul class="sm-sub-list" id="serviceModalSubList"></ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN — Interactive Panel: carousel + tabs -->
+          <div class="sm-col-right">
+
+            <div class="sm-interactive-panel">
+
+              <!-- Automatic image carousel, sourced from admin-uploaded gallery images -->
+              <div class="sm-carousel" id="serviceCarousel">
+                <div class="sm-carousel-track" id="serviceCarouselTrack"></div>
+                <button class="sm-carousel-arrow sm-carousel-prev" id="serviceCarouselPrev" onclick="svcCarouselPrev()" aria-label="Previous image">‹</button>
+                <button class="sm-carousel-arrow sm-carousel-next" id="serviceCarouselNext" onclick="svcCarouselNext()" aria-label="Next image">›</button>
+                <div class="sm-carousel-dots" id="serviceCarouselDots"></div>
+              </div>
+
+              <!-- Tabbed content: Gallery / Dashboards / Process / Tools / Results -->
+              <div class="sm-tabs">
+                <div class="sm-tab-bar" id="serviceTabBar" role="tablist">
+                  <button class="sm-tab-btn" data-tab="gallery" role="tab" onclick="switchServiceTab('gallery')">Gallery</button>
+                  <button class="sm-tab-btn" data-tab="dashboards" role="tab" onclick="switchServiceTab('dashboards')">Dashboards</button>
+                  <button class="sm-tab-btn" data-tab="process" role="tab" onclick="switchServiceTab('process')">Process</button>
+                  <button class="sm-tab-btn" data-tab="tools" role="tab" onclick="switchServiceTab('tools')">Tools</button>
+                  <button class="sm-tab-btn" data-tab="results" role="tab" onclick="switchServiceTab('results')">Results</button>
+                </div>
+                <div class="sm-tab-panels" id="serviceTabPanels">
+                  <div class="sm-tab-panel" data-panel="gallery" id="serviceTabGallery">
+                    <div class="sm-gallery-grid sm-gallery-grid-empty" id="serviceModalGallery"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="dashboards" id="serviceTabDashboards">
+                    <div class="sm-gallery-grid sm-gallery-grid-empty" id="serviceModalDashboards"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="process" id="serviceTabProcess">
+                    <div class="sm-workflow" id="serviceModalWorkflow"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="tools" id="serviceTabTools">
+                    <div class="sm-tools-grid" id="serviceModalTools"></div>
+                  </div>
+                  <div class="sm-tab-panel" data-panel="results" id="serviceTabResults">
+                    <div class="sm-results-grid" id="serviceModalResults"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Process -->
+        <div class="sm-section sm-reveal">
+          <h4>🔄 Our Process</h4>
+          <div class="sm-process" id="serviceModalProcess"></div>
+        </div>
+
+        <!-- Related Services -->
+        <div class="sm-section sm-reveal">
+          <h4>🔗 Related Services</h4>
+          <div class="sm-related" id="serviceModalRelated"></div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="sm-cta sm-reveal">
+          <h3>Ready to get started?</h3>
+          <p>Let's talk about how this service can help your organisation.</p>
+          <button class="bp" onclick="closeServiceModal();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),80)">Request This Service →</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Full-screen image lightbox for the service gallery -->
+<div class="sm-lightbox" id="serviceLightbox" onclick="closeLightbox()">
+  <img id="serviceLightboxImg" src="" alt=""/>
+  <button class="sm-lightbox-close" onclick="closeLightbox()">✕</button>
+</div>

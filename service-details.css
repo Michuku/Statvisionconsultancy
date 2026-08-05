@@ -1,0 +1,226 @@
+/*
+  service-details.css — StatVision service detail page styling
+  Covers: two-column layout, header band, description/features/benefits,
+  accordion, related services, contact CTA, and the Interactive Panel
+  (carousel + tabs + gallery/dashboards/process/tools/results).
+*/
+
+/* SERVICE DETAIL MODAL — icon */
+.sm-ico{display:flex;align-items:center;justify-content:center;width:70px;height:70px;border-radius:15px;font-size:32px;flex-shrink:0;box-sizing:border-box;}
+.sm-ico img{width:100%;height:100%;object-fit:cover;border-radius:15px}
+
+/* Key Features — attractive cards instead of a plain checklist */
+.sm-features{margin-top:.4rem}
+.sm-features-grid{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;padding:0;margin:0;}
+.sm-feature-card{display:flex;align-items:flex-start;gap:.6rem;background:#fff;border:1px solid var(--br);border-radius:14px;padding:.85rem .95rem;font-size:.85rem;color:var(--ch);font-weight:600;line-height:1.4;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+.sm-feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--b4);}
+.sm-feature-check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;}
+@media (max-width:560px){.sm-features-grid{grid-template-columns:1fr}}
+
+/* FULL-PAGE SERVICE MODAL — single vertical content flow (no sticky footer) */
+.mov.fullpage{padding:0;background:rgba(6,15,46,.97)}
+.modal-fullpage{max-width:none;width:100%;height:100vh;max-height:100vh;border-radius:0;display:flex;flex-direction:column;overflow:hidden}
+.modal-fullpage .mhd{border-radius:0;padding:1.5rem 2.4rem}
+.modal-fullpage .mbdy{flex:1;overflow-y:auto;padding:2rem 2.4rem 4rem;scroll-behavior:smooth}
+.sm-inner{max-width:1180px;margin:0 auto}
+.sm-content{display:flex;flex-direction:column;gap:2.4rem}
+@media (max-width:640px){
+  .modal-fullpage .mhd{padding:1.2rem 1.2rem}
+  .modal-fullpage .mbdy{padding:1.3rem 1.2rem 2.2rem}
+}
+
+/* TWO-COLUMN SERVICE LAYOUT — 60% written content / 40% visual content */
+.sm-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:2.6rem;align-items:start;}
+.sm-col-left{display:flex;flex-direction:column;gap:1.9rem;min-width:0;}
+.sm-col-right{display:flex;flex-direction:column;gap:1.6rem;min-width:0;position:sticky;top:1rem;}
+@media (max-width:900px){
+  .sm-layout{grid-template-columns:1fr;gap:1.8rem;}
+  .sm-col-right{position:static;}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   INTERACTIVE PANEL — carousel + tabbed content (right column, 40%)
+   ══════════════════════════════════════════════════════════════════ */
+.sm-interactive-panel{display:flex;flex-direction:column;gap:1.2rem;}
+
+/* --- Automatic image carousel --- */
+.sm-carousel{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;background:#000;}
+.sm-carousel-track{position:relative;width:100%;height:100%;}
+.sm-carousel-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;cursor:zoom-in;}
+.sm-carousel-slide.active{opacity:1;z-index:1;}
+.sm-carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.sm-carousel-slide:hover img{transform:scale(1.06);}
+.sm-carousel-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;color:#fff;text-align:center;padding:1.5rem;}
+.sm-carousel-placeholder span{font-size:3rem;}
+.sm-carousel-placeholder small{font-family:var(--fd);font-weight:700;font-size:.9rem;opacity:.95;}
+.sm-carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.9);border:none;color:var(--navy);font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease,transform .15s ease;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+.sm-carousel-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08);}
+.sm-carousel-prev{left:12px;}
+.sm-carousel-next{right:12px;}
+.sm-carousel-dots{position:absolute;bottom:12px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:.4rem;}
+.sm-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);border:none;cursor:pointer;padding:0;transition:background .2s ease,transform .2s ease;}
+.sm-carousel-dot.active{background:#fff;transform:scale(1.3);}
+
+/* --- Tab bar --- */
+.sm-tabs{display:flex;flex-direction:column;}
+.sm-tab-bar{display:flex;flex-wrap:wrap;gap:.35rem;background:var(--bl);border-radius:12px;padding:.35rem;position:relative;}
+.sm-tab-btn{flex:1;min-width:0;background:transparent;border:none;color:var(--sl);font-size:.8rem;font-weight:700;padding:.55rem .5rem;border-radius:9px;cursor:pointer;transition:background .25s ease,color .25s ease;white-space:nowrap;}
+.sm-tab-btn:hover{color:var(--ch);}
+.sm-tab-btn.active{background:#fff;color:var(--b2);box-shadow:0 2px 6px rgba(16,24,40,.1);}
+@media (max-width:480px){.sm-tab-btn{font-size:.72rem;padding:.5rem .3rem;}}
+
+/* --- Tab panels — fade + slide-up transition --- */
+.sm-tab-panels{position:relative;margin-top:1rem;min-height:120px;}
+.sm-tab-panel{display:none;animation:smTabIn .35s ease both;}
+.sm-tab-panel.active{display:block;}
+@keyframes smTabIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Gallery / Dashboards grids inside tabs */
+.sm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.7rem;}
+.sm-gallery-grid-empty{display:block;}
+.sm-empty-note{color:var(--sl);font-size:.82rem;text-align:center;padding:1.6rem 0;}
+.sm-gallery-item{border-radius:10px;overflow:hidden;border:1px solid var(--br);cursor:zoom-in;}
+.sm-gallery-grid img{width:100%;height:110px;object-fit:cover;display:block;transition:transform .35s ease;}
+.sm-gallery-item:hover img{transform:scale(1.08);}
+
+/* Process tab — animated vertical workflow */
+.sm-workflow{display:flex;flex-direction:column;align-items:center;}
+.sm-workflow-step{width:100%;background:#fff;border:1px solid var(--br);border-radius:12px;padding:.9rem 1rem;display:flex;align-items:center;gap:.8rem;text-align:left;transition:transform .2s ease,box-shadow .2s ease;}
+.sm-workflow-step:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.sm-workflow-ico{font-size:1.4rem;flex-shrink:0;}
+.sm-workflow-step h5{font-family:var(--fd);font-size:.85rem;margin-bottom:.1rem;color:var(--ch);}
+.sm-workflow-step p{font-size:.78rem;color:var(--sl);margin:0;line-height:1.5;}
+.sm-workflow-arrow{color:var(--b2);font-size:1rem;padding:.15rem 0;}
+
+/* Tools tab */
+.sm-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+@media (max-width:480px){.sm-tools-grid{grid-template-columns:1fr;}}
+.sm-tool-card{background:#fff;border:1px solid var(--br);border-radius:12px;padding:.8rem;display:flex;align-items:center;gap:.6rem;transition:transform .2s ease,box-shadow .2s ease;}
+.sm-tool-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.sm-tool-ico{font-size:1.3rem;flex-shrink:0;}
+.sm-tool-card h5{font-family:var(--fd);font-size:.82rem;margin-bottom:.1rem;color:var(--ch);}
+.sm-tool-card p{font-size:.74rem;color:var(--sl);margin:0;line-height:1.4;}
+
+/* Results tab — animated counters */
+.sm-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.sm-result-card{background:#fff;border:1px solid var(--br);border-radius:14px;padding:1rem .8rem;text-align:center;transition:transform .2s ease,box-shadow .2s ease;}
+.sm-result-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.sm-result-card strong{display:block;font-family:var(--fd);font-size:1.3rem;color:var(--b3);margin-bottom:.15rem;}
+.sm-result-card small{font-size:.72rem;color:var(--sl);font-weight:600;}
+
+/* SERVICE MODAL HEADER — branded topbar + colour accent band, icon never stretches */
+.sm-mhd{padding:0;display:flex;flex-direction:column;position:sticky;top:0;z-index:2;border-bottom:none;background:transparent}
+.sm-topbar{display:flex;align-items:center;gap:8px;padding:.65rem 2.4rem;border-bottom:1px solid var(--br);background:#fff}
+.sm-topbar .logo-text{font-size:15px}
+.sm-back-btn{margin-left:auto;display:flex;align-items:center;gap:.4rem;background:var(--bg);border:1px solid var(--br);color:var(--ch);font-size:.82rem;font-weight:600;padding:.45rem .9rem;border-radius:8px;cursor:pointer;transition:background .2s,transform .15s}
+.sm-back-btn:hover{background:var(--br)}
+.sm-back-btn:active{transform:scale(.96)}
+@media(max-width:640px){.sm-back-btn span.sm-back-label{display:none}}
+.sm-headband{padding:1.4rem 2.4rem;background:linear-gradient(120deg,#3b82f6,#2563eb);transition:background .25s}
+.sm-headband-row{display:flex;align-items:center;gap:1.1rem;width:100%;flex-wrap:nowrap;}
+.sm-headband-text{min-width:0;flex:1;}
+.sm-headband h2{color:#fff;font-family:var(--fd);font-size:1.35rem;font-weight:700;margin:0 0 .2rem;line-height:1.25;word-wrap:break-word;}
+.sm-headband p{color:rgba(255,255,255,.9);margin:0;font-size:.85rem;}
+.sm-headband .sm-ico{background:rgba(255,255,255,.22);color:#fff}
+@media (max-width:640px){
+  .sm-topbar{padding:.6rem 1.2rem}
+  .sm-headband{padding:1.1rem 1.2rem}
+  .sm-ico{width:56px;height:56px;border-radius:13px;font-size:26px}
+  .sm-headband h2{font-size:1.1rem}
+}
+
+/* SERVICE MODAL DESCRIPTION — rendered from admin markdown-lite text */
+.sm-desc{color:var(--sl);font-size:.94rem;line-height:1.8;text-align:justify;}
+.sm-desc p{margin-bottom:.9rem}
+.sm-desc h3,.sm-desc h4,.sm-desc h5{font-family:var(--fd);color:var(--ch);margin:1.1rem 0 .5rem;font-weight:700}
+.sm-desc h3{font-size:1.05rem}
+.sm-desc h4{font-size:.96rem}
+.sm-desc h5{font-size:.88rem}
+.sm-desc ul{padding-left:1.2rem;margin-bottom:.9rem}
+.sm-desc li{margin-bottom:.3rem}
+.sm-desc strong{color:var(--ch)}
+
+@media (min-width:901px) and (max-width:1080px){.sm-gallery-grid{grid-template-columns:1fr}}
+.sm-notes{background:var(--bl);border-radius:12px;padding:1.2rem 1.4rem;font-size:.88rem;line-height:1.75;color:var(--ch)}
+.sm-notes h4{font-family:var(--fd);font-size:.9rem;margin-bottom:.6rem}
+#serviceModalNotes p{margin-bottom:.7rem}
+#serviceModalNotes strong{color:var(--ch)}
+
+/* Full-screen lightbox for gallery images */
+.sm-lightbox{display:none;position:fixed;inset:0;background:rgba(6,15,46,.95);z-index:2000;align-items:center;justify-content:center;padding:2rem;}
+.sm-lightbox.open{display:flex;animation:smFadeIn .25s ease both}
+.sm-lightbox img{max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.sm-lightbox-close{position:absolute;top:1.2rem;right:1.5rem;background:rgba(255,255,255,.15);color:#fff;border:none;width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:background .2s}
+.sm-lightbox-close:hover{background:rgba(255,255,255,.3)}
+
+/* Generic section heading used by Available Services / Benefits / Process / Related */
+.sm-section h4{font-family:var(--fd);font-size:.9rem;margin-bottom:.8rem}
+
+/* Available Services — expandable accordion */
+.sm-accordion-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--bl);border:1px solid var(--br);border-radius:12px;padding:1rem 1.3rem;font-family:var(--fd);font-size:.9rem;font-weight:700;color:var(--ch);cursor:pointer;transition:background .2s}
+.sm-accordion-toggle:hover{background:#e8effb}
+.sm-accordion-caret{font-size:.78rem;font-weight:600;color:var(--b2);}
+.sm-accordion-panel{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.sm-sub-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem 1.2rem;padding:1.1rem .3rem .3rem;margin:0;}
+.sm-sub-list li{position:relative;padding-left:1.3rem;font-size:.85rem;color:var(--sl);}
+.sm-sub-list li::before{content:'✓';position:absolute;left:0;color:var(--ok);font-weight:700;}
+@media (max-width:560px){.sm-sub-list{grid-template-columns:1fr}}
+
+/* Benefits — icon cards */
+.sm-benefits-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
+.sm-benefits-list li{display:flex;align-items:flex-start;gap:.7rem;background:var(--bl);border-radius:14px;padding:.85rem .95rem;font-size:.85rem;color:var(--ch);font-weight:600;line-height:1.45;}
+.sm-benefit-ico{flex-shrink:0;font-size:1.1rem;line-height:1;}
+@media (max-width:560px){.sm-benefits-list{grid-template-columns:1fr}}
+
+/* Process */
+.sm-process{display:flex;flex-direction:column;gap:1rem;}
+.sm-process-step{display:flex;gap:1rem;align-items:flex-start;}
+.sm-process-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;}
+.sm-process-step h5{font-family:var(--fd);font-size:.88rem;margin-bottom:.2rem;color:var(--ch)}
+.sm-process-step p{font-size:.84rem;color:var(--sl);margin:0;line-height:1.6;}
+
+/* Related Services */
+.sm-related{display:flex;flex-wrap:wrap;gap:.8rem;}
+.sm-related-card{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--br);border-radius:10px;padding:.7rem 1rem;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--ch);transition:transform .2s ease,box-shadow .2s ease;}
+.sm-related-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.sm-related-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+
+/* Contact CTA — replaces the removed sticky footer, now part of natural page flow */
+.sm-cta{background:linear-gradient(120deg,#0f2d63,#1d4ed8);border-radius:16px;padding:2rem;text-align:center;color:#fff;}
+.sm-cta h3{font-family:var(--fd);font-size:1.2rem;margin-bottom:.4rem;}
+.sm-cta p{color:rgba(255,255,255,.85);font-size:.88rem;margin-bottom:1.2rem;}
+.sm-cta .bp{background:#f59e0b;color:#1a1300;border:none;}
+.sm-cta .bp:hover{background:#fbbf24;}
+
+/* Animations — fade+slide in on open, staggered per section.
+   Uses .sm-reveal (NOT the global .reveal scroll-animation class) so these
+   sections default to fully visible and only animate during the modal's
+   own open transition — they are not scroll-observed like homepage sections. */
+.sm-reveal{opacity:1;}
+@keyframes smFadeInUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes smFadeIn{from{opacity:0}to{opacity:1}}
+.sm-content.sm-animate-in .sm-reveal{animation:smFadeInUp .5s ease both;}
+.sm-content.sm-animate-in .sm-reveal:nth-child(1){animation-delay:.02s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(2){animation-delay:.06s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(3){animation-delay:.1s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(4){animation-delay:.14s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(5){animation-delay:.18s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(6){animation-delay:.22s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(7){animation-delay:.26s}
+.sm-content.sm-animate-in .sm-reveal:nth-child(8){animation-delay:.3s}
+
+
+.svc-icon-upload{position:relative;display:inline-block;cursor:pointer;flex-shrink:0}
+.svc-icon-upload .svc-icon-preview{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden}
+.svc-icon-upload .svc-icon-preview img{width:100%;height:100%;object-fit:cover}
+.svc-icon-upload .avatar-cam{position:absolute;bottom:-4px;right:-4px;background:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.25);opacity:1}
+.svc-gallery-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.7rem;margin-top:.9rem}
+.svc-gallery-admin > div{position:relative;border-radius:8px;overflow:hidden;background:#F4F6FA}
+.svc-gallery-admin img{width:100%;height:95px;object-fit:cover;display:block}
+.svc-gallery-admin button{position:absolute;top:.25rem;right:.25rem;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:6px;width:22px;height:22px;cursor:pointer;font-size:.75rem}
+.bsec{background:var(--bg);color:var(--sl);padding:.68rem 1.55rem;border-radius:8px;font-family:var(--fd);font-weight:600;font-size:.86rem;border:1.5px solid var(--br);cursor:pointer}
+.bsec:hover{border-color:var(--b2);color:var(--b2)}
+.sdts{display:flex;gap:.5rem;margin-bottom:1.65rem}
+.sdt{height:4px;flex:1;border-radius:2px;background:var(--br);transition:background .4s}
+.sdt.on{background:var(--b2)}
+/* FADE UP */
