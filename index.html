@@ -70,11 +70,12 @@
       </div>
       <a href="#dashboards">Dashboards</a>
       <a href="#portfolio">Portfolio</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#resources">Resources</a>
-      <a href="#insights">Insights</a>
-      <a href="#quote">Get a Quote</a>
-      <a href="#booking">Book Now</a>
+      <div class="nav-item-dropdown" id="navMoreItem">
+        <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          More <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dd-panel nav-dd-panel--wide" id="moreMegaMenu" role="menu" aria-label="More"></div>
+      </div>
       <a href="#contact">Contact</a>
     </div>
 
@@ -111,11 +112,12 @@
   </div>
   <a href="#dashboards" onclick="toggleMM()">Dashboards</a>
   <a href="#portfolio" onclick="toggleMM()">Portfolio</a>
-  <a href="#gallery" onclick="toggleMM()">Gallery</a>
-  <a href="#resources" onclick="toggleMM()">Resources</a>
-  <a href="#insights" onclick="toggleMM()">Insights</a>
-  <a href="#quote" onclick="toggleMM()">Get a Quote</a>
-  <a href="#booking" onclick="toggleMM()">Book Now</a>
+  <div class="mm-item-dropdown" id="mmMoreItem">
+    <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+      More <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mm-dd-panel" id="moreMobilePanel"></div>
+  </div>
   <a href="#contact" onclick="toggleMM()">Contact</a>
 </div>
 

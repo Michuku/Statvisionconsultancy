@@ -44,7 +44,10 @@
     star:       ico('<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"/>'),
     handshake:  ico('<path d="M2 12l5-4 4 3 4-3 5 4"/><path d="M2 12l4 4 2-1M22 12l-4 4-2-1"/><path d="M9 11l3 5 3-5"/>'),
     briefcase:  ico('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M3 12h18"/>'),
-    mail:       ico('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/>')
+    mail:       ico('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/>'),
+    camera:     ico('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/>'),
+    calculator: ico('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01"/>'),
+    calendar:   ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M9 15l2 2 4-4"/>')
   }
 
   /* ---------------------------------------------------------------
@@ -129,6 +132,15 @@
   window.STATVISION_INDUSTRIES_MENU = INDUSTRIES_MENU
   window.STATVISION_ABOUT_MENU     = ABOUT_MENU
 
+  var MORE_MENU = [
+    { key:'gallery',   label:'Gallery', desc:'Photos from our office, field work, training and events.', icon:'camera', action:'scroll', target:'gallery' },
+    { key:'resources', label:'Resources Centre', desc:'Articles, templates, reports, datasets and training materials.', icon:'fileText', action:'scroll', target:'resources' },
+    { key:'insights',  label:'Insights', desc:'Practical articles on statistics, research and analytics.', icon:'book', action:'scroll', target:'insights' },
+    { key:'quote',     label:'Get a Quote', desc:'Instant, indicative pricing for your project.', icon:'calculator', action:'scroll', target:'quote' },
+    { key:'booking',   label:'Book a Consultation', desc:'Schedule time with a StatVision consultant.', icon:'calendar', action:'scroll', target:'booking' }
+  ]
+  window.STATVISION_MORE_MENU = MORE_MENU
+
   /* ---------------------------------------------------------------
      Rendering helpers
      --------------------------------------------------------------- */
@@ -148,7 +160,8 @@
     var map = [
       { id:'servicesMegaMenu',   mobile:'servicesMobilePanel',   items:SERVICES_MENU,   kind:'service',  grid:false },
       { id:'industriesMegaMenu', mobile:'industriesMobilePanel', items:INDUSTRIES_MENU, kind:'industry', grid:true  },
-      { id:'aboutMegaMenu',      mobile:'aboutMobilePanel',      items:ABOUT_MENU,      kind:'about',    grid:true  }
+      { id:'aboutMegaMenu',      mobile:'aboutMobilePanel',      items:ABOUT_MENU,      kind:'about',    grid:true  },
+      { id:'moreMegaMenu',       mobile:'moreMobilePanel',       items:MORE_MENU,       kind:'more',     grid:true  }
     ]
     map.forEach(function(m){
       var d = document.getElementById(m.id)
@@ -250,7 +263,7 @@
   }
 
   function findItem(kind, key){
-    var list = kind==='service' ? SERVICES_MENU : kind==='industry' ? INDUSTRIES_MENU : ABOUT_MENU
+    var list = kind==='service' ? SERVICES_MENU : kind==='industry' ? INDUSTRIES_MENU : kind==='more' ? MORE_MENU : ABOUT_MENU
     for(var i=0;i<list.length;i++) if(list[i].key===key) return list[i]
     return null
   }
@@ -270,6 +283,7 @@
     var item = findItem(kind,key)
     if(!item) return
     if(kind==='industry'){ window.openInfoModal(item,'industry'); return }
+    if(kind==='more'){ goHomeSection(item.target); return }
     // about
     if(item.action==='team'){ if(typeof window.openTeamMember==='function') window.openTeamMember(item.target); return }
     if(item.action==='scroll'){ goHomeSection(item.target); return }
@@ -323,8 +337,8 @@
 
   document.addEventListener('DOMContentLoaded',function(){
     renderAll()
-    ;['navServicesItem','navIndustriesItem','navAboutItem'].forEach(wireDesktopDropdown)
-    ;['mmServicesItem','mmIndustriesItem','mmAboutItem'].forEach(wireMobileDropdown)
+    ;['navServicesItem','navIndustriesItem','navAboutItem','navMoreItem'].forEach(wireDesktopDropdown)
+    ;['mmServicesItem','mmIndustriesItem','mmAboutItem','mmMoreItem'].forEach(wireMobileDropdown)
     openFromHash()
   })
 })();
