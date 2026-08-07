@@ -1,0 +1,95 @@
+/* ===================================================================
+   StatVision — Booking System & Quotation Calculator (Phase 4)
+   Reuses site tokens (--navy,--border,--bg,--muted,--radius,--fheading)
+   and .fg/.frow form styles already defined in style.css, plus the
+   --sv-blue accent introduced in navbar.css.
+   =================================================================== */
+
+/* ---------- shared card shell ---------- */
+.tx-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.8rem;box-shadow:0 8px 24px rgba(16,24,40,.05);
+}
+
+/* =====================================================================
+   QUOTATION CALCULATOR
+   ===================================================================== */
+.quote-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:1.6rem;align-items:start;}
+@media (max-width:900px){.quote-layout{grid-template-columns:1fr;}}
+
+.quote-group{margin-bottom:1.3rem;}
+.quote-group > label{display:block;font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:.55rem;letter-spacing:.02em;}
+.quote-chip-grid{display:flex;flex-wrap:wrap;gap:.5rem;}
+.quote-chip{
+  background:var(--bg);border:1.5px solid var(--border);color:#475467;
+  font-size:.8rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;
+  cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease;
+}
+.quote-chip:hover{border-color:var(--sv-blue);}
+.quote-chip.active{background:var(--sv-blue);border-color:var(--sv-blue);color:#fff;}
+
+.quote-result{position:sticky;top:90px;}
+.quote-result .eyebrow{color:var(--sv-blue);}
+.quote-range{font-family:var(--fheading,serif);color:var(--navy);font-size:1.9rem;font-weight:700;margin:.3rem 0 .2rem;}
+.quote-range small{font-size:.9rem;font-weight:600;color:var(--muted);}
+.quote-note{font-size:.76rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.5;}
+.quote-breakdown{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.3rem;}
+.quote-breakdown li{display:flex;justify-content:space-between;font-size:.82rem;color:#475467;padding-bottom:.5rem;border-bottom:1px dashed var(--border);}
+.quote-breakdown li span:last-child{font-weight:700;color:var(--navy);}
+
+/* =====================================================================
+   BOOKING SYSTEM
+   ===================================================================== */
+.book-layout{display:grid;grid-template-columns:1fr;gap:1.6rem;}
+
+.book-group{margin-bottom:1.3rem;}
+.book-group > label{display:block;font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;letter-spacing:.02em;}
+
+.book-consultant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;}
+.book-consultant{
+  background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.9rem .8rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:.4rem;cursor:pointer;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+.book-consultant:hover{border-color:var(--sv-blue);}
+.book-consultant.active{border-color:var(--sv-blue);box-shadow:0 0 0 3px var(--sv-blue-tint);}
+.book-consultant-avatar{
+  width:44px;height:44px;border-radius:50%;background:var(--sv-blue-tint);color:var(--sv-blue);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;
+}
+.book-consultant strong{font-size:.82rem;color:var(--navy);}
+.book-consultant span{font-size:.72rem;color:var(--muted);}
+
+.book-slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:.55rem;}
+.book-slot{
+  background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:.55rem .3rem;
+  font-size:.8rem;font-weight:600;color:#475467;cursor:pointer;text-align:center;
+  transition:background .16s ease,border-color .16s ease,color .16s ease;
+}
+.book-slot:hover{border-color:var(--sv-blue);}
+.book-slot.active{background:var(--sv-blue);border-color:var(--sv-blue);color:#fff;}
+.book-slot.disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}
+
+.book-summary{
+  background:var(--sv-blue-tint);border-radius:12px;padding:1rem 1.1rem;font-size:.82rem;color:#1a3a7a;
+  margin-bottom:1.1rem;display:none;
+}
+.book-summary.show{display:block;}
+.book-summary strong{color:var(--navy);}
+
+.book-confirm{
+  display:none;text-align:center;padding:2.2rem 1rem;
+}
+.book-confirm.show{display:block;}
+.book-confirm-ico{
+  width:60px;height:60px;border-radius:50%;background:#e6f7ec;color:#12805c;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;
+}
+.book-confirm h3{font-family:var(--fheading,serif);color:var(--navy);font-size:1.2rem;margin-bottom:.4rem;}
+.book-confirm p{color:var(--muted);font-size:.86rem;max-width:420px;margin:0 auto;}
+
+.tx-status{font-size:.8rem;margin-top:.6rem;min-height:1.1em;}
+
+@media (max-width:640px){
+  .tx-card{padding:1.3rem;}
+}

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="navbar.css">
 <link rel="stylesheet" href="content-hubs.css">
+<link rel="stylesheet" href="booking-quote.css">
 <!-- Firebase must load BEFORE app.js, since app.js uses fbAuth/fbDB right away -->
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js" defer></script>
@@ -17,6 +18,7 @@
 <script src="app.js" defer></script>
 <script src="navbar.js" defer></script>
 <script src="content-hubs.js" defer></script>
+<script src="booking-quote.js" defer></script>
 </head>
 <body>
 <header class="navbar" id="mainNav">
@@ -71,6 +73,8 @@
       <a href="#gallery">Gallery</a>
       <a href="#resources">Resources</a>
       <a href="#insights">Insights</a>
+      <a href="#quote">Get a Quote</a>
+      <a href="#booking">Book Now</a>
       <a href="#contact">Contact</a>
     </div>
 
@@ -110,6 +114,8 @@
   <a href="#gallery" onclick="toggleMM()">Gallery</a>
   <a href="#resources" onclick="toggleMM()">Resources</a>
   <a href="#insights" onclick="toggleMM()">Insights</a>
+  <a href="#quote" onclick="toggleMM()">Get a Quote</a>
+  <a href="#booking" onclick="toggleMM()">Book Now</a>
   <a href="#contact" onclick="toggleMM()">Contact</a>
 </div>
 
@@ -784,6 +790,79 @@
       </div>
     </div>
     <div class="insights-grid reveal reveal-stagger" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- ============ QUOTATION CALCULATOR ============ -->
+<section class="quote-section" id="quote">
+  <div class="section-inner">
+    <span class="eyebrow">Get an Estimate</span>
+    <h2>Online Quotation Calculator</h2>
+    <p class="section-sub">Select your requirements for an instant, indicative estimate. Your exact quotation is confirmed after a short consultation.</p>
+    <div class="quote-layout">
+      <div class="tx-card">
+        <div class="quote-group"><label>1. Service</label><div class="quote-chip-grid" id="quoteServiceChips"></div></div>
+        <div class="quote-group"><label>2. Organization Type</label><div class="quote-chip-grid" id="quoteOrgChips"></div></div>
+        <div class="quote-group"><label>3. Timeline</label><div class="quote-chip-grid" id="quoteTimelineChips"></div></div>
+        <div class="quote-group"><label>4. Dataset Size</label><div class="quote-chip-grid" id="quoteSizeChips"></div></div>
+        <div class="quote-group" style="margin-bottom:0"><label>5. Additional Deliverables (optional)</label><div class="quote-chip-grid" id="quoteDeliverableChips"></div></div>
+      </div>
+      <div class="tx-card quote-result">
+        <span class="eyebrow">Estimated Investment</span>
+        <div id="quoteResult"><p class="quote-note">Select a service to see your estimate.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING SYSTEM ============ -->
+<section class="book-section" id="booking">
+  <div class="section-inner">
+    <span class="eyebrow">Schedule a Consultation</span>
+    <h2>Book a Consultation</h2>
+    <p class="section-sub">Pick a service, a consultant, and a time that works for you — we'll confirm within 4 business hours.</p>
+    <div class="tx-card">
+      <div id="bookFormWrap">
+        <div class="book-layout">
+          <div class="book-group">
+            <label>Service</label>
+            <select id="bookServiceSelect"></select>
+          </div>
+          <div class="book-group">
+            <label>Consultant</label>
+            <div class="book-consultant-grid" id="bookConsultantGrid"></div>
+          </div>
+          <div class="frow">
+            <div class="book-group"><label>Preferred Date</label><input type="date" id="bookDateInput"/></div>
+            <div class="book-group"><label>&nbsp;</label></div>
+          </div>
+          <div class="book-group">
+            <label>Preferred Time</label>
+            <div class="book-slot-grid" id="bookSlotGrid"></div>
+          </div>
+          <div class="book-summary" id="bookSummary"></div>
+          <div class="frow">
+            <div class="fg"><label>Full Name</label><input type="text" id="bookName" placeholder="Your full name"/></div>
+            <div class="fg"><label>Email Address</label><input type="email" id="bookEmail" placeholder="your@email.com"/></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label>Phone Number</label><input type="tel" id="bookPhone" placeholder="+254 748 216 918"/></div>
+            <div class="fg"><label>Organisation (optional)</label><input type="text" id="bookOrg" placeholder="University, Company, NGO..."/></div>
+          </div>
+          <div class="fg"><label>What would you like to discuss? (optional)</label><textarea id="bookNotes" placeholder="Brief context for your consultant..."></textarea></div>
+          <button type="button" class="bp" onclick="submitBooking()">Confirm Booking &rarr;</button>
+          <div class="tx-status" id="bookStatus"></div>
+        </div>
+      </div>
+      <div class="book-confirm" id="bookConfirm">
+        <div class="book-confirm-ico">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3>Booking Received!</h3>
+        <p id="bookConfirmDetails"></p>
+        <button type="button" class="bsec" style="margin-top:1.3rem" onclick="resetBookingForm()">Book Another Consultation</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1501,6 +1580,7 @@
     <button class="snav" onclick="adTab('services',this)"><span class="sni">🛠️</span>Manage Services</button>
     <button class="snav" onclick="adTab('team',this)"><span class="sni">🧑‍💼</span>Team Profiles</button>
     <button class="snav" onclick="adTab('hubs',this)"><span class="sni">🗂️</span>Content Hubs</button>
+    <button class="snav" onclick="adTab('bookings',this)"><span class="sni">📅</span>Bookings</button>
     <button class="snav" onclick="adTab('profile',this)"><span class="sni">👤</span>My Profile</button>
     <div class="ssep"></div>
     <button class="snav" onclick="adTab('analysts',this)"><span class="sni">➕</span>Add Analyst</button>
@@ -1885,6 +1965,14 @@
           <button class="db1 dba" onclick="publishBlogPost()">⬆ Publish Article</button>
           <div id="blogUploadStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
           <div id="blogAdminList" style="margin-top:1.2rem"></div>
+        </div>
+      </div>
+      <!-- BOOKINGS -->
+      <div id="adtab-bookings" style="display:none">
+        <div class="odtl">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">📅 Consultation Bookings</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1.2rem">Bookings submitted through the public "Book a Consultation" section. Update status as you confirm each one.</p>
+          <div id="bookingsAdminList"></div>
         </div>
       </div>
       <!-- PROFILE -->

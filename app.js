@@ -2378,7 +2378,7 @@ function adTab(n,btn){
   document.querySelectorAll('#page-admin .snav').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')
   document.querySelectorAll('#page-admin [id^=adtab-]').forEach(d=>d.style.display='none')
   const el=document.getElementById('adtab-'+n);if(el)el.style.display='block'
-  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',services:'Manage Services',team:'Team Profiles',hubs:'Content Hubs',profile:'My Profile'}
+  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',services:'Manage Services',team:'Team Profiles',hubs:'Content Hubs',bookings:'Bookings',profile:'My Profile'}
   document.getElementById('adTabTitle').textContent=t[n]||n
   renderSQL()
   if(n==='finance') renderFinance()
@@ -2388,6 +2388,7 @@ function adTab(n,btn){
   if(n==='content') loadSiteImages()
   if(n==='services') renderAdminServicesPanel()
   if(n==='team') renderAdminTeamPanel()
+  if(n==='bookings'){ if(typeof loadBookingsAdmin==='function') loadBookingsAdmin() }
   if(n==='hubs'){
     if(typeof loadDashboardShowcaseAdmin==='function') loadDashboardShowcaseAdmin()
     if(typeof loadGalleryAdmin==='function') loadGalleryAdmin()

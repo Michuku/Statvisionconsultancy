@@ -51,7 +51,7 @@ service cloud.firestore {
       }
     }
 
-    // ===== Phase 3: Content Hubs =====
+    // ===== Phase 3: Content Hubs (new) =====
     // Dashboards & Deliverables Showcase (multi-tool sample previews)
     match /dashboardShowcase/{docId} {
       allow read: if true;
@@ -74,6 +74,15 @@ service cloud.firestore {
     match /blogPosts/{docId} {
       allow read: if true;
       allow write: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ===== Phase 4: Booking System (new) =====
+    // Public visitors can submit a booking without being logged in.
+    // Only admins can read/manage the list (shown in the Admin > Bookings tab).
+    match /bookings/{bookingId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null &&
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
   }
