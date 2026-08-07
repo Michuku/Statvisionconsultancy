@@ -651,14 +651,22 @@ function toggleServiceAccordion(){
   }
 }
 
-// ---- Full-screen lightbox for gallery images ----
-function openLightbox(url){
+// ---- Full-screen lightbox for gallery images (also used by the
+//      Dashboards showcase and Portfolio Gallery sections) ----
+function openLightbox(url,downloadUrl){
   document.getElementById('serviceLightboxImg').src=url
+  const dl=document.getElementById('serviceLightboxDownload')
+  if(dl){
+    if(downloadUrl){ dl.href=downloadUrl; dl.style.display='flex' }
+    else{ dl.style.display='none' }
+  }
   document.getElementById('serviceLightbox').classList.add('open')
 }
 function closeLightbox(){
   document.getElementById('serviceLightbox').classList.remove('open')
 }
+window.openLightbox=openLightbox
+window.closeLightbox=closeLightbox
 
 async function openServiceModal(id){
   const s = SERVICES_DATA[id]
@@ -2370,7 +2378,7 @@ function adTab(n,btn){
   document.querySelectorAll('#page-admin .snav').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')
   document.querySelectorAll('#page-admin [id^=adtab-]').forEach(d=>d.style.display='none')
   const el=document.getElementById('adtab-'+n);if(el)el.style.display='block'
-  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',services:'Manage Services',team:'Team Profiles',profile:'My Profile'}
+  const t={overview:'Admin Overview',orders:'All Orders',tracker:'Project Tracker',clients:'Client Management',analysts:'Analyst Accounts',finance:'Financial Management',reports:'Reports & Analytics',notifs:'Notification Centre',content:'Website Content',services:'Manage Services',team:'Team Profiles',hubs:'Content Hubs',profile:'My Profile'}
   document.getElementById('adTabTitle').textContent=t[n]||n
   renderSQL()
   if(n==='finance') renderFinance()
@@ -2380,6 +2388,12 @@ function adTab(n,btn){
   if(n==='content') loadSiteImages()
   if(n==='services') renderAdminServicesPanel()
   if(n==='team') renderAdminTeamPanel()
+  if(n==='hubs'){
+    if(typeof loadDashboardShowcaseAdmin==='function') loadDashboardShowcaseAdmin()
+    if(typeof loadGalleryAdmin==='function') loadGalleryAdmin()
+    if(typeof loadResourcesAdmin==='function') loadResourcesAdmin()
+    if(typeof loadBlogAdmin==='function') loadBlogAdmin()
+  }
 }
 function filt(btn,f){btn.closest('.filt').querySelectorAll('.fb2').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}
 function toggleCreateAnalyst(){const f=document.getElementById('createAnalystForm');f.style.display=f.style.display==='none'?'block':'none'}

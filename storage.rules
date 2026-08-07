@@ -1,0 +1,50 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profile-pictures/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /team-photos/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /site-media/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /service-icons/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /service-gallery/{serviceId}/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /service-dashboards/{serviceId}/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /orders/{orderId}/{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ===== Phase 3: Content Hubs =====
+    match /dashboard-showcase/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /gallery-items/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /resources/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /blog-media/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

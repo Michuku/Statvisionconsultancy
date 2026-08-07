@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="content-hubs.css">
 <!-- Firebase must load BEFORE app.js, since app.js uses fbAuth/fbDB right away -->
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js" defer></script>
@@ -15,6 +16,7 @@
 <script src="firebase-config.js" defer></script>
 <script src="app.js" defer></script>
 <script src="navbar.js" defer></script>
+<script src="content-hubs.js" defer></script>
 </head>
 <body>
 <header class="navbar" id="mainNav">
@@ -64,7 +66,10 @@
         </button>
         <div class="nav-dd-panel nav-dd-panel--wide" id="industriesMegaMenu" role="menu" aria-label="Industries"></div>
       </div>
+      <a href="#dashboards">Dashboards</a>
       <a href="#portfolio">Portfolio</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#resources">Resources</a>
       <a href="#insights">Insights</a>
       <a href="#contact">Contact</a>
     </div>
@@ -100,7 +105,10 @@
     </button>
     <div class="mm-dd-panel" id="industriesMobilePanel"></div>
   </div>
+  <a href="#dashboards" onclick="toggleMM()">Dashboards</a>
   <a href="#portfolio" onclick="toggleMM()">Portfolio</a>
+  <a href="#gallery" onclick="toggleMM()">Gallery</a>
+  <a href="#resources" onclick="toggleMM()">Resources</a>
   <a href="#insights" onclick="toggleMM()">Insights</a>
   <a href="#contact" onclick="toggleMM()">Contact</a>
 </div>
@@ -117,6 +125,19 @@
       </div>
     </div>
     <div class="info-modal-body" id="infoModalBody"></div>
+  </div>
+</div>
+
+<!-- ============ BLOG POST MODAL ============ -->
+<div class="info-modal" id="blogModal" onclick="if(event.target===this) closeBlogPost()">
+  <div class="info-modal-content">
+    <button type="button" class="info-modal-close" aria-label="Close" onclick="closeBlogPost()">&times;</button>
+    <span class="info-modal-tag" id="blogModalTag"></span>
+    <h2 style="font-family:var(--fheading,serif);color:var(--navy);font-size:1.4rem;margin:.35rem 0 1rem;" id="blogModalTitle"></h2>
+    <img class="blog-modal-cover" id="blogModalCover" src="" alt="" style="display:none">
+    <div class="blog-modal-body" id="blogModalBody"></div>
+    <div class="blog-tags" id="blogModalTags"></div>
+    <div class="blog-related" id="blogModalRelated"></div>
   </div>
 </div>
 
@@ -551,6 +572,19 @@
 </section>
 
 <!-- ============ INDUSTRIES ============ -->
+<!-- ============ DASHBOARDS SHOWCASE (multi-tool sample deliverables) ============ -->
+<section class="dashboards-showcase" id="dashboards">
+  <div class="section-inner">
+    <span class="eyebrow">Our Toolkit</span>
+    <h2>Dashboards &amp; Deliverables Showcase</h2>
+    <p class="section-sub">Sample dashboards and outputs across the tools our team works in every day. Click any preview to zoom, or download a sample.</p>
+    <div class="hub-toolbar">
+      <div class="hub-tabs" id="dashFilterTabs"></div>
+    </div>
+    <div class="dash-grid" id="dashShowcaseGrid"></div>
+  </div>
+</section>
+
 <section class="industries" id="industries">
   <div class="section-inner">
     <span class="eyebrow">Industries</span>
@@ -649,6 +683,36 @@
 </section>
 
 <!-- ============ ABOUT ============ -->
+<!-- ============ PORTFOLIO GALLERY (photos) ============ -->
+<section class="site-gallery" id="gallery">
+  <div class="section-inner">
+    <span class="eyebrow">Gallery</span>
+    <h2>Moments From Our Work</h2>
+    <p class="section-sub">Office, field work, training sessions and events — a look at StatVision in action.</p>
+    <div class="hub-toolbar">
+      <div class="hub-tabs" id="galleryFilterTabs"></div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ============ RESOURCES CENTRE ============ -->
+<section class="resources-centre" id="resources">
+  <div class="section-inner">
+    <span class="eyebrow">Resources Centre</span>
+    <h2>Articles, Templates &amp; Downloads</h2>
+    <p class="section-sub">Free research articles, templates, reports, datasets and training materials from our team.</p>
+    <div class="hub-toolbar">
+      <div class="hub-tabs" id="resourceFilterTabs"></div>
+      <div class="hub-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="resourceSearch" placeholder="Search resources...">
+      </div>
+    </div>
+    <div class="resource-grid" id="resourceGrid"></div>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="section-inner">
     <div class="about-grid reveal">
@@ -706,31 +770,20 @@
   </div>
 </section>
 
-<!-- ============ INSIGHTS ============ -->
+<!-- ============ INSIGHTS / BLOG ============ -->
 <section class="insights" id="insights">
   <div class="section-inner">
     <span class="eyebrow">Insights</span>
     <h2>Latest Insights &amp; Articles</h2>
-    <div class="insights-grid reveal reveal-stagger">
-      <article class="insight-card">
-        <span class="insight-tag">Research</span>
-        <h3>5 Signs Your Organization Needs an M&amp;E Framework</h3>
-        <p>How to know when it's time to move from ad-hoc reporting to a structured monitoring &amp; evaluation system.</p>
-        <a href="#">Read More &rarr;</a>
-      </article>
-      <article class="insight-card">
-        <span class="insight-tag">Business Intelligence</span>
-        <h3>Power BI vs Excel: Choosing the Right Tool</h3>
-        <p>A practical comparison for organizations deciding how to modernize their reporting stack.</p>
-        <a href="#">Read More &rarr;</a>
-      </article>
-      <article class="insight-card">
-        <span class="insight-tag">Statistics</span>
-        <h3>Common Data Cleaning Mistakes in SPSS</h3>
-        <p>The most frequent errors we see in raw datasets — and how to fix them before analysis.</p>
-        <a href="#">Read More &rarr;</a>
-      </article>
+    <p class="section-sub">Practical thinking on statistics, research, monitoring and business intelligence from our team.</p>
+    <div class="hub-toolbar">
+      <div class="hub-tabs" id="blogFilterTabs"></div>
+      <div class="hub-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="blogSearch" placeholder="Search articles...">
+      </div>
     </div>
+    <div class="insights-grid reveal reveal-stagger" id="blogGrid"></div>
   </div>
 </section>
 
@@ -1447,6 +1500,7 @@
     <button class="snav" onclick="adTab('content',this)"><span class="sni">🌐</span>Website Content</button>
     <button class="snav" onclick="adTab('services',this)"><span class="sni">🛠️</span>Manage Services</button>
     <button class="snav" onclick="adTab('team',this)"><span class="sni">🧑‍💼</span>Team Profiles</button>
+    <button class="snav" onclick="adTab('hubs',this)"><span class="sni">🗂️</span>Content Hubs</button>
     <button class="snav" onclick="adTab('profile',this)"><span class="sni">👤</span>My Profile</button>
     <div class="ssep"></div>
     <button class="snav" onclick="adTab('analysts',this)"><span class="sni">➕</span>Add Analyst</button>
@@ -1749,6 +1803,90 @@
           </div>
         </div>
       </div>
+      <!-- CONTENT HUBS: Dashboards showcase / Gallery / Resources / Blog -->
+      <div id="adtab-hubs" style="display:none">
+        <div class="odtl">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">📊 Dashboards Showcase</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1rem">Upload sample dashboard screenshots tagged by tool. They appear on the homepage "Dashboards &amp; Deliverables Showcase" section.</p>
+          <div style="display:grid;grid-template-columns:2fr 1fr;gap:.8rem">
+            <div class="fg"><label>Title (optional)</label><input type="text" id="dashUploadTitle" placeholder="e.g. Executive KPI Dashboard"/></div>
+            <div class="fg"><label>Tool</label>
+              <select id="dashUploadTool">
+                <option value="powerbi">Power BI</option><option value="excel">Excel</option>
+                <option value="spss">SPSS</option><option value="r">R</option>
+                <option value="python">Python</option><option value="sql">SQL</option>
+                <option value="tableau">Tableau</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg"><label>Image</label><input type="file" id="dashUploadInput" accept="image/*"/></div>
+          <button class="db1 dba" onclick="uploadDashboardShowcase()">⬆ Upload Dashboard Preview</button>
+          <div id="dashUploadStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
+          <div id="dashAdminGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem;margin-top:1.2rem"></div>
+        </div>
+
+        <div class="odtl" style="margin-top:1.2rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">🖼️ Portfolio Gallery</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1rem">Upload photos tagged by category. They appear on the homepage "Gallery" section, filterable by visitors.</p>
+          <div style="display:grid;grid-template-columns:2fr 1fr;gap:.8rem">
+            <div class="fg"><label>Choose image(s)</label><input type="file" id="galleryUploadInput" accept="image/*" multiple/></div>
+            <div class="fg"><label>Category</label>
+              <select id="galleryUploadCat">
+                <option value="office">Office</option><option value="training">Training</option>
+                <option value="fieldwork">Field Work</option><option value="dashboards">Dashboards</option>
+                <option value="presentations">Presentations</option><option value="research">Research</option>
+                <option value="events">Events</option>
+              </select>
+            </div>
+          </div>
+          <button class="db1 dba" onclick="uploadGalleryItem()">⬆ Upload to Gallery</button>
+          <div id="galleryUploadStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
+          <div id="galleryAdminGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem;margin-top:1.2rem"></div>
+        </div>
+
+        <div class="odtl" style="margin-top:1.2rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">📁 Resources Centre</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1rem">Upload downloadable articles, templates, reports, datasets or training materials.</p>
+          <div class="fg"><label>Title</label><input type="text" id="resourceUploadTitle" placeholder="e.g. M&E Indicator Template"/></div>
+          <div class="fg"><label>Description</label><input type="text" id="resourceUploadDesc" placeholder="One-line description"/></div>
+          <div style="display:grid;grid-template-columns:2fr 1fr;gap:.8rem">
+            <div class="fg"><label>File (PDF, DOCX, XLSX...)</label><input type="file" id="resourceUploadFile"/></div>
+            <div class="fg"><label>Category</label>
+              <select id="resourceUploadCat">
+                <option value="articles">Research Articles</option><option value="templates">Templates</option>
+                <option value="reports">Reports</option><option value="datasets">Datasets</option>
+                <option value="training">Training Materials</option>
+              </select>
+            </div>
+          </div>
+          <button class="db1 dba" onclick="uploadResource()">⬆ Upload Resource</button>
+          <div id="resourceUploadStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
+          <div id="resourceAdminList" style="margin-top:1.2rem"></div>
+        </div>
+
+        <div class="odtl" style="margin-top:1.2rem">
+          <h3 style="font-family:var(--fd);font-size:1rem;margin-bottom:.4rem">📝 Blog / Insights</h3>
+          <p style="font-size:.8rem;color:var(--sl);margin-bottom:1rem">Publish an article. One paragraph per line in the body field.</p>
+          <div class="fg"><label>Title</label><input type="text" id="blogUploadTitle"/></div>
+          <div class="fg"><label>Excerpt (short summary shown on the card)</label><input type="text" id="blogUploadExcerpt"/></div>
+          <div class="fg"><label>Body (one paragraph per line)</label><textarea id="blogUploadBody" rows="5"></textarea></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+            <div class="fg"><label>Category</label>
+              <select id="blogUploadCat">
+                <option value="statistics">Statistics</option><option value="research">Research</option>
+                <option value="monitoring">Monitoring</option><option value="datascience">Data Science</option>
+                <option value="powerbi">Power BI</option><option value="spss">SPSS</option>
+                <option value="r">R</option><option value="python">Python</option><option value="sql">SQL</option>
+              </select>
+            </div>
+            <div class="fg"><label>Tags (comma-separated)</label><input type="text" id="blogUploadTags" placeholder="e.g. M&E, indicators"/></div>
+          </div>
+          <div class="fg"><label>Cover image (optional)</label><input type="file" id="blogUploadCover" accept="image/*"/></div>
+          <button class="db1 dba" onclick="publishBlogPost()">⬆ Publish Article</button>
+          <div id="blogUploadStatus" style="margin-top:.6rem;font-size:.8rem;color:var(--sl)"></div>
+          <div id="blogAdminList" style="margin-top:1.2rem"></div>
+        </div>
+      </div>
       <!-- PROFILE -->
       <div id="adtab-profile" style="display:none">
         <div class="odtl" style="max-width:560px">
@@ -1926,6 +2064,9 @@
 <!-- Full-screen image lightbox for the service gallery -->
 <div class="sm-lightbox" id="serviceLightbox" onclick="closeLightbox()">
   <img id="serviceLightboxImg" src="" alt=""/>
+  <a id="serviceLightboxDownload" href="" download onclick="event.stopPropagation()" style="display:none;position:absolute;top:1.1rem;right:4.2rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;align-items:center;justify-content:center;text-decoration:none;" title="Download image">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+  </a>
   <button class="sm-lightbox-close" onclick="closeLightbox()">✕</button>
 </div>
 
