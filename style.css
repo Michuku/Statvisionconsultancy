@@ -928,20 +928,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
 .hero-visual{position:relative;min-height:300px;display:flex;align-items:center;justify-content:center;}
 
-/* ===== Hero professional photo + subtle blue data/tech decorations ===== */
-.hero-visual-decor{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:28px;}
-.hvd-circle{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(96,165,250,.28),rgba(37,99,235,.06) 70%);}
-.hvd-circle-1{width:260px;height:260px;top:-40px;right:-60px;}
-.hvd-circle-2{width:170px;height:170px;bottom:10%;left:-40px;background:radial-gradient(circle at 40% 40%,rgba(37,99,235,.16),transparent 70%);}
-.hvd-dots{position:absolute;width:110px;height:80px;background-image:radial-gradient(rgba(37,99,235,.35) 1.6px,transparent 1.6px);background-size:14px 14px;}
-.hvd-dots-1{top:6%;right:8%;}
-.hvd-dots-2{bottom:8%;left:4%;}
-.hvd-lines{position:absolute;inset:0;width:100%;height:100%;}
-.hvd-line{fill:none;stroke:var(--lightblue);stroke-width:2;stroke-linecap:round;opacity:.35;}
-.hvd-line-alt{stroke:var(--blue);opacity:.22;}
-
-.hero-professional{position:relative;z-index:1;width:100%;max-width:300px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);height:300px;max-height:48vh;}
-.hero-professional-image{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;}
+/* ===== Hero professional photo (image itself carries the blue data/tech motif) ===== */
+.hero-professional{position:relative;z-index:1;width:100%;max-width:520px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;max-height:52vh;}
+.hero-professional-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
 
 /* TRUST BAR */
 /* STATS BAR */
