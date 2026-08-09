@@ -15,6 +15,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js" defer></script>
 <script src="firebase-config.js" defer></script>
+<script src="hero-rotator.js" defer></script>
 <script src="app.js" defer></script>
 <script src="navbar.js" defer></script>
 <script src="content-hubs.js" defer></script>
@@ -155,7 +156,7 @@
   <div class="hero-inner">
     <div class="hero-copy">
       <span class="eyebrow">Welcome to StatVision</span>
-      <h1>Turning Complex Data Into Powerful <span class="highlight">Business Intelligence.</span></h1>
+      <h1 id="heroHeadline">Turning Complex Data Into Powerful <span class="highlight">Business Intelligence.</span></h1>
       <p class="hero-sub">StatVision Research &amp; Consultancy empowers organizations with data-driven insights through research, analytics, monitoring &amp; evaluation, and intelligent reporting.</p>
       <div class="hero-ctas">
         <a href="#" class="btn btn-primary" onclick="openModal();return false">Request Consultation <span aria-hidden="true">&rarr;</span></a>
@@ -194,7 +195,8 @@
       <div class="hero-professional">
         <img src="hero-consultant.jpg"
              alt="StatVision data professional working on a laptop"
-             class="hero-professional-image">
+             class="hero-professional-image"
+             id="heroImage">
       </div>
     </div>
   </div>
