@@ -905,6 +905,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 @keyframes cubeSpin{from{transform:rotateX(0deg) rotateY(0deg)}to{transform:rotateX(360deg) rotateY(360deg)}}
 .logo-text{font-family:var(--fheading);font-weight:800;font-size:20px;color:var(--navy);line-height:1.1;}
 .logo-text small{display:block;font-family:'Segoe UI',system-ui,sans-serif;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.02em;}
+.logo-img{height:44px;width:auto;display:block;}
+.footer-logo-img{height:52px;}
+.sm-topbar-logo{height:32px;}
 .nav-links{display:flex;gap:26px;align-items:center;}
 .nav-links a{font-size:14.5px;font-weight:500;color:#344054;transition:color .2s;}
 .nav-links a:hover{color:var(--navy);}
