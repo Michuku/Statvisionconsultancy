@@ -34,8 +34,7 @@
     </a>
 
     <div class="nav-links">
-      <a href="#" class="nav-client" onclick="goClient();return false">Client Login</a>
-      <a href="#" class="active">Home</a>
+      <a href="#" id="navHomeLink" class="active" onclick="showPage('home');window.scrollTo(0,0);return false">Home</a>
       <div class="nav-item-dropdown" id="navAboutItem">
         <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
           About Us <span class="caret" aria-hidden="true">▾</span>
@@ -63,6 +62,7 @@
         <div class="nav-dd-panel nav-dd-panel--wide" id="moreMegaMenu" role="menu" aria-label="More"></div>
       </div>
       <a href="#contact">Contact</a>
+      <a href="#" class="nav-client" onclick="goClient();return false">Client Login</a>
     </div>
 
     <div class="nav-actions">
@@ -77,7 +77,7 @@
 </header>
 <div class="mm" id="mmenu">
   <a href="#" onclick="goClient();toggleMM();return false">Client Login</a>
-  <a href="#" onclick="toggleMM();return false">Home</a>
+  <a href="#" onclick="showPage('home');window.scrollTo(0,0);toggleMM();return false">Home</a>
   <div class="mm-item-dropdown" id="mmAboutItem">
     <button type="button" class="mm-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
       About Us <span class="caret" aria-hidden="true">▾</span>

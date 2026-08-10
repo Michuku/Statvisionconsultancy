@@ -3,6 +3,8 @@ function showPage(p){
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'))
   const pg=document.getElementById('page-'+p)
   if(pg){pg.classList.add('active');window.scrollTo(0,0)}
+  const homeLink=document.getElementById('navHomeLink')
+  if(homeLink) homeLink.classList.toggle('active', p==='home')
   sessionStorage.setItem('db_lastPage',p)
   renderSQL()
 }
