@@ -124,15 +124,15 @@
    =================================================================== */
 .info-modal{
   display:none;position:fixed;inset:0;z-index:1200;
-  background:rgba(6,15,46,.55);backdrop-filter:blur(6px);
+  background:#fff;
   align-items:flex-start;justify-content:center;
-  padding:6vh 1.2rem;overflow-y:auto;
+  padding:0;overflow-y:auto;
 }
 .info-modal.open{display:flex;}
 .info-modal-content{
-  background:#fff;border-radius:18px;width:100%;max-width:640px;
-  box-shadow:0 30px 70px rgba(6,15,46,.35);position:relative;
-  padding:2.2rem 2.2rem 2.4rem;
+  background:#fff;border-radius:0;width:100%;max-width:none;min-height:100vh;
+  box-shadow:none;position:relative;
+  padding:6vh max(1.5rem,calc(50% - 420px)) 4rem;
   opacity:0;transform:translateY(14px);
 }
 .info-modal-content.info-animate-in{
@@ -140,13 +140,13 @@
 }
 @keyframes infoModalIn{to{opacity:1;transform:translateY(0);}}
 .info-modal-close{
-  position:absolute;top:1.1rem;right:1.1rem;width:34px;height:34px;border-radius:50%;
-  border:none;background:#f1f4fa;color:var(--navy);font-size:1.2rem;line-height:1;
+  position:fixed;top:1.4rem;right:1.4rem;width:40px;height:40px;border-radius:50%;
+  border:none;background:#f1f4fa;color:var(--navy);font-size:1.3rem;line-height:1;
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:background .15s ease;
+  transition:background .15s ease;z-index:1;
 }
 .info-modal-close:hover{background:#e2e9fa;}
-.info-modal-head{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;padding-right:2rem;}
+.info-modal-head{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;padding-right:2rem;max-width:720px;margin-left:auto;margin-right:auto;}
 .info-modal-ico{
   flex-shrink:0;width:52px;height:52px;border-radius:13px;
   background:var(--sv-blue-tint);color:var(--sv-blue);
@@ -155,6 +155,7 @@
 .info-modal-ico svg{width:26px;height:26px;}
 .info-modal-head h2{font-family:var(--fheading,serif);color:var(--navy);font-size:1.35rem;margin-bottom:.3rem;}
 .info-modal-tag{color:var(--muted);font-size:.92rem;}
+.info-modal-body{max-width:720px;margin-left:auto;margin-right:auto;}
 .info-modal-body p{color:#475467;font-size:.93rem;line-height:1.65;margin-bottom:.85rem;}
 .info-modal-bullets{list-style:none;margin-top:.4rem;display:flex;flex-direction:column;gap:.55rem;}
 .info-modal-bullets li{
@@ -166,5 +167,5 @@
 }
 
 @media (max-width:640px){
-  .info-modal-content{padding:1.6rem 1.4rem 1.8rem;border-radius:14px;}
+  .info-modal-content{padding:5.5rem 1.2rem 3rem;}
 }
