@@ -968,8 +968,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* SERVICES */
 .section-inner{max-width:1400px;margin:0 auto;padding:50px 40px;}
 .services h2,.live-dash h2{font-family:var(--fheading);font-size:28px;font-weight:800;color:#0d1b3e;margin-bottom:26px;}
-.service-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-.service-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;overflow:hidden;cursor:pointer;
+.services-head{text-align:center;max-width:720px;margin:0 auto 42px;}
+.services-head h2{margin-bottom:10px;}
+.services-sub{font-family:var(--fheading);font-size:17px;font-weight:600;color:var(--blue,#1d4ed8);margin-bottom:14px;}
+.services-intro{font-size:14.5px;line-height:1.7;color:var(--muted);margin:0;}
+.service-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.service-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;overflow:hidden;cursor:pointer;
+  box-shadow:0 1px 3px rgba(16,24,40,.05);text-align:center;
   transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease;}
 .service-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:0;}
 .service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
@@ -980,7 +985,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .service-card a{font-size:13px;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:4px;}
 .service-card a span{transition:transform .3s ease;}
 .service-card:hover a span{transform:translateX(4px);}
-.s-ico{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;font-size:17px;margin-bottom:14px;transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+.s-ico{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;font-size:17px;margin:0 auto 14px;transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
 
 /* Per-card colour identity + unique hover motion & glow */
 .service-card:nth-child(1){border-top:3px solid transparent}
@@ -1046,6 +1051,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .service-card:has(.s-ico.cyan):hover::before{opacity:.08;}
 .service-card:has(.s-ico.cyan):hover::after{background:#0891b2;transform:scaleX(1);}
 .service-card:has(.s-ico.cyan):hover .s-ico{transform:rotate(-8deg) scale(1.12);}
+
+/* Uploaded-icon service tiles — sits on top of the .s-ico.<color> rules above
+   so it overrides their flat tint fill with a clean white tile that frames
+   the uploaded artwork proportionally, without distortion. */
+.s-ico.svc-ico-img{
+  width:64px;height:64px;border-radius:12px;padding:8px;
+  background:#fff;border:1px solid var(--border);
+}
+.s-ico.svc-ico-img img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+.service-card:hover .s-ico.svc-ico-img img{transform:scale(1.1);}
+.service-card .s-tools{text-align:center;}
+.service-card a{justify-content:center;width:100%;}
 
 .service-next{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--navy);}
 
