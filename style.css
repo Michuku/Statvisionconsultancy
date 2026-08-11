@@ -1064,6 +1064,41 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .service-card .s-tools{text-align:center;}
 .service-card a{justify-content:center;width:100%;}
 
+/* StatVision blue theme override — Services section accents only.
+   Replaces the prior multi-colour (incl. green) card accents with the
+   StatVision blue palette. Scoped to .services / .service-card so no
+   other section, and no global --navy/--blue variable, is touched. */
+.services-sub{color:#0066B3;}
+.services .s-ico.svc-ico-img{background:#EAF5FC;border-color:#1688D4;}
+.services .service-card a{color:#062B49;}
+
+.services .s-ico.blue,
+.services .s-ico.green,
+.services .s-ico.violet,
+.services .s-ico.teal,
+.services .s-ico.amber,
+.services .s-ico.green2{background:#EAF5FC;color:#0066B3;}
+
+.services .service-card:has(.s-ico.blue)::before,
+.services .service-card:has(.s-ico.violet)::before,
+.services .service-card:has(.s-ico.amber)::before{background:radial-gradient(circle at 30% 20%,#0066B3 0%,transparent 60%);}
+.services .service-card:has(.s-ico.blue):hover,
+.services .service-card:has(.s-ico.violet):hover,
+.services .service-card:has(.s-ico.amber):hover{border-color:#1688D4;box-shadow:0 16px 32px -12px rgba(6,43,73,.25);}
+.services .service-card:has(.s-ico.blue):hover::after,
+.services .service-card:has(.s-ico.violet):hover::after,
+.services .service-card:has(.s-ico.amber):hover::after{background:#0066B3;}
+
+.services .service-card:has(.s-ico.green)::before,
+.services .service-card:has(.s-ico.teal)::before,
+.services .service-card:has(.s-ico.green2)::before{background:radial-gradient(circle at 30% 20%,#1688D4 0%,transparent 60%);}
+.services .service-card:has(.s-ico.green):hover,
+.services .service-card:has(.s-ico.teal):hover,
+.services .service-card:has(.s-ico.green2):hover{border-color:#1688D4;box-shadow:0 16px 32px -12px rgba(22,136,212,.3);}
+.services .service-card:has(.s-ico.green):hover::after,
+.services .service-card:has(.s-ico.teal):hover::after,
+.services .service-card:has(.s-ico.green2):hover::after{background:#1688D4;}
+
 .service-next{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--navy);}
 
 /* Fallback for browsers without :has() support — still get colour + lift, just not per-icon targeting */
